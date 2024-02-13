@@ -1,0 +1,21 @@
+<h1 style="font-family:verdana;">Authentication in K8</h1>
+
+<p style="font-family:verdana;" style="font-size:300%;"><strong>Certificate Singning Request Object</strong></p>
+<img src="cert_api.JPG" width="800" height="400">
+<p style="font-family:verdana;" style="font-size:300%;">Let say we have new user JANE in company who needs access to k8 cluster.</p>
+<p style="font-family:verdana;" style="font-size:300%;">So Jane first create key : </p>
+<p style="font-family:verdana;" style="font-size:300%;"><strong>openssl gersa -out jane.key 2048</strong></p>
+<p style="font-family:verdana;" style="font-size:300%;">Then creates the Certificate Signing Request :</p>
+<p style="font-family:verdana;" style="font-size:300%;"><strong>openssl req -new -key jane.key -subj "/CN=jane" -out jane.csr</strong></p>
+<img src="csr_jane.JPG" width="500" height="200">
+
+<p style="font-family:verdana;" style="font-size:300%;">Now Admin will take the csr, encode it to base64, then create a <strong>CSR Object</strong> by using encoded CSR.</p>
+<img src="csr_object_yaml.JPG" width="600" height="400">
+
+<p style="font-family:verdana;" style="font-size:300%;">Then it is reviewed and approved by the admin, kubernetes signs the certificate using kubernetes CA key pairs and generates the certificate for the user using below commands: </p>
+<img src="csr_object_approval.JPG" width="600" height="200">
+
+<p style="font-family:verdana;" style="font-size:300%;">This certificate then extracted and shared with user.</p>
+<img src="csr_extraction.JPG" width="600" height="400">
+
+<p style="font-family:verdana;" style="font-size:300%;"><strong>Note:</strong>All these processes related to Certificate are controlled by the Control Manager in K8</p>

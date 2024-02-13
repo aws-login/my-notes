@@ -1,0 +1,11 @@
+We have deployed a number of PODs. They are labelled with tier, env and bu. How many PODs exist in the dev environment (env)?
+
+controlplane ~ ✖ k get pod --selector env=dev
+NAME          READY   STATUS    RESTARTS   AGE
+db-1-jk9fp    1/1     Running   0          12m
+app-1-dxrvz   1/1     Running   0          12m
+app-1-xq8vm   1/1     Running   0          12m
+app-1-hmb7f   1/1     Running   0          12m
+db-1-glt6q    1/1     Running   0          12m
+db-1-sjtnn    1/1     Running   0          12m
+db-1-cvt44    1/1     Running   0          12m

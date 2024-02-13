@@ -1,0 +1,52 @@
+<h1 style="font-family:verdana;">Docker Terms</h1>
+
+
+<p style="font-family:verdana;" style="font-size:300%;"><strong>Docker Layered Architecture:</strong></p>
+
+<p style="font-family:verdana;" style="font-size:300%;">So actually what happens when we create a docker file which acts as image(A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image.).</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">So when we create a container out of it which contains an app.py file.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">So now let run another container with difference docker file and let say it few command common like below , then it will be another container will take less time to create because there will be cache available for the common commands.</p>
+
+<img src="docker1.JPG" width="500" height=300">
+
+
+<p style="font-family:verdana;" style="font-size:300%;">Now let say i wants to make changes on the py code which comes with docker file image and  is in read only format, </p>
+
+<p style="font-family:verdana;" style="font-size:300%;">So  lets say if i want to edit the app.py code , I will be able to edit it but it will not make any changes on the original file but it will create the original and save the changes i will make.
+This is called <strong>COPY ON WRITE.</strong></p>
+
+<img src="docker2.JPG" width="500" height=300">
+
+<p style="font-family:verdana;" style="font-size:300%;">Now let's say I have created the container and did the customization of the container as per need. But somehow accidentally or deliberately the container got deleted then all changes will be gone because we were not using any external volume to save data.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;"><strong>Docker Volume:</strong></p>
+
+<p style="font-family:verdana;" style="font-size:300%;">So as we checked above, in order to save the data we need a persistent volume.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">In docker data is saved under /var/lib/volumes directory , so we can create the volume.</p>
+
+<img src="docker3.JPG" width="500" height=300">
+
+<p style="font-family:verdana;" style="font-size:300%;">Then specify the volume details, and create the container  by mounting the volume like below</p>
+<img src="docker4.JPG" width="400" height=50">
+
+<p style="font-family:verdana;" style="font-size:300%;">If we run above command like below </p>
+<img src="docker5.JPG" width="400" height=50">
+<p style="font-family:verdana;" style="font-size:300%;">It will itself create a volume as it is the default place for docker. It is called <strong>VOLUME MOUNTING.</strong></p>
+
+<p style="font-family:verdana;" style="font-size:300%;">But let say we wants to use/mount an external drive or folder instead of /var/lib/volumes, the we need to specify the whole path like below and it is called <strong>BIND MOUNTING</strong></p>
+<img src="docker6.JPG" width="400" height=50">
+
+<p style="font-family:verdana;" style="font-size:300%;">Above command is the old way but now we can write it as below using mount option.</p>
+<img src="docker7.JPG" width="400" height=50">
+
+<p style="font-family:verdana;" style="font-size:300%;"><strong>Common storage and volume drivers : </strong></p>
+<img src="docker8.JPG" width="700" height=500">
+
+<p style="font-family:verdana;" style="font-size:300%;">As docker engine provides a container service it is considered in kubernetes as a container runtime interface. Same with network and storage</p>
+<img src="docker9.JPG" width="500" height=300">
+
+<p style="font-family:verdana;" style="font-size:300%;">We use critctl for container details like --> <strong>crictl ps same as docker ps</strong></p>
+

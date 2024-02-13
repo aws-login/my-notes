@@ -1,0 +1,53 @@
+controlplane ~ ➜  cat pod.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: webapp
+  name: webapp
+  namespace: default
+spec:
+  containers:
+  - image: kodekloud/event-simulator
+    imagePullPolicy: Always
+    name: webapp
+    volumeMounts:
+    - mountPath: /log
+      name: kube
+  volumes:
+  - name: kube
+    persistentVolumeClaim: 
+       claimName: claim-log-1
+
+controlplane ~ ➜  
+
+controlplane ~ ✖ cat pv.yaml 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-log
+spec:
+  capacity:
+    storage: 100Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /pv/log
+
+controlplane ~ ➜  cat pvc.yaml 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claim-log-1
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Mi
+
+
+controlplane ~ ➜  
+

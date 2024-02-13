@@ -1,0 +1,52 @@
+<p style="font-family:verdana;" style="font-size:300%;"><strong>Image Security:</strong> </p>
+<p style="font-family:verdana;" style="font-size:300%;">Let say we have deployment and pod :</p>
+<img src="image_sec.JPG" width="600" height="250">
+
+<p style="font-family:verdana;" style="font-size:300%;">Deployment original :</p>
+<img src="deploy_orig.JPG" width="500" height="500">
+
+
+<p style="font-family:verdana;" style="font-size:300%;">But now we want to add our private repository . We will add the path in image</p>
+<p style="font-family:verdana;" style="font-size:300%;"><b>myprivateregistry.com:5000/nginx:alpine</b></p>
+<img src="deploy_edited.JPG" width="500" height="500">
+
+<p style="font-family:verdana;" style="font-size:300%;">But now there is error as k8 is unable to fetch the image.</p>
+<img src="image_pull_back.JPG" width="700" height="200">
+
+<p style="font-family:verdana;" style="font-size:300%;">To get access we need to create a secret object for</p>
+<p style="font-family:verdana;" style="font-size:300%;">Create a secret object with the credentials required to access the registry.</p>
+<pre>
+Name: private-reg-cred
+Username: dock_user
+Password: dock_password
+Server: myprivateregistry.com:5000
+Email: dock_user@myprivateregistry.com
+</pre>
+
+<p style="font-family:verdana;" style="font-size:300%;"><b>kubectl create secret docker-registry private-reg-cred --docker-email=dock_user@myprivateregistry.com --docker-username=dock_user --docker-password=dock_password --docker-server=myprivateregistry.com:5000</b></p>
+
+<img src="docker_reg.JPG" width="500" height="500">
+<img src="docker_reg2.JPG" width="500" height="500">
+
+<p style="font-family:verdana;" style="font-size:300%;">Now configure the deployment to use credentials from the new secret to pull images from the private registry.</p>
+
+<img src="deploy_new_cred.JPG" width="500" height="500">
+<img src="dep_status.JPG" width="500" height="300">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+ 
