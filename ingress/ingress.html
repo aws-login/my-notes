@@ -1,0 +1,29 @@
+<h1 style="font-family:verdana;">what is Ingress</h1>
+
+<p style="font-family:verdana;" style="font-size:300%;">Ingress is used to expose the website to world.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">Why we use Ingress ?</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">Ingress is used as a load balancer , though we have loadbalancer service but still we use ingress because it is cost effective and intelligest to route the traffic on requsted service.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">what is loadbalancer service ?</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">let say you wants create a service that will only hosts images, so you will create pod and a service whick only deals with images.so load balancer is a service used to route the traffic in roundrobbin basis as per service requested, let say request is for images only, it will go to service that serves images.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">why we use ingress if we have load balancer ?</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">We use Ingress because the loadbalancer service is not enterprise level as enterprise load balancer are nginx, f5 etc, they are provides some advance features which  load balancer service in k8s doesnt provide.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">An Ingress may be configured to give Services externally-reachable URLs, load balance traffic, terminate SSL / TLS, and offer name-based virtual hosting.</p>
+
+<p style="font-family:verdana;" style="font-size:300%;">Ingress uses ingress controller.</p>
+
+<h1 style="font-family:verdana;">Ingress Types :</h1>
+
+<p style="font-family:verdana;" style="font-size:300%;">Host based</p>
+<p style="font-family:verdana;" style="font-size:300%;">path based</p>
+<p style="font-family:verdana;" style="font-size:300%;">TLS/NON TLS</p>
+<p style="font-family:verdana;" style="font-size:300%;">Wild card</p>
+
+
+<img src="ingress.JPG" width="800" height=400">
