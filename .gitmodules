@@ -1,0 +1,3 @@
+[submodule "my-notes"]
+	path = my-notes
+	url = https://github.com/aws-login/my-notes
