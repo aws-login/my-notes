@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="music.css">
+<script src="music.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Piyush Tech Notes</title>
 <link rel="icon" type="image/x-icon" href="w3images/favicon.jpg">
@@ -34,7 +36,13 @@
 </style>
 </head>
 <body>
+    <!-- (PART A) SPLASH SCREEN -->
+    <div id="splash" onclick="start()">&#127929; Welcome to Piyush Notes, please click to begin!</div>
 
+    <!-- (PART B) BGM -----<audio id="bgm" src="sample.mp3" loop></audio> for looping the audio-->
+    <audio id="bgm" src="sample.mp3" ></audio>
+
+    <!-- (PART C) MAIN CONTENT -->
 <header class="header">
   <h1>PIYUSH NOTES</h1>
   <h4>This is <span class="w3-tag">PIYUSH TECH NOTES</span></h4>
