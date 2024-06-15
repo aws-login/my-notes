@@ -1,29 +1,60 @@
-<h1 style="font-family:verdana;">what is Ingress</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+          font-family: Verdana, Arial, sans-serif;
+          line-height: 1.6;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+        h1 {
+          font-size: 28px;
+        }
+        p, strong {
+          font-size: 18px;
+        }
+        img {
+          display: block;
+          margin: 20px auto;
+          max-width: 100%;
+          height: auto;
+        }
+      </style>
+</head>
+<body>
 
-<p style="font-family:verdana;" style="font-size:300%;">Ingress is used to expose the website to world.</p>
+<h1>What is Ingress?</h1>
 
-<p style="font-family:verdana;" style="font-size:300%;">Why we use Ingress ?</p>
+<p>Ingress is used to expose the website to the world.</p>
 
-<p style="font-family:verdana;" style="font-size:300%;">Ingress is used as a load balancer , though we have loadbalancer service but still we use ingress because it is cost effective and intelligest to route the traffic on requsted service.</p>
+<h2>Why do we use Ingress?</h2>
 
-<p style="font-family:verdana;" style="font-size:300%;">what is loadbalancer service ?</p>
+<p>Ingress is used as a load balancer. Though we have a load balancer service, we use Ingress because it is cost-effective and intelligently routes traffic to requested services.</p>
 
-<p style="font-family:verdana;" style="font-size:300%;">let say you wants create a service that will only hosts images, so you will create pod and a service whick only deals with images.so load balancer is a service used to route the traffic in roundrobbin basis as per service requested, let say request is for images only, it will go to service that serves images.</p>
+<h2>What is a Load Balancer Service?</h2>
 
-<p style="font-family:verdana;" style="font-size:300%;">why we use ingress if we have load balancer ?</p>
+<p>A load balancer service routes traffic in a round-robin basis to specific services. For example, a service dedicated to hosting images will receive image-related requests.</p>
 
-<p style="font-family:verdana;" style="font-size:300%;">We use Ingress because the loadbalancer service is not enterprise level as enterprise load balancer are nginx, f5 etc, they are provides some advance features which  load balancer service in k8s doesnt provide.</p>
+<h2>Why use Ingress if we have a Load Balancer?</h2>
 
-<p style="font-family:verdana;" style="font-size:300%;">An Ingress may be configured to give Services externally-reachable URLs, load balance traffic, terminate SSL / TLS, and offer name-based virtual hosting.</p>
+<p>We use Ingress because standard load balancer services in Kubernetes lack enterprise-level features found in tools like nginx or F5, such as advanced routing and SSL termination.</p>
 
-<p style="font-family:verdana;" style="font-size:300%;">Ingress uses ingress controller.</p>
+<p>An Ingress may be configured to provide externally-reachable URLs, load balance traffic, terminate SSL/TLS, and offer name-based virtual hosting.</p>
 
-<h1 style="font-family:verdana;">Ingress Types :</h1>
+<p>Ingress uses an Ingress Controller.</p>
 
-<p style="font-family:verdana;" style="font-size:300%;">Host based</p>
-<p style="font-family:verdana;" style="font-size:300%;">path based</p>
-<p style="font-family:verdana;" style="font-size:300%;">TLS/NON TLS</p>
-<p style="font-family:verdana;" style="font-size:300%;">Wild card</p>
+<h1>Ingress Types:</h1>
 
+<p class="center">Host-based</p>
+<p class="center">Path-based</p>
+<p class="center">TLS/Non-TLS</p>
+<p class="center">Wildcard</p>
 
-<img src="ingress.JPG" width="800" height=400">
+<div class="center">
+    <img src="ingress.JPG" alt="Ingress Types" width="800" height="400">
+</div>
+
+</body>
+</html>

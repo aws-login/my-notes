@@ -1,27 +1,60 @@
-<h1 style="font-family:verdana;">Storage in POD</h1>
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Details: </strong>Persistant Volume and Persistant Volume Claim.Example of pod storage addition</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storage in POD</title>
+<style>
+    body {
+      font-family: Verdana, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    p, strong {
+      font-size: 18px;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
 
-<h3 style="font-family:verdana;">Persistant Volume - </h3>
+<h1>Storage in POD</h1>
+<p><strong>Details:</strong> Persistent Volume and Persistent Volume Claim. Example of pod storage addition.</p>
+
+<h3>Persistent Volume -</h3>
 <img src="persistant_volume.JPG" width="500" height="400">
-<h3 style="font-family:verdana;">Persistant Volume Claim - </h3>
+<h3>Persistent Volume Claim -</h3>
 <img src="persistant_volume_claim.JPG" width="500" height="400">
-<h3 style="font-family:verdana;"	>Storage mounted in POD - </h3>
+<h3>Storage mounted in POD -</h3>
 <img src="pod_pic.JPG" width="700" height="600">
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Storage Class : </strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">So we learnt so far below format in snip , create pv  >>  create pvc >> attach/use in pod.</p>
-<img src="docker10.JPG" width="800" height=500">
+<p><strong>Storage Class:</strong></p>
+<p>So we learnt so far below format in snip, create pv >> create pvc >> attach/use in pod.</p>
+<img src="docker10.JPG" width="800" height="500">
 
-<p style="font-family:verdana;" style="font-size:300%;">So here we are using google cloud disk.</p>
-<p style="font-family:verdana;" style="font-size:300%;">So we need to first create a disk then use it in Persitant Volume.</p>
-<img src="docker11.JPG" width="450" height=400">
+<p>So here we are using Google Cloud Disk.</p>
+<p>So we need to first create a disk then use it in Persistent Volume.</p>
+<img src="docker11.JPG" width="450" height="400">
 
-<p style="font-family:verdana;" style="font-size:300%;">So every time we have to create a disk in a provider  or provisioners like GCP and AWS, and the need to create PV that's called <strong> STATIC PROVISIONING of volumes.</strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">It would be nice if volume got provision automatically when the application needed it. And that's where storage classes and this is called <strong>DYNAMIC PROVISIONING of volumes.</strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">In Dynamic provisioning, providers or provisioners like GCP and AWS can provide the storage and attach to the pod  whenever the  <strong>persistent volume claim</strong> is made</p>
+<p>So every time we have to create a disk in a provider or provisioners like GCP and AWS, and the need to create PV that's called <strong>STATIC PROVISIONING of volumes.</strong></p>
+<p>It would be nice if volume got provisioned automatically when the application needed it. And that's where storage classes and this is called <strong>DYNAMIC PROVISIONING of volumes.</strong></p>
+<p>In Dynamic provisioning, providers or provisioners like GCP and AWS can provide the storage and attach to the pod whenever the <strong>persistent volume claim</strong> is made.</p>
 
-<p style="font-family:verdana;" style="font-size:300%;">That is done by creating a<strong> Storage Class Object</strong> like below</p>
-<img src="docker12.JPG" width="400" height=200">
+<p>That is done by creating a <strong>Storage Class Object</strong> like below:</p>
+<img src="docker12.JPG" width="400" height="200">
 
-<p style="font-family:verdana;" style="font-size:300%;">So now it will look like below and here Persistant Volume will be created but it will done automatically.</p>
-<img src="docker13.JPG" width="900" height=500">
+<p>So now it will look like below and here Persistent Volume will be created but it will be done automatically.</p>
+<img src="docker13.JPG" width="900" height="500">
+
+</body>
+</html>

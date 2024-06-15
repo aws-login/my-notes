@@ -1,64 +1,107 @@
-<h1 style="font-family:verdana;">Authorization in K8</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authorization in K8</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+    }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
+    strong {
+      font-weight: bold;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
 
-<p style="font-family:verdana;" style="font-size:300%;">Authorization means to provide the required access as per their profile.</p>
-<p style="font-family:verdana;" style="font-size:300%;">It also means to provide access to a group of similar profiles.</p>
-<p style="font-family:verdana;" style="font-size:300%;">Types of authorization mechanism :</p>
+<h1>Authorization in K8</h1>
+
+<p>Authorization means to provide the required access as per their profile.</p>
+<p>It also means to provide access to a group of similar profiles.</p>
+
+<p><strong>Types of authorization mechanism:</strong></p>
 <img src="auth_mechanism.JPG" width="600" height="200">
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Node:</strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">Kubelet services access the API server to manage the cluster and check the other components and also provide status of the nodes.</p>
-<p style="font-family:verdana;" style="font-size:300%;">When it reaches the API server the request is approved by the <strong>node authorizer</strong></p>
+<p><strong>Node:</strong></p>
+<p>Kubelet services access the API server to manage the cluster and check the other components and also provide status of the nodes.</p>
+<p>When it reaches the API server the request is approved by the <strong>node authorizer</strong></p>
 <img src="node_auth.JPG" width="600" height="300">
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>ABAC:</strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">It is a set of permission that is allotted to a user or a group user to perform action on k8 cluster.</p>
-<p style="font-family:verdana;" style="font-size:300%;">It is a json format file , which contains a set of policies and we can pass it on the Kube API server.</p>
+<p><strong>ABAC:</strong></p>
+<p>It is a set of permissions allotted to a user or a group user to perform actions on K8s cluster.</p>
+<p>It is a JSON format file, which contains a set of policies and can be passed to the Kube API server.</p>
 <img src="abac_auth.JPG" width="700" height="400">
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>RBAC full description:</strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">Here we create a role with a set of permission then associate the user or users with that role.</p>
-<p style="font-family:verdana;" style="font-size:300%;">If we need to make some changes we can edit the role and permission changes to reflect on the users.</p>
+<p><strong>RBAC full description:</strong></p>
+<p>Here we create a role with a set of permissions then associate the user or users with that role.</p>
+<p>If we need to make changes, we can edit the role and permission changes to reflect on the users.</p>
 <img src="rbac_auth.JPG" width="700" height="300">
 
-<p style="font-family:verdana;" style="font-size:300%;">How to create a ROLE:</p>
-<p style="font-family:verdana;" style="font-size:300%;">Role object is created from a role definition file.</p>
-<p style="font-family:verdana;" style="font-size:300%;">Below there is a role created for developer users.</p>
-<p style="font-family:verdana;" style="font-size:300%;">So here two rules were added where developer users can  create, view, delete pod and create configMaps.</p>
+<p>How to create a ROLE:</p>
+<p>Role object is created from a role definition file.</p>
+<p>Below there is a role created for developer users.</p>
+<p>So here two rules were added where developer users can create, view, delete pod and create configMaps.</p>
 <img src="role.JPG" width="600" height="300">
-<p style="font-family:verdana;" style="font-size:300%;">we can create rule : <strong>kubectl create -f developer-role.yaml</strong></p>
+<p>We can create rule: <strong>kubectl create -f developer-role.yaml</strong></p>
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Role Binding :</strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">Now as we have created the role , we need to link the user with the role.</p>
-<p style="font-family:verdana;" style="font-size:300%;">We need to create another object called <strong>RoleBinding.</strong></p>
+<p><strong>Role Binding:</strong></p>
+<p>Now as we have created the role, we need to link the user with the role.</p>
+<p>We need to create another object called <strong>RoleBinding.</strong></p>
 <img src="rolebinding.JPG" width="700" height="400">
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Note :</strong> Role and RoleBinding fall under the scope of namespace , if we do not specify namespace it will allow the developer user to access the Pods and ConfigMap under scope of default namespace.But if we need to specify namespace we can mention under metadata in the definition file.</p>
-<p style="font-family:verdana;" style="font-size:300%;">We can run below commands to check the role and role bindings.</p>
+<p><strong>Note:</strong> Role and RoleBinding fall under the scope of namespace. If we do not specify namespace, it will allow the developer user to access the Pods and ConfigMap under the scope of the default namespace. But if we need to specify namespace, we can mention it under metadata in the definition file.</p>
+<p>We can run below commands to check the role and role bindings.</p>
 <img src="role_rolebinding_cmd.JPG" width="600" height="400">
 <img src="rolebinding_describe.JPG" width="600" height="200">
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Check Access : </strong></p>
+<p><strong>Check Access:</strong></p>
 <img src="check_access.JPG" width="600" height="400">
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Resource Names :</strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">We can restrict the access with the namespace as well.</p>
-<p style="font-family:verdana;" style="font-size:300%;">Let see in the picture below that we have 5 pods within the same namespace and we want to restrict access to Blue and Orange Pod. we can do it by specifying - <strong>resourceName.</strong></p>
+<p><strong>Resource Names:</strong></p>
+<p>We can restrict access with the namespace as well.</p>
+<p>Let's see in the picture below that we have 5 pods within the same namespace and we want to restrict access to Blue and Orange Pod. We can do it by specifying - <strong>resourceName.</strong></p>
 <img src="resourceName.JPG" width="700" height="400">
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Webhook :  </strong></p>
-<p style="font-family:verdana;" style="font-size:300%;">If we want to outsource the authorization and don't want to be authorized through the k8 inbuilt mechanism. We can use webhook.</p>
-<p style="font-family:verdana;" style="font-size:300%;">Open Policigy Agent is one of the examples.</p>
+<p><strong>Webhook:</strong></p>
+<p>If we want to outsource the authorization and don't want to be authorized through the K8s inbuilt mechanism, we can use webhook.</p>
+<p>Open Policy Agent is one of the examples.</p>
 <img src="webhook.JPG" width="600" height="400">
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Note :</strong> there are 2 more modes AlwaysAllow and AlawaysDeny.</p>\
+<p><strong>Note:</strong> There are 2 more modes AlwaysAllow and AlwaysDeny.</p>
 
-
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Authorization Modes :</strong></p>
+<p><strong>Authorization Modes:</strong></p>
 <img src="alwaysallow_awaysdeny.JPG" width="600" height="400">
-<p style="font-family:verdana;" style="font-size:300%;"><strong>AlwaysAllow :</strong> Kube APIserver allows everything to access everything.</p>
-<p style="font-family:verdana;" style="font-size:300%;"><strong>AlwaysDeny :</strong>  Kube APIserver denies everything to access everything</p>
-<p style="font-family:verdana;" style="font-size:300%;">It is mentioned below in the APIserver manifest file.</p>
-<p style="font-family:verdana;" style="font-size:300%;">Also if we do not specify anything it always allow by default.</p>
+<p><strong>AlwaysAllow:</strong> Kube APIserver allows everything to access everything.</p>
+<p><strong>AlwaysDeny:</strong> Kube APIserver denies everything to access everything.</p>
+<p>It is mentioned below in the APIserver manifest file.</p>
+<p>Also if we do not specify anything it always allows by default.</p>
 <img src="alwaysallow_awaysdeny_manifest_file.JPG" width="700" height="500">
-<p style="font-family:verdana;" style="font-size:300%;">Also We can provide comma separated modes if we wish to sue like below picture, so the request will come and will be checked one mode and after mode.</p>
+<p>Also We can provide comma-separated modes if we wish to use like below picture, so the request will come and will be checked one mode and after mode.</p>
 <img src="seq_auth.JPG" width="600" height="500">
 
 <a href="#">To the top</a>
+
+</body>
+</html>

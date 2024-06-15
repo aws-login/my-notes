@@ -1,19 +1,54 @@
-<h1 style="font-family:verdana;">Probe</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kubernetes Probes</title>
+  <style>
+    body {
+      font-family: Verdana, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    p, strong {
+      font-size: 18px;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <h1>Probe</h1>
+  </div>
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Liveness Probe </strong>tells k8 cluster to restart the container.</p>
+  <div class="section">
+    <h2>Liveness Probe</h2>
+    <img src="liveness.JPG" width="500" height="500" alt="Liveness Probe Image">
+    <p><strong>Liveness Probe</strong> tells the Kubernetes cluster to restart the container.</p>
+    <p>Suppose there is a deadlock happening inside a Kubernetes cluster and the Docker container does not start.</p>
+  </div>
 
-<p style="font-family:verdana;" style="font-size:300%;">Suppose there is a deadlock happening inside a kubernetes cluster and the docker container does not start.</p>
+  <div class="section">
+    <h2>Readiness Probe</h2>
+    <img src="readiness.JPG" width="400" height="500" alt="Readiness Probe Image">
+    <p><strong>Readiness Probe</strong> works as a doorkeeper for incoming traffic.</p>
+    <p>It is responsible for determining if the pod is ready to receive traffic. If the pod is not ready, the Readiness Probe informs the Kubernetes cluster to remove the pod. If the pod is healthy and ready to receive traffic, it informs the cluster to add it to the load balancer.</p>
+  </div>
 
-<img src="liveness.JPG" width="500" height=500">
+  <div class="section">
+    <h2>Startup Probe</h2>
+    <img src="startup.JPG" width="400" height="500" alt="Startup Probe Image">
+    <p><strong>Startup Probe</strong> is responsible for checking the running application inside the container.</p>
+    <p>It verifies if the application is running inside the container and informs the Kubernetes cluster of its status. If the application is not running, the Startup Probe communicates with the Liveness and Readiness probes to prevent them from starting.</p>
+  </div>
 
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Readiness probe </strong>works as a door keeper for incoming traffic</p>
-
-<p style="font-family:verdana;" style="font-size:300%;">it is responsible for telling if the pod is ready to receive the traffic or not. If the pod is not ready to receive the traffic then the readiness pod will tell the k8 cluster to remove the pod.also if it is healthy then also it is going to tell k8 cluster that this pod is ready to receive the traffic and ask to add the load balancer</p>
-
-<img src="readiness.JPG" width="400" height=500">
-
-<p style="font-family:verdana;" style="font-size:300%;"><strong>Startup probe </strong>is responsible for the running application inside the container.</p>
-
-<p style="font-family:verdana;" style="font-size:300%;"> it checks that the application is running or not inside the container and then informs the k8 cluster the status, if application is not running then startup probe will inform Liveness and Readiness probe to not start.</p>
-
-<img src="startup.JPG" width="400" height=500">
+</body>
+</html>
