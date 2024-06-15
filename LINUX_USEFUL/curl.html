@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cURL Usage</title>
+  <style>
+    /* CSS for styling */
+    .w3-panel {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-left: 6px solid #4CAF50; /* Green border */
+      margin: 20px 0;
+    }
+    h2 {
+      color: #4CAF50; /* Green text */
+    }
+    p {
+      line-height: 1.6;
+    }
+    b {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="w3-panel">
+  <h2><b>Curl</b></h2>
+  <p><b>cURL, which stands for client URL, is a command line tool that developers use to transfer data to and from a server. At the most fundamental, cURL lets you talk to a server by specifying the location (in the form of a URL) and the data you want to send.</b></p>
+  <p><b>Example usage of cURL with proxy:</b></p>
+  <pre><code>curl -vx proxy_ip:port destination:port</code></pre>
+  <p><b>Options breakdown:</b></p>
+  <ul>
+    <li><b>-v</b>: Verbose mode</li>
+    <li><b>-x</b>: Option for proxy</li>
+    <li><b>proxy_ip:port</b>: Proxy IP address and port (usually 3128)</li>
+    <li><b>destination:port</b>: Destination IP address or website and port</li>
+  </ul>
+</div>
+
+</body>
+</html>
