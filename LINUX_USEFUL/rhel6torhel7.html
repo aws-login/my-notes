@@ -28,46 +28,87 @@
 </head>
 <body>
 
-<h1>RHEL 6 to RHEL 8 Upgrade:</h1>
-<p><br />This will happen with 2 step RHEL6 to RHEL7 then RHEL 7 to RHEL 8</p>
-<h4>For RHEL6 TO RHEL8:</h4>
-<p><br />Note: take the snapshot before beginning</p>
-<p><br />1. Update of your system to UpToDate.<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp First check the repo is set.<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Then run update the system<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp yum update --- should be upgraded to rhel6.6</p>
-<p><br />2. Now install the preupgarde by copying below tar file from Sharepoint to target server.<br /></p>
-<p><span style="background-color: #ffff00;">File -- rhel6torhel7.tar</span></p>
-<p><br />&nbsp&nbsp&nbsp&nbsp 1. Untar the rhel6torhel7.tar:<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp tar -xvf rhel6torhel7.tar</p>
-<p><br />&nbsp&nbsp&nbsp&nbsp 2. The install the packages on the system:<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  &bull; cd &lt;untard folder&gt;<br /> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp yum localinstall *</p>
-<p><br />&nbsp&nbsp&nbsp&nbsp 3. Disable all repo:<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  yum-config-manager --disable \*</p>
-<p>&nbsp&nbsp&nbsp&nbsp<img src="repo_disable.JPG" alt="repo_disable"></p>
-<p><br />&nbsp&nbsp&nbsp&nbsp 4.run the pre-upgrade on server<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  preupg</p>
-<p>&nbsp&nbsp&nbsp&nbsp<img src="preupg.JPG" alt="preupg"></p>
-<p><br />Press Y for yes to upgrade.<br /></p>
-<p>&nbsp&nbsp&nbsp&nbsp<img src="pres_yes.JPG" alt="pres_yes"></p>
-<p>Check for the error and inhibitor and resolve them by checking the answer file and recommendation:</p>
-<p>5. Copy the ISO to target server</p>
-<p>6. Run actual upgrade by running below command:<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp redhat-upgrade-tool --iso /&lt;iso&gt; --cleanup-post</p>
-<p><br />&nbsp&nbsp&nbsp&nbsp<img src="redhat-upgrade-tool.JPG" alt="redhat-upgrade-tool"></p>
-<p>7. There will be prompt for reboot teh server at the end.</p>
-<p><br />&nbsp&nbsp&nbsp&nbsp<img src="reboot.JPG" alt="reboot"></p>
-<p><br />Now server will boot with RHEL 7, it will take some time to boot and may reboot multiple time (twice).</p>
-<p><br />Then you get the login prompt.</p>
-<p>&nbsp;</p>
-<h4>For RHEL7 to RHEL8:</h4>
-<p>Note: take the snapshot before begin</p>
-<p>1. Update of your system UpToDate<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp First check the repo is set.<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Then run update the system<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &lt;&lt; yum update &gt;&gt; should be upgraded to rhel7.9</p>
-<p>2. Now install the preupgarde by copying below tar file from sharepoint to target server.<br />
-<p><span style="background-color: #ffff00;">File -- rhel7torhel8.tar</span></p>
-<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp tar  -xvf  rhel7torhel8.tar</p>
-<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp The install the packages on the system:</p>
-<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp cd  untard folder </p>
-<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp yum  localinstall</p>
-<p>3. We need to run preupgrade:<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp leap preuprade -target 8.8 --no-rhsm</p>
-<p><br />&nbsp&nbsp&nbsp&nbsp<img src="leapp_preupg.JPG" alt="leapp_preupg"></p>
-<p>Check for the error and inhibitor and resolve them by checking the answer file and recommendation</p>
-<p><br />One of them is:</p>
-<p><span style="background-color: #ffff00;"> we need unload kernel driver that is not supported in the 8, by running below command :</span></p>
-<p><span style="background-color: #ffff00;">  Ismod | grep pata_acpi</span><br /><span style="background-color: #ffff00;">  modprobe -r pata_acpi</span><br /><span style="background-color: #ffff00;"> lsmod | grep pata_acpi</span></p>
-<p>4. Once all the issues fixed update to RHEL 8 do a leapp upgrade by running below command:<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp leapp upgrade --target 8.8 --no-rhsm<br />once leap upgrade finish, it will ask reboot.</p>
-<p><br />&nbsp&nbsp&nbsp&nbsp<img src="leapp_upgrade.JPG" alt="leapp_upgrade"></p>
-<p>5. Reboot the server<br /><br />5. Once booted with rhel8, set the repo and patch the server to get RHEL 8.10.</p>
-<p>&nbsp;</p>
+<h1>RHEL 6 to RHEL 8 Upgrade Procedure</h1>
+<p>This upgrade process will occur in two stages: from RHEL 6 to RHEL 7, followed by RHEL 7 to RHEL 8.</p>
+
+<h3>1. Upgrading from RHEL 6 to RHEL 8</h3>
+<p><strong>Note:</strong> Take a snapshot before starting the upgrade process.</p>
+
+<h4>Step 1: Update the System</h4>
+<p>First, ensure your system is up-to-date. Check if the repositories are set correctly and then run the following command to update the system:</p>
+<pre>yum update</pre>
+<p>This should upgrade the system to RHEL 6.6.</p>
+
+<h4>Step 2: Install Pre-Upgrade Packages</h4>
+<p>Copy the following tar file from SharePoint to the target server:</p>
+<p><span style="background-color: #ffff00;">File: <strong>rhel6torhel7.tar</strong></span></p>
+<p>1. Extract the tar file:</p>
+<pre>tar -xvf rhel6torhel7.tar</pre>
+<p>2. Install the packages using the following commands:</p>
+<pre>cd untarred_folder</pre>
+<pre>yum localinstall *</pre>
+
+<h4>Step 3: Disable All Repositories</h4>
+<p>Disable all repositories with the following command:</p>
+<pre>yum-config-manager --disable *</pre>
+<img src="repo_disable.JPG" alt="repo_disable">
+
+<h4>Step 4: Run the Pre-Upgrade Check</h4>
+<p>Run the pre-upgrade tool with the command:</p>
+<pre>preupg</pre>
+<img src="preupg.JPG" alt="preupg">
+<p>Press 'Y' to confirm the upgrade process.</p>
+<img src="pres_yes.JPG" alt="pres_yes">
+<p>Check for any errors or inhibitors and resolve them by reviewing the answer file and recommendations.</p>
+
+<h4>Step 5: Copy the ISO to the Target Server</h4>
+<p>Copy the RHEL 7 ISO to the target server.</p>
+
+<h4>Step 6: Run the Upgrade</h4>
+<p>Run the upgrade using the following command:</p>
+<pre>redhat-upgrade-tool --iso /<iso> --cleanup-post</pre>
+<img src="redhat-upgrade-tool.JPG" alt="redhat-upgrade-tool">
+
+<h4>Step 7: Reboot the Server</h4>
+<p>At the end of the upgrade, the server will prompt for a reboot. After rebooting, the system will boot into RHEL 7. The boot process may take some time and the system may reboot twice before reaching the login prompt.</p>
+<img src="reboot.JPG" alt="reboot">
+
+<h3>2. Upgrading from RHEL 7 to RHEL 8</h3>
+<p><strong>Note:</strong> Take a snapshot before starting this upgrade process as well.</p>
+
+<h4>Step 1: Update the System</h4>
+<p>Ensure your system is up-to-date. Check the repository settings and run the following command:</p>
+<pre>yum update</pre>
+<p>This will upgrade the system to RHEL 7.9.</p>
+
+<h4>Step 2: Install Pre-Upgrade Packages</h4>
+<p>Copy the following tar file from SharePoint to the target server:</p>
+<p><span style="background-color: #ffff00;">File: <strong>rhel7torhel8.tar</strong></span></p>
+<p>Extract the tar file:</p>
+<pre>tar -xvf rhel7torhel8.tar</pre>
+<p>Install the packages:</p>
+<pre>cd untarred_folder</pre>
+<pre>yum localinstall *</pre>
+
+<h4>Step 3: Run the Pre-Upgrade Check with Leapp</h4>
+<p>Run the pre-upgrade check using the Leapp tool:</p>
+<pre>leap preupgrade -target 8.8 --no-rhsm</pre>
+<img src="leapp_preupg.JPG" alt="leapp_preupg">
+<p>Review and resolve any errors or inhibitors by following the recommendations in the answer file.</p>
+<p>One common issue is the need to unload unsupported kernel drivers. To do this, run the following commands:</p>
+<pre>lsmod | grep pata_acpi</pre>
+<pre>modprobe -r pata_acpi</pre>
+<pre>lsmod | grep pata_acpi</pre>
+<p>This will ensure the kernel driver is unloaded.</p>
+
+<h4>Step 4: Upgrade to RHEL 8</h4>
+<p>Once all issues are resolved, initiate the upgrade to RHEL 8 by running:</p>
+<pre>leapp upgrade --target 8.8 --no-rhsm</pre>
+<p>The system will prompt for a reboot once the upgrade is complete.</p>
+<img src="leapp_upgrade.JPG" alt="leapp_upgrade">
+
+<h4>Step 5: Final Reboot and Post-Upgrade Steps</h4>
+<p>After the system reboots into RHEL 8, set up the repository and apply patches to upgrade to RHEL 8.10.</p>
+
+</body>
+</html>
