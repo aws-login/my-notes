@@ -36,26 +36,26 @@
 
 <h4>Step 1: Update the System</h4>
 <p>First, ensure your system is up-to-date. Check if the repositories are set correctly and then run the following command to update the system:</p>
-<pre>yum update</pre>
+<pre style="font-size: 20px">yum update</pre>
 <p>This should upgrade the system to RHEL 6.6.</p>
 
 <h4>Step 2: Install Pre-Upgrade Packages</h4>
 <p>Copy the following tar file from SharePoint to the target server:</p>
 <p><span style="background-color: #ffff00;">File: <strong>rhel6torhel7.tar</strong></span></p>
 <p>1. Extract the tar file:</p>
-<pre>tar -xvf rhel6torhel7.tar</pre>
+<pre style="font-size: 20px">tar -xvf rhel6torhel7.tar</pre>
 <p>2. Install the packages using the following commands:</p>
-<pre>cd untarred_folder</pre>
-<pre>yum localinstall *</pre>
+<pre style="font-size: 20px">cd untared_folder</pre>
+<pre style="font-size: 20px">yum localinstall *</pre>
 
 <h4>Step 3: Disable All Repositories</h4>
 <p>Disable all repositories with the following command:</p>
-<pre>yum-config-manager --disable *</pre>
+<pre style="font-size: 20px">yum-config-manager --disable \*</pre>
 <img src="repo_disable.JPG" alt="repo_disable">
 
 <h4>Step 4: Run the Pre-Upgrade Check</h4>
 <p>Run the pre-upgrade tool with the command:</p>
-<pre>preupg</pre>
+<pre style="font-size: 20px">preupg</pre>
 <img src="preupg.JPG" alt="preupg">
 <p>Press 'Y' to confirm the upgrade process.</p>
 <img src="pres_yes.JPG" alt="pres_yes">
@@ -66,7 +66,7 @@
 
 <h4>Step 6: Run the Upgrade</h4>
 <p>Run the upgrade using the following command:</p>
-<pre>redhat-upgrade-tool --iso /<iso> --cleanup-post</pre>
+<pre style="font-size: 20px">redhat-upgrade-tool --iso /path_os_iso --cleanup-post</pre>
 <img src="redhat-upgrade-tool.JPG" alt="redhat-upgrade-tool">
 
 <h4>Step 7: Reboot the Server</h4>
@@ -78,32 +78,32 @@
 
 <h4>Step 1: Update the System</h4>
 <p>Ensure your system is up-to-date. Check the repository settings and run the following command:</p>
-<pre>yum update</pre>
+<pre style="font-size: 20px">yum update</pre>
 <p>This will upgrade the system to RHEL 7.9.</p>
 
 <h4>Step 2: Install Pre-Upgrade Packages</h4>
 <p>Copy the following tar file from SharePoint to the target server:</p>
 <p><span style="background-color: #ffff00;">File: <strong>rhel7torhel8.tar</strong></span></p>
 <p>Extract the tar file:</p>
-<pre>tar -xvf rhel7torhel8.tar</pre>
+<pre style="font-size: 20px">tar -xvf rhel7torhel8.tar</pre>
 <p>Install the packages:</p>
-<pre>cd untarred_folder</pre>
-<pre>yum localinstall *</pre>
+<pre style="font-size: 20px">cd untared_folder</pre>
+<pre style="font-size: 20px">yum localinstall *</pre>
 
 <h4>Step 3: Run the Pre-Upgrade Check with Leapp</h4>
 <p>Run the pre-upgrade check using the Leapp tool:</p>
-<pre>leap preupgrade -target 8.8 --no-rhsm</pre>
+<pre style="font-size: 20px">leap preupgrade -target 8.8 --no-rhsm</pre>
 <img src="leapp_preupg.JPG" alt="leapp_preupg">
 <p>Review and resolve any errors or inhibitors by following the recommendations in the answer file.</p>
 <p>One common issue is the need to unload unsupported kernel drivers. To do this, run the following commands:</p>
-<pre>lsmod | grep pata_acpi</pre>
-<pre>modprobe -r pata_acpi</pre>
-<pre>lsmod | grep pata_acpi</pre>
+<pre style="font-size: 20px">lsmod | grep pata_acpi</pre>
+<pre style="font-size: 20px">modprobe -r pata_acpi</pre>
+<pre style="font-size: 20px">lsmod | grep pata_acpi</pre>
 <p>This will ensure the kernel driver is unloaded.</p>
 
 <h4>Step 4: Upgrade to RHEL 8</h4>
 <p>Once all issues are resolved, initiate the upgrade to RHEL 8 by running:</p>
-<pre>leapp upgrade --target 8.8 --no-rhsm</pre>
+<pre style="font-size: 20px">leapp upgrade --target 8.8 --no-rhsm</pre>
 <p>The system will prompt for a reboot once the upgrade is complete.</p>
 <img src="leapp_upgrade.JPG" alt="leapp_upgrade">
 
