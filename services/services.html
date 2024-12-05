@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Policy</title>
+<style>
+    body {
+      font-family: Verdana, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    p, strong {
+      font-size: 18px;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<h1 style="font-family: Verdana;">Services</h1>
+
+<p>K8 services allow communication between and outside application..</p>
+
+<p><strong>Types of Services:</strong> Incoming connection to pod.</p>
+
+<ul>
+  <li>nodePort</li>
+  <li>cluster IP</li>
+  <li>Loadbalancer</li>
+</ul>
+
+<img src="type0fservice.JPG" alt="type0fservice" width="500" height="450">
+
+<strong>nodePort:</strong>
+
+<p>if suppose i have a node where pod is running and url is accessible through curl with in the pod.and i have my laptop on same sunbnet as node and i want to access the same url there,but the problem is server and laptop are in same subnet but pod is of different subnet.</p>
+<p>So how the communication happens:</p>
+<p>it will happen through nodePort service.</p>
+<p>note: within node there is always a clusterIP by default so that pods can communicate each other.</p>
+<p>so the set up will belike as below shown in image </p>
+
+<img src="nodePort1.JPG" alt="nodePort1" width="500" height="450">
+
+<p>We can see the yaml for nodePort service.</p>
+
+<p>there are few things which are mandatory in nodeport service yaml , that is the port should be mandatory mentioned however if targetPort not mention it will take reference of port value. and nodeport is also not mandatory it can pickup with range from 30000-32767 port values.</p>
+
+<img src="nodePort2.JPG" alt="nodePort2" width="500" height="450">
+
+<p>now we have created the nodePort service but how will it communicate with pod.</p>
+
+<p>we use  label and selectors to make connection between services and pods as shown below</p>
+
+<img src="nodePort_yaml.JPG" alt="nodePort_yaml" width="500" height="400">
+
+<p>now the question arises that if there are multiple pods what will happen so the service will work according to label and selectors only and all the post ould have same label like "app: myapp" so the communication will done with all the pods with same labels with some random algorithm and session affinity.</p>
+
+<img src="nodePort_algo.JPG" alt="nodePort_algo" width="500" height="450">
+
+<p>Now again if the pods are distributed in different nodes , how the service will work , so it is feature of Kubernetes that once the service is created it will automatically communicate with all pods with in a cluster (creating kind of abstraction layer).</p>
+
+<img src="nodePort-.JPG" alt="nodePort-" width="500" height="450">
