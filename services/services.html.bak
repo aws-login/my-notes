@@ -74,17 +74,17 @@
 
 <strong>ClusterIP:</strong>
 
-<p>Lets suppose we have an application running with layer of application microservices like frontend, backend, storage.</p>
+<p></p>
 <img src="layerofapp.JPG" alt="layerofapp" width="500" height="450">
-<p>now we can see each pod has its on ip address , but the question is how the pods communicate each layer and to which pod to get require data to run the application.</p>
-<p>Also these pod have ephemeral ip that will change on every reboot if any thing goes wrong.</p>
-<p>here Kubernetes services come into picture , which creates an abstraction between each layer of application microservices is know as ClusterIP.</p>
-<p>ClusterIP is a Kubernetes Service type that assigns an IP address from a reserved pool to help facilitate communication within the cluster. In this Service, access is limited only within the cluster. Using the specified TCP port, users can access the Service and forward the requests to another Pod on the targetPort.</p>
-<p>So we need not to bother about which pod is rebooting and getting IP change, the pod from front end will communicate with backend layer pod with the help of clusterIP that provdie a simgle interface with an ip.</p>
-<p>Each layer now can move and scale without impacting the communication.</p>
-<p>Each layer will get its name and IP assigned inside the cluster that is the name used by pods to communicate each layer.</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
 <img src="layerofapp1.JPG" alt="layerofapp1" width="500" height="450">
-<p>Now how the create the ClusterIP service it is done through definition file. if order to create a pool fo pods connected with service we need to define the label of pods as selector in ClusterIP definition file.</p>
+<p></p>
 <img src="ClusterIP_def.JPG" alt="ClusterIP_def" width="500" height="450">
-<p>once we created the yaml file we will create the service out of it and can list it as shown below.</p>
+<p></p>
 <img src="ClusterIP_service.JPG" alt="ClusterIP_service" width="500" height="450">
