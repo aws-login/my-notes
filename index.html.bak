@@ -40,7 +40,7 @@
     <div id="splash" onclick="start()">&#127929; Welcome to Piyush Notes, please click to begin!</div>
 
     <!-- (PART B) BGM -----<audio id="bgm" src="sample.mp3" loop></audio> for looping the audio-->
-    <audio id="bgm" src="sample.mp3" ></audio>
+    <audio id="bgm" src="beautiful-piano-logo-143488.mp3" ></audio>
 
     <!-- (PART C) MAIN CONTENT -->
 <header class="header">
@@ -96,7 +96,7 @@
       <a href="ingress/ingress.html" target="_blank">Ingress</a>
     </div>
     <div class="w3-panel w3-black">
-      <a href="services/ingress.html" target="_blank">Ingress</a>
+      <a href="services/services.html" target="_blank">Services</a>
     </div>
   </section>
 
@@ -122,7 +122,7 @@
   <a href="#">To the top</a>
   <p>Owned by <a href="w3images/Pic.png" target="_blank">Piyush</a></p>
   <img src="w3images/Pic.png" width="50" height="50" alt="Piyush">
-  <p>Updated last: LINUX_USEFUL updated on 15 June</p>
+  <p>Updated last: chnaged music updated on 8 Dec</p>
 </footer>
 
 </body>
