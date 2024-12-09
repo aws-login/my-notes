@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kube controller Manager with Node Controller</title>
+<style>
+  body {
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Kube controller Manager with Node Controller</h1>
+
+<p><strong>Kube Controller Manager:</strong></p>
+<p>Controller is a process that continuously monitor the state of components with the syste m and bringing the whole system.</p>
+<img src="controller_manager.JPG" alt="controller_manager">
+<p>These are bundles in Kubernetes are KUBE-COTROLLER-MANAGER.</p>
+
+<p><strong>NODE CONTROLLER:</strong></p>
+<p>Like Node controller is responsible for  monitoring the status of nodes , and take necessary action keep the application running.</p>
+<p>Node controller checks the status for nodes availibilty in every 5 secs.</p>
+<p>if it stop receiving heartbeat from the nodes, the nodes marked as unreachable but before marking it unreachable it waits from 40sec.</p>
+<p>Once the controller marked the node as unreachable , controller will wait fr 5 mins to come up the node online. If node doesn't come up in 5 mins controller removed the pods on faulty node and provision them in  working nodes if they are part of repicasets.</p>
+
+<img src="node_contrl-1.JPG" alt="node_contrl-1">
+<img src="node_contrl-2.JPG" alt="node_contrl-2">
+
+
+<p><strong>REPLICATION CONTROLLER:</strong></p>
+<p> it is responsible to monitor the replica sets and ensure that desired number of pod are available all the time even its just one or hundred.</p>
+<p>if a pod dies it creates another one.</p>
+
+<p><strong>REPLICATION CONTROLLER provide few features:</strong></p>
+<ul>
+  <li><strong>High availability :</strong>
+  <p>If any pod dies by any reason , it will create another pod so same specification without a down time to application.</p>
+  <p>Replication controller is effective on single pod or multiple pods.</p>
+  </li>
+  <li><strong>Load Balancing and scaling:</strong>
+  <p>Replication controller help in load balancing and scaling the application pods..</p>
+  <p>Let suppose we have one pod which is providing the application service to nuber of user , if suppose the user increases then to full fill all the user Replication controller will create new pods to service users by scailing the pods without any application downs time.</p>
+  </li> 
+</ul>
+
+<p><strong>Installing Kube-Controller-Manager:</strong></p>
+<p>Downloading KUBE-COTROLLER-MANAGER :</p>
+<img src="install-kube-cnrtl-mang.JPG" alt="install-kube-cnrtl-mang">
+<p>Below image we can see all the controllers , we can customize it by monitoring all the components or by doing selective monitoring my rmove the components from  KUBE-COTROLLER-MANAGER.</p>
+<img src="kube-ctrl-mang.JPG" alt="kube-ctrl-mang">
+<p>Listing Kube Controller Manager as pod:</p>
+<img src="kcm_as_pod.JPG" alt="kcm_as_pod">
+<p>other than kubeadm</p>
+<img src="other_than-kuebadm.JPG" alt="other_than-kuebadm">
+<p>Kube Controller manager as a process:</p>
+<img src="kcm-process.JPG" alt="kcm-process">
+
+
+</body>
+</html>

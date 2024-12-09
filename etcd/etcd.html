@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETCD</title>
+<style>
+  body {
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>ETCD</h1>
+
+<p>ETCD is a distributed reliable key-value store that is simple, secure and fast.</p>
+
+
+<p>ETCD is a key-value store that stores all cluster data in Kubernetes. It's a critical component of Kubernetes, and is used for:</p>
+<ul>
+  <li><strong>Backing store:</strong>ETCD is the backing store for all cluster data in Kubernetes.</li>
+  <li><strong>Configuration management:</strong>ETCD is used for shared configuration.</li>
+  <li><strong>Service discovery:</strong>ETCD is used for service discovery.</li>
+  <li><strong>Scheduler coordination:</strong>ETCD is used for scheduler coordination of distributed systems or clusters of machines.</li>
+</ul>
+
+<p>ETCD is an open-source, distributed, persistent key-value store, and a type of NoSQL database. It's built on the Raft consensus algorithm to ensure data storage consistency across all nodes in a cluster.</p>
+
+<p><strong>Raft consensus algorithm :</strong> this algorithm update the data by itself if there is old entry in the config file.</p>
+
+<p>ETCD is reliable and efficient, and is primarily designed for distributed systems. It's a better performing option than Redis for fault tolerance, and it supports continuous data availability.</p>
+
+<p><strong>Install ETCD</strong></p>
+<img src="Install_etcd.JPG" alt="Install_etcd">
+
+<p><strong>Operate ETCD</strong></p>
+<p>ETCD is a key value databse and work on port 2379</p>
+<img src="operate_etcd.JPG" alt="operate_etcd">
+
+<p>ETCD version</p>
+
+<img src="etcdctl_version-1.JPG" alt="etcdctl_version-1">
+<img src="etcdctl_version-2.JPG" alt="etcdctl_version-2">
+<img src="etcdctl_version-3.JPG" alt="etcdctl_version-3">
+
+

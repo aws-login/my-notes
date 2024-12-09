@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kube Scheduler</title>
+<style>
+  body {
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Kube Scheduler</h1>
+
+<p>Schedular only decides which pod goes to which nodes.</p>
+<p>Scheduler actually does not place POD to nodes , its the responsible of KUBELET(as kubelet is captain of ship/ nodes, who creates the pod in nodes).</p>
+<p>Scheduler only decided which pod goes where means which node.</p>
+<p>Pods are of different size and configuration and schedular checks each nodes and assign the nodes as per requirements.</p>
+
+<p><strong>How scheduler assign a node:</strong></p>
+<p>Request reached to Scheduler to assign node to newly created Pod.</p>
+<img src="ks1.JPG" alt="ks1">
+<p>It filters the nodes have free resource free as per resource requiremnets.</p>
+<img src="ks2.JPG" alt="ks2">
+<p>Then it rank nodes as per nodes free resource and which have more resource will be put in high rank</p>
+<img src="ks3.JPG" alt="ks3">
+<p>And is highest ranked is select to put the pod</p>
+<p><strong>Note:</strong>Scheduler can works that way that we can also customize the scheduler we want it to be work to schedule a pod on nodes.</p>
+
+<p><strong>more to learn:</strong></p>
+<p>Resource Requirements and Limits:</p>
+<p>Taints and tolerations:</p>
+<p>Node Selectors/Affinity:</p>
+
+<p><strong>Advance in scheduling-----------------------</strong></p>
+<p>Need to create page</p>

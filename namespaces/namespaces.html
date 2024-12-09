@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Namespaces</title>
+<style>
+  body {
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Namespaces</h1>
+
+<p>Namespaces is used to isolate the work done.</p>
+
+<p>In Kubernetes, a namespace is a virtual cluster that helps organize, secure, and manage resources within a single cluster: </p>
+<ul>
+  <li><strong>Organization:</strong> Namespaces can help different teams or projects share a Kubernetes cluster.</li>
+  <li><strong>Security:</strong>Namespaces can isolate workloads or resources and limit access to specific users.</li>
+  <li><strong>Performance:</strong>Namespaces can help with performance. </li>
+</ul>
+
+<p>Here are some things to know about namespaces in Kubernetes: </p>
+<ul>
+  <li> You can create multiple namespaces in a single Kubernetes cluster. </li>
+  <li> Namespaces are logically isolated from each other, but can communicate with each other. </li>
+  <li> Users interacting with one namespace do not see the content in another namespace. </li>
+  <li> Resource names need to be unique within a namespace, but not across namespaces. </li>
+  <li> Namespace-based scoping only applies to namespaced objects, like Deployments and Services. </li>
+  <li> Kubernetes automatically creates the default and kube-system namespaces in a new cluster. </li>
+  <li> You can create a namespace using a single command or by creating a YAML file and applying it. </li>
+  <li> You can view all namespaces with the "kubectl get namespace" command. </li>
+  <li> You can define the rules for who can do what in a namespace.</li>
+  <li> You can assign quota to namespace so that they can use the resource to certain limit and cannot go beyond quota.</li>
+  <img src="quota.JPG" alt="quota">
+</ul>
+	
+<p><strong>Default namespace : </strong></p>
+<p>if suppose the web application wants to access the database server localy and of another name space how it will access see the image below. </p>
+<img src="default-namespace.JPG" alt="default-namespace">
+<img src="namingclature.JPG" alt="namingclature">
+<p>Few more commands</p>
+<img src="switch.JPG" alt="switch">
+
+
+
+</body>
+</html>
