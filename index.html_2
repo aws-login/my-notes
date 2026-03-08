@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Piyush Tech Notes</title>
+
+<link rel="icon" type="image/x-icon" href="w3images/favicon.jpg">
+
+<link rel="stylesheet" href="music.css">
+<link rel="stylesheet" href="note.CSS">
+
+<style>
+
+body{
+margin:0;
+font-family:Verdana,sans-serif;
+}
+
+/* HEADER */
+
+.header{
+background:#222;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+height:90vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+background:#111;
+color:white;
+overflow-y:auto;
+padding-bottom:50px;
+}
+
+.sidebar input{
+width:85%;
+margin:10px;
+padding:6px;
+}
+
+/* SIDEBAR LINKS */
+
+.sidebar a{
+display:block;
+padding:8px 15px;
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.sidebar a:hover{
+background:#d21818;
+}
+
+/* COLLAPSIBLE */
+
+.collapsible{
+background:#333;
+color:white;
+cursor:pointer;
+padding:10px;
+width:100%;
+border:none;
+text-align:left;
+font-size:15px;
+}
+
+.collapsible:hover{
+background:#d21818;
+}
+
+.collapsible-content{
+display:none;
+}
+
+/* CONTENT */
+
+.content{
+flex:1;
+padding:20px;
+background:#f4f4f4;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+background:#d21818;
+color:white;
+padding:15px;
+}
+
+/* SPLASH */
+
+#splash{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+cursor:pointer;
+z-index:9999;
+}
+
+</style>
+
+<script src="music.js"></script>
+
+<script>
+
+/* SPLASH */
+
+function start(){
+
+document.getElementById("splash").style.display="none"
+document.getElementById("bgm").play()
+
+}
+
+/* LOAD PAGE IN VIEWER */
+
+function loadPage(page){
+
+document.getElementById("viewer").src = page
+
+}
+
+/* COLLAPSIBLE MENU */
+
+function toggleMenu(btn){
+
+let content = btn.nextElementSibling
+
+if(content.style.display==="block")
+content.style.display="none"
+else
+content.style.display="block"
+
+}
+
+/* SEARCH */
+
+function searchNotes(){
+
+let input=document.getElementById("search").value.toLowerCase()
+
+let links=document.querySelectorAll(".sidebar a")
+
+links.forEach(function(link){
+
+if(link.textContent.toLowerCase().includes(input))
+link.style.display="block"
+else
+link.style.display="none"
+
+})
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- SPLASH -->
+
+<div id="splash" onclick="start()">🎵 Welcome to Piyush Notes - Click to Enter</div>
+
+<audio id="bgm" src="beautiful-piano-logo-143488.mp3"></audio>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h2>PIYUSH TECH NOTES</h2>
+
+<p>Kubernetes | Linux | DevOps</p>
+
+</div>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<input id="search" placeholder="Search notes..." onkeyup="searchNotes()">
+
+<!-- KUBERNETES -->
+
+<button class="collapsible" onclick="toggleMenu(this)">Kubernetes</button>
+
+<div class="collapsible-content">
+
+<a href="#" onclick="loadPage('k8_arch/k8_arch.html')">Kubernetes Architecture</a>
+
+<a href="#" onclick="loadPage('etcd/etcd.html')">ETCD</a>
+
+<a href="#" onclick="loadPage('kubelet/kubelet.html')">Kubelet</a>
+
+<a href="#" onclick="loadPage('node_controller/node_controller.html')">Node Controller</a>
+
+<a href="#" onclick="loadPage('kube_scheduler/kube_scheduler.html')">Kube Scheduler</a>
+
+<a href="#" onclick="loadPage('kube_proxy/kube_proxy.html')">Kube Proxy</a>
+
+<a href="#" onclick="loadPage('replication_controller/replication_controller.html')">Replication Controller</a>
+
+<a href="#" onclick="loadPage('deployments/deployments.html')">Deployments</a>
+
+<a href="#" onclick="loadPage('namespaces/namespaces.html')">Namespaces</a>
+
+<a href="#" onclick="loadPage('pod/pod.html')">Pod</a>
+
+<a href="#" onclick="loadPage('statefulset/statefulset.html')">StatefulSets</a>
+
+<a href="#" onclick="loadPage('selector/selector.html')">Selector</a>
+
+<a href="#" onclick="loadPage('kubeconfig/kubeconfig.html')">Kubeconfig</a>
+
+<a href="#" onclick="loadPage('probe/probe.html')">Probe</a>
+
+<a href="#" onclick="loadPage('network_policy/network_policy.html')">Network Policy</a>
+
+<a href="#" onclick="loadPage('docker/docker.html')">Docker Terms</a>
+
+<a href="#" onclick="loadPage('pod_storage/pod_storage.html')">Storage in POD</a>
+
+<a href="#" onclick="loadPage('certificate/authentication.html')">Authentication</a>
+
+<a href="#" onclick="loadPage('authorization/authorization.html')">Authorization</a>
+
+<a href="#" onclick="loadPage('security_context/security_context.html')">Security Context</a>
+
+<a href="#" onclick="loadPage('image_security/image_security.html')">Image Security</a>
+
+<a href="#" onclick="loadPage('configmap/configmap.html')">ConfigMap</a>
+
+<a href="#" onclick="loadPage('ingress/ingress.html')">Ingress</a>
+
+<a href="#" onclick="loadPage('services/services.html')">Services</a>
+
+</div>
+
+<!-- LINUX -->
+
+<button class="collapsible" onclick="toggleMenu(this)">Linux</button>
+
+<div class="collapsible-content">
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/useful_commands.html')">Useful Commands</a>
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/netstat.html')">Netstat</a>
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/curl.html')">Curl</a>
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/rhel6torhel7.html')">RHEL Upgrade</a>
+
+</div>
+
+<!-- ANSIBLE -->
+
+<button class="collapsible" onclick="toggleMenu(this)">Ansible</button>
+
+<div class="collapsible-content">
+
+<a href="#">Ansible Architecture</a>
+
+<a href="#">Inventory</a>
+
+<a href="#">Playbooks</a>
+
+<a href="#">Roles</a>
+
+</div>
+
+</div>
+
+<!-- CONTENT VIEWER -->
+
+<div class="content">
+
+<iframe id="viewer"
+width="100%"
+height="900px"
+style="border:none;">
+</iframe>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+<p>Owned by Piyush</p>
+
+<img src="w3images/Pic.png" width="60">
+
+<p>DevOps Notes</p>
+
+</div>
+
+</body>
+
+</html>

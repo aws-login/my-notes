@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+          font-family: Verdana, Arial, sans-serif;
+          line-height: 1.6;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+        h1 {
+          font-size: 28px;
+        }
+        p, strong {
+          font-size: 18px;
+        }
+        img {
+          display: block;
+          margin: 20px auto;
+          max-width: 100%;
+          height: auto;
+        }
+      </style>
+</head>
+<body>
+
+<h1>What is Ingress?</h1>
+
+<p>Ingress is used to expose the website to the world.</p>
+
+<h2>Why do we use Ingress?</h2>
+
+<p>Ingress is used as a load balancer. Though we have a load balancer service, we use Ingress because it is cost-effective and intelligently routes traffic to requested services.</p>
+
+<h2>What is a Load Balancer Service?</h2>
+
+<p>A load balancer service routes traffic in a round-robin basis to specific services. For example, a service dedicated to hosting images will receive image-related requests.</p>
+
+<h2>Why use Ingress if we have a Load Balancer?</h2>
+
+<p>We use Ingress because standard load balancer services in Kubernetes lack enterprise-level features found in tools like nginx or F5, such as advanced routing and SSL termination.</p>
+
+<p>An Ingress may be configured to provide externally-reachable URLs, load balance traffic, terminate SSL/TLS, and offer name-based virtual hosting.</p>
+
+<p>Ingress uses an Ingress Controller.</p>
+
+<h1>Ingress Types:</h1>
+
+<p class="center">Host-based</p>
+<p class="center">Path-based</p>
+<p class="center">TLS/Non-TLS</p>
+<p class="center">Wildcard</p>
+
+<div class="center">
+    <img src="ingress.JPG" alt="Ingress Types" width="800" height="400">
+</div>
+
+</body>
+</html>

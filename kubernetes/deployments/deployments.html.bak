@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deployments</title>
+<style>
+  body {
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Deployments</h1>
+
+<p><strong>Docker Layered Architecture:</strong></p>
+
+<p>When we create a Dockerfile, it acts as a blueprint to build an image. When we create a container from this image, such as one containing an app.py file, subsequent containers using a similar Dockerfile benefit from cached common commands, reducing build time.</p>
+
+<img src="docker1.JPG" alt="Docker Layered Architecture">
+
+<p>Modifications made to files within a Docker container are isolated and ephemeral. This behavior, known as <strong>COPY ON WRITE</strong>, ensures changes persist only within the container instance.</p>
+
+<img src="docker2.JPG" alt="Copy on Write">
+
+<p>If a container is deleted, all changes made within it are lost unless data is stored externally using Docker Volumes.</p>
+
+<p><strong>Docker Volume:</strong></p>
+
+<p>To persist data beyond the lifecycle of a container, Docker Volumes are used. Data is typically stored in <code>/var/lib/volumes</code>, where volumes can be created and mounted into containers.</p>
+
+<img src="docker3.JPG" alt="Docker Volume">
+
+<p>For example, to mount a volume to a container:</p>
+
+<img src="docker4.JPG" alt="Mounting Docker Volume">
+
+<p>Default volume mounting:</p>
+
+<img src="docker5.JPG" alt="Default Volume Mounting">
+
+<p>To specify an external drive or folder for data persistence, use <strong>BIND MOUNTING</strong>:</p>
+
+<img src="docker6.JPG" alt="Bind Mounting">
+
+<p>Alternatively, using the <code>mount</code> option:</p>
+
+<img src="docker7.JPG" alt="Mount Option">
+
+<p><strong>Common storage and volume drivers:</strong></p>
+
+<img src="docker8.JPG" alt="Common Storage and Volume Drivers">
+
+<p>Containers managed by Docker are considered in Kubernetes as a container runtime interface, similar to how network and storage are handled.</p>
+
+<img src="docker9.JPG" alt="Container Service in Kubernetes">
+
+<p>We can use <code>crictl ps</code> for container details, akin to <code>docker ps</code>.</p>
+
+</body>
+</html>

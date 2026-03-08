@@ -1,0 +1,45 @@
+/* LIGHT MODE */
+
+body{
+background:#ffffff;
+color:#000000;
+font-family:Verdana,sans-serif;
+}
+
+/* DARK MODE */
+
+body.dark{
+background:#121212;
+color:#ffffff;
+}
+
+/* LINKS */
+
+body.dark a{
+color:#8ab4f8;
+}
+
+/* TABLES */
+
+body.dark table{
+color:white;
+border-color:#555;
+}
+
+/* CODE BLOCKS */
+
+body.dark pre{
+background:#1e1e1e;
+color:#ddd;
+padding:10px;
+border-radius:6px;
+}
+
+/* HEADINGS */
+
+body.dark h1,
+body.dark h2,
+body.dark h3{
+color:#ffffff;
+}
+

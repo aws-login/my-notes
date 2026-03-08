@@ -1,159 +1,326 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<link rel="stylesheet" href="music.css">
-<script src="music.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Piyush Tech Notes</title>
+
 <link rel="icon" type="image/x-icon" href="w3images/favicon.jpg">
-<link rel="stylesheet" href="note.CSS" >
+
+<link rel="stylesheet" href="music.css">
+<link rel="stylesheet" href="note.CSS">
+
 <style>
-  body {
-    font-family: Verdana, sans-serif;
-  }
-  .header {
-    text-align: center;
-  }
-  .header h1 {
-    font-weight: bold;
-  }
-  .content {
-    margin: 20px;
-  }
-  .w3-panel {
-    margin-bottom: 10px;
-  }
-  .footer {
-    padding: 32px;
-    background-color: #d21818;
-    color: #fff;
-    text-align: center;
-  }
-  .footer a {
-    color: #fff;
-  }
+
+body{
+margin:0;
+font-family:Verdana,sans-serif;
+}
+
+/* HEADER */
+
+.header{
+background:#222;
+color:white;
+padding:15px;
+text-align:center;
+position:relative;
+}
+
+/* LAST UPDATED */
+
+.update{
+position:absolute;
+top:8px;
+right:15px;
+font-size:11px;
+color:#ccc;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+min-height:90vh;
+flex:1;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+background:#111;
+color:white;
+overflow-y:auto;
+padding-bottom:50px;
+}
+
+.sidebar input{
+width:85%;
+margin:10px;
+padding:6px;
+}
+
+.sidebar a{
+display:block;
+padding:8px 15px;
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.sidebar a:hover{
+background:#d21818;
+}
+
+/* COLLAPSIBLE */
+
+.collapsible{
+background:#333;
+color:white;
+cursor:pointer;
+padding:10px;
+width:100%;
+border:none;
+text-align:left;
+font-size:15px;
+}
+
+.collapsible:hover{
+background:#d21818;
+}
+
+.collapsible-content{
+display:none;
+}
+
+/* CONTENT */
+
+.content{
+flex:1;
+padding:20px;
+background:#f4f4f4;
+display:flex;
+flex-direction:column;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+background:#d21818;
+color:white;
+padding:4px 10px;
+font-size:11px;
+margin-top:auto;
+line-height:1.2;
+}
+
+/* SPLASH */
+
+#splash{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+cursor:pointer;
+z-index:9999;
+}
+
 </style>
+
+<script src="music.js"></script>
+
+<script>
+
+/* SPLASH */
+
+function start(){
+
+document.getElementById("splash").style.display="none"
+document.getElementById("bgm").play()
+
+}
+
+/* LOAD PAGE */
+
+function loadPage(page){
+
+document.getElementById("viewer").src = page
+
+}
+
+/* COLLAPSIBLE */
+
+function toggleMenu(btn){
+
+let content = btn.nextElementSibling
+
+if(content.style.display==="block")
+content.style.display="none"
+else
+content.style.display="block"
+
+}
+
+/* SEARCH */
+
+function searchNotes(){
+
+let input=document.getElementById("search").value.toLowerCase()
+
+let links=document.querySelectorAll(".sidebar a")
+
+links.forEach(function(link){
+
+if(link.textContent.toLowerCase().includes(input))
+link.style.display="block"
+else
+link.style.display="none"
+
+})
+
+}
+
+</script>
+
 </head>
+
 <body>
-    <!-- (PART A) SPLASH SCREEN -->
-    <div id="splash" onclick="start()">&#127929; Welcome to Piyush Notes, please click to begin!</div>
 
-    <!-- (PART B) BGM -----<audio id="bgm" src="sample.mp3" loop></audio> for looping the audio-->
-    <audio id="bgm" src="beautiful-piano-logo-143488.mp3" ></audio>
+<!-- SPLASH -->
 
-    <!-- (PART C) MAIN CONTENT -->
-<header class="header">
-  <h1>PIYUSH NOTES</h1>
-  <h4>This is <span class="w3-tag">PIYUSH TECH NOTES</span></h4>
-  <img src="w3images/book_shelf.JPG" width="100%" alt="Bookshelf">
-</header>
+<div id="splash" onclick="start()">🎵 Welcome to Piyush Notes - Click to Enter</div>
 
-<div class="content">
-  <section class="w3-panel">
-    <h2><b>Kubernetes</b></h2>
-    <p>Kubernetes automates operational tasks of container management and includes built-in commands for deploying applications, rolling out changes, scaling, monitoring, etc.</p>
-    <div class="w3-panel w3-black">
-      <a href="k8_arch/k8_arch.html" target="_blank">Kubernetes Architecture</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="etcd/etcd.html" target="_blank">ETCD cluster and kube-api server</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="kubelet/kubelet.html" target="_blank">Kubelet</a>
-    </div>    
-    <div class="w3-panel w3-black">
-      <a href="node_controller/node_controller.html" target="_blank">Kube controller Manager with Node Controller</a>
-    </div> 
-    <div class="w3-panel w3-black">
-      <a href="kube_scheduler/kube_scheduler.html" target="_blank">Kube Scheduler</a>
-    </div>  
-    <div class="w3-panel w3-black">
-      <a href="kube_proxy/kube_proxy.html" target="_blank">Kube Proxy</a>
-    </div> 
-    <div class="w3-panel w3-black">
-      <a href="replication_controller/replication_controller.html" target="_blank">Repication controller vs Replicasets</a>
-    </div> 
-    <div class="w3-panel w3-black">
-      <a href="deployments/deployments.html" target="_blank">Deployments</a>
-    </div> 
-    <div class="w3-panel w3-black">
-      <a href="namespaces/namespaces.html" target="_blank">Namespaces</a>
-    </div> 
-    <div class="w3-panel w3-black">
-      <a href="pod/pod.html" target="_blank">Pod</a>
-    </div> 
-	<div class="w3-panel w3-black">
-      <a href="statefulset/statefulset.html" target="_blank">StatefulSets</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="misc/pd.html" target="_blank">How to read pod</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="selector/selector.html" target="_blank">Selector</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="kubeconfig/kubeconfig.html" target="_blank">Kubeconfig</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="probe/probe.html" target="_blank">Probe</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="network_policy/network_policy.html" target="_blank">Network Policy</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="docker/docker.html" target="_blank">Docker Terms</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="pod_storage/pod_storage.html" target="_blank">Storage in POD</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="certificate/authentication.html" target="_blank">Authentication in K8</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="authorization/authorization.html" target="_blank">Authorization in K8</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="security_context/security_context.html" target="_blank">security_context</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="image_security/image_security.html" target="_blank">image_security</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="configmap/configmap.html" target="_blank">ConfigMap</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="ingress/ingress.html" target="_blank">Ingress</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="services/services.html" target="_blank">Services</a>
-    </div>
-  </section>
+<audio id="bgm" src="beautiful-piano-logo-143488.mp3"></audio>
 
-  <section class="w3-panel">
-    <h2><b>LINUX</b></h2>
-    <p>Linux commands</p>
-    <div class="w3-panel w3-black">
-      <a href="LINUX_USEFUL/useful_commands.html" target="_blank">Useful Commands</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="LINUX_USEFUL/netstat.html" target="_blank">Netstat</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="LINUX_USEFUL/curl.html" target="_blank">Curl</a>
-    </div>
-    <div class="w3-panel w3-black">
-      <a href="LINUX_USEFUL/rhel6torhel7.html" target="_blank">RHEL6 to RHEL8 Upgrade</a>
-    </div>
-  </section>
+<!-- HEADER -->
+
+<div class="header">
+
+<h2>PIYUSH TECH NOTES</h2>
+
+<p>Kubernetes | Linux | DevOps</p>
+
 </div>
 
-<footer class="footer">
-  <a href="#">To the top</a>
-  <p>Owned by <a href="w3images/Pic.png" target="_blank">Piyush</a></p>
-  <img src="w3images/Pic.png" width="50" height="50" alt="Piyush">
-  <p>Updated last: New K8 components on 9 Dec</p>
-</footer>
+<div class="container">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<input id="search" placeholder="Search notes..." onkeyup="searchNotes()">
+
+<button class="collapsible" onclick="toggleMenu(this)">Kubernetes</button>
+
+<div class="collapsible-content">
+
+<a href="#" onclick="loadPage('kubernetes/k8_arch/k8_arch.html')">Kubernetes Architecture</a>
+
+<a href="#" onclick="loadPage('kubernetes/etcd/etcd.html')">ETCD</a>
+
+<a href="#" onclick="loadPage('kubernetes/kubelet/kubelet.html')">Kubelet</a>
+
+<a href="#" onclick="loadPage('kubernetes/node_controller/node_controller.html')">Node Controller</a>
+
+<a href="#" onclick="loadPage('kubernetes/kube_scheduler/kube_scheduler.html')">Kube Scheduler</a>
+
+<a href="#" onclick="loadPage('kubernetes/kube_proxy/kube_proxy.html')">Kube Proxy</a>
+
+<a href="#" onclick="loadPage('kubernetes/replication_controller/replication_controller.html')">Replication Controller</a>
+
+<a href="#" onclick="loadPage('kubernetes/deployments/deployments.html')">Deployments</a>
+
+<a href="#" onclick="loadPage('kubernetes/namespaces/namespaces.html')">Namespaces</a>
+
+<a href="#" onclick="loadPage('kubernetes/pod/pod.html')">Pod</a>
+
+<a href="#" onclick="loadPage('kubernetes/statefulset/statefulset.html')">StatefulSets</a>
+
+<a href="#" onclick="loadPage('kubernetes/selector/selector.html')">Selector</a>
+
+<a href="#" onclick="loadPage('kubernetes/kubeconfig/kubeconfig.html')">Kubeconfig</a>
+
+<a href="#" onclick="loadPage('kubernetes/probe/probe.html')">Probe</a>
+
+<a href="#" onclick="loadPage('kubernetes/network_policy/network_policy.html')">Network Policy</a>
+
+<a href="#" onclick="loadPage('kubernetes/docker/docker.html')">Docker Terms</a>
+
+<a href="#" onclick="loadPage('kubernetes/pod_storage/pod_storage.html')">Storage in POD</a>
+
+<a href="#" onclick="loadPage('kubernetes/certificate/authentication.html')">Authentication</a>
+
+<a href="#" onclick="loadPage('kubernetes/authorization/authorization.html')">Authorization</a>
+
+<a href="#" onclick="loadPage('kubernetes/security_context/security_context.html')">Security Context</a>
+
+<a href="#" onclick="loadPage('kubernetes/image_security/image_security.html')">Image Security</a>
+
+<a href="#" onclick="loadPage('kubernetes/configmap/configmap.html')">ConfigMap</a>
+
+<a href="#" onclick="loadPage('kubernetes/ingress/ingress.html')">Ingress</a>
+
+<a href="#" onclick="loadPage('kubernetes/services/services.html')">Services</a>
+
+<a href="#" onclick="loadPage('kubernetes/misc/pd.html')">misc</a>
+
+</div>
+
+<button class="collapsible" onclick="toggleMenu(this)">Linux</button>
+
+<div class="collapsible-content">
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/useful_commands.html')">Useful Commands</a>
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/netstat.html')">Netstat</a>
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/curl.html')">Curl</a>
+
+<a href="#" onclick="loadPage('LINUX_USEFUL/rhel6torhel7.html')">RHEL Upgrade</a>
+
+</div>
+
+<button class="collapsible" onclick="toggleMenu(this)">Ansible</button>
+
+<div class="collapsible-content">
+
+<a href="#">Ansible Architecture</a>
+
+<a href="#">Inventory</a>
+
+<a href="#">Playbooks</a>
+
+<a href="#">Roles</a>
+
+</div>
+
+</div>
+
+<!-- CONTENT VIEWER -->
+
+<div class="content">
+
+<iframe id="viewer"
+src="welcome.html"
+style="width:100%;height:100%;border:none;flex-grow:1;">
+</iframe>
+
+</div>
+
+</div>
 
 </body>
 </html>
+

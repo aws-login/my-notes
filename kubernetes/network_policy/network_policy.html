@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Policy</title>
+<style>
+    body {
+      font-family: Verdana, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    p, strong {
+      font-size: 18px;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<h1 style="font-family: Verdana;">Network Policy</h1>
+
+<p>All connections are allowed for each pod in Kubernetes to communicate with each other.</p>
+
+<p><strong>Ingress:</strong> Incoming connection to pod.</p>
+
+<p>If we need a particular port to communicate with the pod, then we will write an ingress network policy. All ingress communication will be blocked except the port which is defined.</p>
+
+<p>Even if all egress communication is blocked from the pod, outgoing communication for that defined port will still be allowed.</p>
+
+<p>This blocks out all traffic first as mentioned below in the snippet:</p>
+
+<img src="ingress1.JPG" alt="Ingress 1" width="500" height="350">
+
+<p>Note that if a particular port is allowed on a pod, then all pods labeled as <strong>role: db</strong> within the cluster will be able to communicate with that pod. For example, port 3306 is only allowed for ingress, so it is allowed for all pods located in different namespaces within the cluster.</p>
+
+<img src="ingress2.JPG" alt="Ingress 2" width="500" height="350">
+
+<p>If we want to restrict the connection to the same namespace where the db pod is located, we need to specify the namespace as shown below:</p>
+
+<img src="ingress3.JPG" alt="Ingress 3" width="500" height="350">
+
+<p>If no pod selector is mentioned, then all pods within the namespace will be allowed to communicate with the db pod on port 3306, as shown below:</p>
+
+<img src="ingress4.JPG" alt="Ingress 4" width="500" height="300">
+
+<p>If you have a backup server outside the Kubernetes cluster and want to allow ingress communication with a DB pod, you will allow the IP block in that case.</p>
+
+<img src="ingress5.JPG" alt="Ingress 5" width="500" height="350">
+
+<p><strong>Egress:</strong> Outgoing connection from pod.</p>
+
+<p>For example, if a DB pod needs to communicate with an external backup server (where the DB pod has an agent that communicates with the backup server), we will allow egress traffic communication like below:</p>
+
+<img src="egress.JPG" alt="Egress Example" width="500" height="350">
+
+<p>More egress examples:</p>
+<img src="egress2.JPG" alt="Egress Example 2" width="500" height="400">
+<img src="egress1.JPG" alt="Egress Example 1" width="400" height="500">
+
+</body>
+</html>

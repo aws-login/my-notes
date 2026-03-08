@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kube Proxy</title>
+<style>
+  body {
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Kube Proxy</h1>
+
+<p>In k8 , every pod can communicate with other pods all the nodes in cluster by default its possible due pod networking.</p>
+<p>Let suppose we have 2 pods.</p>
+<p>One have web app and another is DB app.</p>
+<p>As default communication is there so web app can always communicate with DB pod.</p>
+<p>But there is no guarantee that ip for the DATABASE pod will always be same.</p>
+<p>to ensure that the communication with the pod will always be there , database pod will  introduce  a services to expose DATABASE service to WEBAPP pod now database can be accessed with the service name let say "db" as showing pic below, which not a pod or a container, its just a virtual components with in the memory with a ip.</p>
+<img src="kp1.JPG" alt="kp1">
+<p>Whenever a pod tries to reach a service using its IP or name it forwards the traffic to backend PODs in this case the database pod.</p>
+<p>Services can be accessed from any nodes from the cluster and it is due to KUBE PROXY.</p>
+<p>KUBE PROXY runs as process on each node of the cluster and its job is to look for new services and every time a new services created , KUBE PROXY creates a appropriate rule forward traffic to those service to backend pods. one ways it does it by using IPTABLES RULES.</p>
+<p>Like below that all traffic coming to service that is 10.96.0.12 and forward to pod ip that is 10.32.0.15. like shown below:</p>
+<img src="kp2.JPG" alt="kp2">
+<p>Kube Proxy as pod in node :</p>
+<img src="kp3.JPG" alt="kp3">
+
+
+</body>
+</html>

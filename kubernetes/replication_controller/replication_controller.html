@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Replication controller vs Replicasets</title>
+<style>
+  body {
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Replication controller vs Replicasets</h1>
+
+<p>Replication controller is old technology and replica sets is the new technology.</p>
+<p>Now we use only Replicasets , which is similar to Replication Controller.</p>
+
+<p><strong>Comparison :</strong></p>
+<p>Replication control maintains the number of pods in config file.</p>
+<p>It will be only responsible for those pods which are created by replication controller, if any issue happens , it will only recreate number of pod which are mentioned in config yaml file.</p>
+<p>On the other hand, Replica sets maintains the number of pods in config file with selector to label mentioned in pods.</p>
+<p>There is a selector mentioned in the replica set it will not only creates the number of replica mention in yaml. but also considered the pod preset already in the cluster running with same label mentioned in selector.</p>
+<img src="lb-scaling.JPG" alt="lb-scaling">
+<p>We can see the difference in the api version and selector in below images , between Replicasets and Replication Controller</p>
+<p><strong>Replication Controller :</strong></p>
+<img src="rc.JPG" alt="Replication Controller">
+<p><strong>Replicaset :</strong></p>
+<img src="replicaset.JPG" alt="replicaset">
+
+</body>
+</html>
