@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="../style.css"> <!-- Linking external CSS -->
+</head>
+<body>
+
+</head>
+<body>
+
+<h1>Introduction to Ansible</h1>
+<p>Ansible is an open-source automation tool used for configuration management, application deployment, and infrastructure provisioning. It works in an agentless architecture using SSH to communicate with managed nodes. Automation tasks are written in YAML-based playbooks, which makes them simple and readable. Ansible helps automate repetitive tasks like package installation, service management, and server configuration across multiple systems.
+</p>
+
+
+
+<h1>Step 1 — Install Ansible</h1>
+<p>On your control machine:</p>
+<p><strong>Ubuntu</strong><br>
+apt install ansible -y</p>
+<p><strong>RHEL / CentOS</strong><br>
+yum install ansible -y</p>
+<p>Check version:<br>
+ansible --version</p>
+
+<h1>Step 2 — Setup Passwordless SSH</h1>
+<p>Ansible connects using SSH.</p>
+<p>Create SSH key:<br>
+ssh-keygen</p>
+<p>Copy key to server:<br>
+ssh-copy-id root@server1</p>
+<p>Now you can login without password.</p>
+
+<h1>Step 3 — Test Connection</h1>
+<p>Run:<br>
+ansible all -m ping</p>
+<p>Output:<br>
+server1 | SUCCESS<br>
+server2 | SUCCESS</p>
+<p>Means Ansible can reach the servers.</p>
+
+</body>
+</html>

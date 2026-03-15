@@ -17,10 +17,13 @@
 
 <style>
 
-body{
-margin:0;
-font-family:Verdana,sans-serif;
+body {
+  margin: 0;
+  font-family: Verdana, sans-serif;
+  background: #000;   /* black background */
+  color: #fff;        /* white text */
 }
+
 
 /* HEADER */
 
@@ -101,12 +104,13 @@ display:none;
 
 /* CONTENT */
 
-.content{
-flex:1;
-padding:20px;
-background:#f4f4f4;
-display:flex;
-flex-direction:column;
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #000;   /* black background */
+  color: #fff;        /* white text */
+  display: flex;
+  flex-direction: column;
 }
 
 /* FOOTER */
@@ -290,19 +294,34 @@ link.style.display="none"
 
 <a href="#" onclick="loadPage('LINUX_USEFUL/rhel6torhel7.html')">RHEL Upgrade</a>
 
+<a href="#" onclick="loadPage('LINUX_USEFUL/secondary_ip_add.html')">Secondary IP Addition</a>
+
 </div>
 
 <button class="collapsible" onclick="toggleMenu(this)">Ansible</button>
 
 <div class="collapsible-content">
 
-<a href="#">Ansible Architecture</a>
-
-<a href="#">Inventory</a>
-
-<a href="#">Playbooks</a>
-
-<a href="#">Roles</a>
+<a href="#" onclick="loadPage('ansible/introduction_to_ansible.html')">	Introduction to Ansible	</a>
+<a href="#" onclick="loadPage('ansible/setting_up_ansible.html')">	Setting up Ansible	</a>
+<a href="#" onclick="loadPage('ansible/introduction_to_yaml.html')">	Introduction to YAML	</a>
+<a href="#" onclick="loadPage('ansible/inventory_files.html')">	Inventory Files	</a>
+<a href="#" onclick="loadPage('ansible/playbooks.html')">	Playbooks	</a>
+<a href="#" onclick="loadPage('ansible/variables.html')">	Variables	</a>
+<a href="#" onclick="loadPage('ansible/conditionals.html')">	Conditionals	</a>
+<a href="#" onclick="loadPage('ansible/loops.html')">	Loops	</a>
+<a href="#" onclick="loadPage('ansible/roles.html')">	Roles	</a>
+<a href="#" onclick="loadPage('ansible/practice.html')">	Practice	</a>
+<a href="#" onclick="loadPage('ansible/roles_advanced.html')">	Roles (advanced)	</a>
+<a href="#" onclick="loadPage('ansible/asynchronous_actions.html')">	Asynchronous Actions	</a>
+<a href="#" onclick="loadPage('ansible/error_handling.html')">	Error Handling	</a>
+<a href="#" onclick="loadPage('ansible/jinja2_templates.html')">	Jinja2 Templates	</a>
+<a href="#" onclick="loadPage('ansible/lookups.html')">	Lookups	</a>
+<a href="#" onclick="loadPage('ansible/vault.html')">	Vault	</a>
+<a href="#" onclick="loadPage('ansible/dynamic_inventory.html')">	Dynamic Inventory	</a>
+<a href="#" onclick="loadPage('ansible/custom_modules.html')">	Custom Modules	</a>
+<a href="#" onclick="loadPage('ansible/plugins.html')">	Plugins	</a>
+<a href="#" onclick="loadPage('ansible/practice.html')">	Practice	</a>
 
 </div>
 

@@ -1,5 +1,5 @@
 /* ============================= */
-/* BASE LAYOUT                   */
+/* BASE LAYOUT FIX               */
 /* ============================= */
 
 html, body {
@@ -23,7 +23,7 @@ min-height:100vh;
 text-align:center;
 background:#111;
 color:white;
-padding:15px;
+padding:20px;
 }
 
 /* MAIN LAYOUT */
@@ -51,9 +51,7 @@ color:white;
 text-decoration:none;
 }
 
-.sidebar a:hover{
-background:#444;
-}
+.sidebar a:hover
 
 /* CONTENT AREA */
 
@@ -76,21 +74,20 @@ background:white;
 }
 
 /* ============================= */
-/* FOOTER                        */
+/* FOOTER FIX                    */
 /* ============================= */
 
 .footer{
-padding:10px;
+padding:20px;
 background:#d21818;
 color:white;
 text-align:center;
 width:100%;
 margin-top:auto;
-font-size:12px;
 }
 
 /* ============================= */
-/* DARK MODE                     */
+/* DARK MODE SUPPORT             */
 /* ============================= */
 
 .dark{
@@ -127,7 +124,7 @@ border:none;
 }
 
 /* ============================= */
-/* MOBILE RESPONSIVE             */
+/* RESPONSIVE                    */
 /* ============================= */
 
 @media screen and (max-width:900px){
@@ -138,42 +135,7 @@ flex-direction:column;
 
 .sidebar{
 width:100%;
-padding:5px;
-}
-
-.sidebar a{
-padding:12px;
-font-size:16px;
-}
-
-.content{
-padding:10px;
-}
-
-#viewer{
-min-height:600px;
-}
-
-.header{
-padding:10px;
-}
-
-.header h2{
-font-size:18px;
 }
 
 }
 
-/* ============================= */
-/* IMAGE & TABLE FIX (mobile)    */
-/* ============================= */
-
-img{
-max-width:100%;
-height:auto;
-}
-
-table{
-max-width:100%;
-display:block;
-overflow-x:auto;

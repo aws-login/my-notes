@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="../style.css"> <!-- Linking external CSS -->
+</head>
+<body>
+
+<h1>What are Loops in Ansible?</h1>
+
+<h3>Simple Definition</h3>
+<p><strong>Loops in Ansible</strong> are used to repeat a task multiple times using different values.</p>
+<p>Instead of writing the same task many times, we use a <strong>loop</strong> to run it repeatedly.</p>
+<p>Think of it like a <strong>for loop in programming</strong>.</p>
+
+<hr>
+
+<h2>Layman Example</h2>
+<p>Suppose you want to install <strong>3 packages</strong>:</p>
+<ul>
+  <li>vim</li>
+  <li>git</li>
+  <li>htop</li>
+</ul>
+
+<p><strong>Without loop ❌</strong></p>
+<pre>
+- name: Install vim
+  yum:
+    name: vim
+    state: present
+
+- name: Install git
+  yum:
+    name: git
+    state: present
+
+- name: Install htop
+  yum:
+    name: htop
+    state: present
+</pre>
+
+<p>Too repetitive.</p>
+
+<hr>
+
+<h2>Using Loop (Better Way)</h2>
+<pre>
+- name: Install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - vim
+    - git
+    - htop
+</pre>
+
+<p><strong>What happens:</strong></p>
+<pre>
+Install vim
+Install git
+Install htop
+</pre>
+
+<hr>
+
+<h2>Important Concept: <code>item</code></h2>
+<p><code>item</code> represents <strong>each value in the loop list</strong>.</p>
+<pre>
+vim
+git
+htop
+</pre>
+<p><code>item</code> will take values one by one.</p>
+
+<hr>
+
+<h2>Example: Creating Multiple Users</h2>
+<pre>
+- name: Create users
+  user:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - appuser
+    - monitor
+    - backup
+</pre>
+
+<p><strong>Result:</strong></p>
+<pre>
+appuser created
+monitor created
+backup created
+</pre>
+
+<hr>
+
+<h2>Real Production Example</h2>
+<pre>
+- name: Install admin tools
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - vim
+    - net-tools
+    - htop
+    - wget
+    - curl
+</pre>
+
+<p>All tools installed automatically.</p>
+
+<hr>
+
+<h2>Loop with Dictionary Example</h2>
+<pre>
+- name: Create users with shell
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+  loop:
+    - { name: 'user1', shell: '/bin/bash' }
+    - { name: 'user2', shell: '/bin/sh' }
+</pre>
+
+<hr>
+
+<h2>Loop in File Copy Example</h2>
+<pre>
+- name: Copy config files
+  copy:
+    src: "{{ item }}"
+    dest: /etc/config/
+  loop:
+    - app.conf
+    - db.conf
+    - web.conf
+</pre>
+
+<hr>
+
+<h2>1️⃣ Old Loop Syntax: <code>with_items</code></h2>
+<p>Earlier versions of Ansible used <strong><code>with_items</code></strong> to repeat tasks.</p>
+
+<pre>
+- name: Install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vim
+    - git
+    - htop
+</pre>
+
+<p><strong>What happens:</strong></p>
+<pre>
+Install vim
+Install git
+Install htop
+</pre>
+
+<p>Here:</p>
+<pre>
+item = vim
+item = git
+item = htop
+</pre>
+
+<hr>
+
+<h2>Example Output</h2>
+<pre>
+TASK [Install packages]
+
+changed: [server1] => (item=vim)
+changed: [server1] => (item=git)
+changed: [server1] => (item=htop)
+</pre>
+
+<hr>
+
+<h2>2️⃣ New Loop Syntax: <code>loop</code></h2>
+<p>Now Ansible recommends using <strong><code>loop</code></strong> instead of <code>with_items</code>.</p>
+
+<pre>
+- name: Install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - vim
+    - git
+    - htop
+</pre>
+
+<p>Result is <strong>exactly the same</strong>.</p>
+
+<hr>
+
+<h2>Comparison</h2>
+<table>
+  <tr>
+    <th>Old Syntax</th>
+    <th>New Syntax</th>
+  </tr>
+  <tr>
+    <td>with_items</td>
+    <td>loop</td>
+  </tr>
+  <tr>
+    <td>Older Ansible</td>
+    <td>Recommended method</td>
+  </tr>
+  <tr>
+    <td>Limited features</td>
+    <td>More flexible</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2>Real Production Example</h2>
+<h3>Old Way</h3>
+<pre>
+- name: Install admin tools
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vim
+    - net-tools
+    - wget
+    - curl
+</pre>
+
+<h3>New Way (Recommended)</h3>
+<pre>
+- name: Install admin tools
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - vim
+    - net-tools
+    - wget
+    - curl
+</pre>
+
+</body>
+</html>

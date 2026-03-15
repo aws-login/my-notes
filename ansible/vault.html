@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="../style.css"> <!-- Linking external CSS -->
+</head>
+<body>
+
+
+
+<h1>What is Ansible Vault?</h1>
+
+<h3>Simple Definition</h3>
+<p><strong>Ansible Vault</strong> is a feature used to encrypt sensitive information in Ansible playbooks.</p>
+<p>It protects confidential data such as:</p>
+<ul>
+  <li>Passwords</li>
+  <li>API keys</li>
+  <li>Database credentials</li>
+  <li>SSH keys</li>
+  <li>Tokens</li>
+</ul>
+<p>So that <strong>other people cannot read them</strong>.</p>
+
+<hr>
+
+<h2>Layman Example</h2>
+<p>Suppose your playbook contains a database password.</p>
+
+<p><strong>Without Vault:</strong></p>
+<pre>
+db_user: admin
+db_password: mypassword123
+</pre>
+<p>Anyone who opens the file can see the password ❌</p>
+
+<p><strong>With Vault:</strong></p>
+<pre>
+db_user: admin
+db_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          326432356334356634...
+</pre>
+<p>Password is <strong>encrypted</strong> and not readable ✅</p>
+
+<hr>
+
+<h2>Why We Use Vault</h2>
+<ul>
+  <li>Protect sensitive data</li>
+  <li>Secure automation scripts</li>
+  <li>Safely store secrets in Git repositories</li>
+  <li>Prevent unauthorized access</li>
+</ul>
+
+<hr>
+
+<h2>Example Scenario (Production)</h2>
+<p>Suppose you automate <strong>database deployment</strong>. Your playbook contains:</p>
+<ul>
+  <li>DB username</li>
+  <li>DB password</li>
+  <li>API tokens</li>
+</ul>
+<p>Instead of writing them in plain text, you store them in a <strong>Vault encrypted file</strong>.</p>
+
+<hr>
+
+<h2>Creating a Vault File</h2>
+<p>Create encrypted file:</p>
+<pre>ansible-vault create secrets.yml</pre>
+<p>It will ask for a password.</p>
+
+<p>Example content:</p>
+<pre>
+db_user: admin
+db_password: securepassword
+</pre>
+<p>The file is now <strong>encrypted</strong>.</p>
+
+<hr>
+
+<h2>View Encrypted File</h2>
+<pre>ansible-vault view secrets.yml</pre>
+
+<h2>Edit Vault File</h2>
+<pre>ansible-vault edit secrets.yml</pre>
+
+<h2>Encrypt Existing File</h2>
+<pre>ansible-vault encrypt vars.yml</pre>
+
+<h2>Decrypt File</h2>
+<pre>ansible-vault decrypt vars.yml</pre>
+
+<hr>
+
+<h2>Using Vault in Playbook</h2>
+<p>Example playbook:</p>
+<pre>
+- hosts: dbservers
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Print database user
+      debug:
+        msg: "{{ db_user }}"
+</pre>
+
+<p>Run playbook:</p>
+<pre>ansible-playbook deploy.yml --ask-vault-pass</pre>
+<p>Ansible will ask for the <strong>vault password</strong> to decrypt the file.</p>
+
+<hr>
+
+<h2>Real Production Example</h2>
+<p>You automate <strong>application deployment</strong> on 50 servers.</p>
+<p>Sensitive data includes:</p>
+<ul>
+  <li>Database password</li>
+  <li>API token</li>
+  <li>Cloud credentials</li>
+</ul>
+<p>All stored in <strong>vault encrypted file</strong>. This allows you to safely push playbooks to <strong>GitHub or GitLab</strong>.</p>
+
+<hr>
+
+<h2>Interview Answer (Best Short Version)</h2>
+<blockquote>
+Ansible Vault is used to encrypt sensitive data in playbooks. It ensures passwords, tokens, and credentials are stored securely. Vault files can be included in playbooks and decrypted at runtime using a password, making automation safe and production-ready.
+</blockquote>
+
+</body>
+</html>

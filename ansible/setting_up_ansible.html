@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="../style.css"> <!-- Linking external CSS -->
+</head>
+<body>
+
+</head>
+<body>
+
+<h1>Setting Up Ansible</h1>
+<p>Setting up Ansible means <strong>installing Ansible on a control machine and configuring it to manage other servers.</strong></p>
+<p>Ansible works using <strong>SSH</strong>, so we only need to install it on <strong>one server called the Control Node</strong>.</p>
+
+<pre>
+Control Node (Ansible installed)
+        |
+        | SSH
+        |
+Managed Nodes (Linux Servers)
+</pre>
+
+<hr>
+
+<h1>Step 1: Install Ansible</h1>
+<h3>On RHEL / CentOS / Rocky / Alma</h3>
+<pre><code>sudo yum install ansible -y</code></pre>
+
+<h3>On Ubuntu</h3>
+<pre><code>sudo apt update
+sudo apt install ansible -y</code></pre>
+
+<p>Check installation:</p>
+<pre><code>ansible --version</code></pre>
+
+<p>Example output:</p>
+<pre><code>ansible [core 2.x]
+python version = 3.x</code></pre>
+
+<hr>
+
+<h1>Step 2: Configure Inventory File</h1>
+<p>Inventory file contains the <strong>list of servers Ansible will manage</strong>.</p>
+<p>Default location:</p>
+<pre><code>/etc/ansible/hosts</code></pre>
+
+<p>Edit the file:</p>
+<pre><code>sudo vi /etc/ansible/hosts</code></pre>
+
+<p>Example:</p>
+<pre><code>[webservers]
+192.168.1.10
+192.168.1.11
+
+[dbservers]
+192.168.1.20</code></pre>
+
+<p>This means Ansible can manage <strong>3 servers</strong>.</p>
+
+<hr>
+
+<h1>Step 3: Setup SSH Passwordless Authentication</h1>
+<p>Ansible connects to servers using <strong>SSH keys</strong>.</p>
+
+<p>Generate SSH key:</p>
+<pre><code>ssh-keygen</code></pre>
+
+<p>Copy key to server:</p>
+<pre><code>ssh-copy-id user@192.168.1.10
+ssh-copy-id user@192.168.1.11</code></pre>
+
+<p>Now Ansible can login <strong>without password</strong>.</p>
+
+<hr>
+
+<h1>Step 4: Test Connectivity</h1>
+<p>Run:</p>
+<pre><code>ansible all -m ping</code></pre>
+
+<p>Example output:</p>
+<pre><code>192.168.1.10 | SUCCESS => {
+    "ping": "pong"
+}
+
+192.168.1.11 | SUCCESS => {
+    "ping": "pong"
+}</code></pre>
+
+<p>This means Ansible is successfully connected.</p>
+
+<hr>
+
+<h1>Step 5: Run a Simple Command</h1>
+<p>Example: Check disk usage on all servers.</p>
+<pre><code>ansible all -a "df -h"</code></pre>
+
+<p>Example: Install package.</p>
+<pre><code>ansible all -m yum -a "name=htop state=present"</code></pre>
+
+<hr>
+
+<h1>Real Production Example</h1>
+<p>Suppose you manage <strong>100 Linux servers</strong>.</p>
+
+<p>Without Ansible:</p>
+<pre><code>ssh server1
+ssh server2
+ssh server3</code></pre>
+
+<p>With Ansible:</p>
+<pre><code>ansible all -a "uptime"</code></pre>
+
+<p>All servers execute the command <strong>at the same time</strong>.</p>
+
+</body>
+</html>

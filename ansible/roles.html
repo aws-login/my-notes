@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="../style.css"> <!-- Linking external CSS -->
+</head>
+<body>
+
+<h1>What are Roles in Ansible?</h1>
+
+<h3>Simple Definition</h3>
+<p>An <strong>Ansible Role</strong> is a way to organize playbooks into a structured and reusable format.</p>
+<p>When a playbook becomes <strong>large and complex</strong>, roles help split it into smaller organized parts.</p>
+<p>Think of roles like <strong>folders that contain related automation tasks</strong>.</p>
+
+<hr>
+
+<h2>Layman Example</h2>
+<p>Imagine building a <strong>house</strong>. Different teams handle different work:</p>
+<ul>
+  <li>Electrician</li>
+  <li>Plumber</li>
+  <li>Painter</li>
+  <li>Carpenter</li>
+</ul>
+
+<p>In Ansible:</p>
+<pre>
+webserver role
+database role
+monitoring role
+security role
+</pre>
+
+<p>Each role performs a specific task.</p>
+
+<hr>
+
+<h2>Why Roles Are Used</h2>
+<ul>
+  <li>Organize automation code</li>
+  <li>Reuse automation tasks</li>
+  <li>Manage large playbooks</li>
+  <li>Simplify infrastructure automation</li>
+</ul>
+<p>Roles are <strong>very common in production environments</strong>.</p>
+
+<hr>
+
+<h2>Example Without Roles</h2>
+<pre>
+Install Apache
+Configure Apache
+Copy config files
+Start service
+Enable service
+Create users
+Setup firewall
+</pre>
+<p>Everything is in <strong>one large playbook</strong> → difficult to manage.</p>
+
+<hr>
+
+<h2>Example With Roles</h2>
+<pre>
+roles/
+   webserver/
+   database/
+   monitoring/
+</pre>
+<p>Each role handles its own tasks. Much cleaner.</p>
+
+<hr>
+
+<h2>Standard Role Directory Structure</h2>
+<pre>
+roles/
+   webserver/
+      tasks/
+         main.yml
+      handlers/
+         main.yml
+      vars/
+         main.yml
+      templates/
+      files/
+      defaults/
+      meta/
+</pre>
+
+<table>
+  <tr>
+    <th>Folder</th>
+    <th>Purpose</th>
+  </tr>
+  <tr><td>tasks</td><td>Main automation tasks</td></tr>
+  <tr><td>handlers</td><td>Triggered tasks (like service restart)</td></tr>
+  <tr><td>vars</td><td>Variables</td></tr>
+  <tr><td>templates</td><td>Jinja2 templates</td></tr>
+  <tr><td>files</td><td>Static files</td></tr>
+  <tr><td>defaults</td><td>Default variables</td></tr>
+  <tr><td>meta</td><td>Role dependencies</td></tr>
+</table>
+
+<hr>
+
+<h2>Simple Role Example</h2>
+<h3>Role Directory</h3>
+<pre>
+roles/
+   apache/
+      tasks/
+         main.yml
+</pre>
+
+<h3>tasks/main.yml</h3>
+<pre>
+- name: Install Apache
+  yum:
+    name: httpd
+    state: present
+
+- name: Start Apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+</pre>
+
+<h3>Using Role in Playbook</h3>
+<pre>
+- hosts: webservers
+  become: yes
+
+  roles:
+    - apache
+</pre>
+
+<p>Run playbook:</p>
+<pre>ansible-playbook site.yml</pre>
+
+<hr>
+
+<h2>Real Production Example</h2>
+<pre>
+roles/
+   common/
+   security/
+   monitoring/
+   nginx/
+   database/
+   backup/
+</pre>
+
+<p>Example workflow when provisioning new server:</p>
+<ol>
+  <li>common role → basic packages</li>
+  <li>security role → ssh hardening</li>
+  <li>monitoring role → install monitoring agent</li>
+  <li>nginx role → configure web server</li>
+  <li>backup role → configure backups</li>
+</ol>
+
+<p>This is <strong>standard DevOps practice</strong>.</p>
+
+<hr>
+
+<h2>Example Role for User Creation</h2>
+<pre>
+roles/user_management/tasks/main.yml
+</pre>
+
+<pre>
+- name: Create application user
+  user:
+    name: appuser
+    state: present
+</pre>
+
+<p>Playbook:</p>
+<pre>
+- hosts: all
+  roles:
+    - user_management
+</pre>
+
+<hr>
+
+<h2>Interview Answer (Best Short Version)</h2>
+<p><em>If interviewer asks “What are roles in Ansible?”</em></p>
+<blockquote>
+Ansible roles are used to organize playbooks into reusable and structured components. A role contains tasks, variables, templates, and handlers organized in a standard directory structure. Roles help simplify large playbooks and allow automation code to be reused across different environments.
+</blockquote>
+
+<hr>
+
+<h2>Quick Example (Interview Friendly)</h2>
+<p>Role structure:</p>
+<pre>
+roles/
+   webserver/
+      tasks/main.yml
+</pre>
+
+<p>Playbook:</p>
+<pre>
+roles:
+  - webserver
+</pre>
+
+<hr>
+
+<h2>Important Advantage</h2>
+<p>Roles allow <strong>modular automation</strong>. Instead of writing <strong>one big playbook</strong>, we create reusable modules.</p>
+
+</body>
+</html>

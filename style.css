@@ -1,0 +1,26 @@
+/* style.css */
+body {
+  font-family: Verdana, Arial, sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #000;   /* Black background */
+  color: #fff;              /* White text */
+}
+
+h1 {
+  font-size: 28px;
+  color: #00ffcc;           /* Optional: teal headings for contrast */
+}
+
+p, strong, ul li {
+  font-size: 18px;
+}
+
+img {
+  display: block;
+  margin: 20px auto;
+  max-width: 100%;
+  height: auto;
+}

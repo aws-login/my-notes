@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="../style.css"> <!-- Linking external CSS -->
+</head>
+<body>
+
+</head>
+<body>
+
+<h1>Adding Secondary IP on Cluster Nodes (RHEL)</h1>
+<p><strong>Environment:</strong> Red Hat Enterprise Linux cluster nodes.</p>
+
+<hr>
+
+<h1>Primary Host IP (Permanent)</h1>
+<p>Each node has its <strong>own primary IP configured in the interface file</strong>:</p>
+
+<p><strong>Node1</strong></p>
+<pre><code>/etc/sysconfig/network-scripts/ifcfg-eth0
+IPADDR=10.203.201.73
+PREFIX=24</code></pre>
+
+<p><strong>Node2</strong></p>
+<pre><code>/etc/sysconfig/network-scripts/ifcfg-eth0
+IPADDR=10.203.201.74
+PREFIX=24</code></pre>
+
+<p>These IPs are:</p>
+<ul>
+  <li>Primary host IP</li>
+  <li>Permanent</li>
+  <li>Loaded automatically after reboot</li>
+</ul>
+
+<hr>
+
+<h1>Adding Secondary IP Online (Recommended Method)</h1>
+<p>Use <strong>NetworkManager</strong> command:</p>
+<pre><code>nmcli con modify "System eth0" +ipv4.addresses 10.203.193.79/24
+nmcli device reapply eth0</code></pre>
+
+<p><strong>Advantages:</strong></p>
+<ul>
+  <li>No downtime</li>
+  <li>Applied immediately</li>
+  <li>Persistent after reboot</li>
+  <li>Recommended for production</li>
+</ul>
+
+<hr>
+
+<h1>Temporary Method (Not Persistent)</h1>
+<pre><code>ip addr add 10.203.193.79/24 dev eth0</code></pre>
+
+<p><strong>Characteristics:</strong></p>
+<ul>
+  <li>Works immediately</li>
+  <li>Lost after reboot</li>
+  <li>Used only for testing</li>
+</ul>
+
+<hr>
+
+<h1>Old Method (Network Scripts)</h1>
+<p>Edit configuration file:</p>
+<pre><code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code></pre>
+
+<p>Example:</p>
+<pre><code>IPADDR1=10.203.193.79
+PREFIX1=24</code></pre>
+
+<p>Then restart network.</p>
+<p>This method works but is <strong>not preferred when NetworkManager is running</strong>.</p>
+
+<hr>
+
+<h1>Verification Commands</h1>
+<p>Check IP addresses:</p>
+<pre><code>ip a show eth0</code></pre>
+
+<p>Check NetworkManager configuration:</p>
+<pre><code>nmcli con show "System eth0" | grep ipv4.addresses</code></pre>
+
+<p>Check routing source IP:</p>
+<pre><code>ip route get 8.8.8.8</code></pre>
+
+
+<h1>Adding Secondary IP on Debian (Classic Networking)</h1>
+<p>This works on systems using the classic Debian networking (<code>/etc/network/interfaces</code>).</p>
+
+<hr>
+
+<h1>Add Secondary IP Online (Immediate)</h1>
+<p>First add the IP <strong>live</strong>:</p>
+<pre><code>ip addr add 192.168.1.20/24 dev eth0</code></pre>
+
+<p>Verify:</p>
+<pre><code>ip a show eth0</code></pre>
+
+<p>You will see:</p>
+<pre><code>192.168.1.10  → primary
+192.168.1.20  → secondary</code></pre>
+
+<ul>
+  <li>✅ IP becomes active immediately</li>
+  <li>✅ No downtime</li>
+  <li>❌ Not persistent yet</li>
+</ul>
+
+<hr>
+
+<h1>Make It Permanent</h1>
+<p>Edit:</p>
+<pre><code>vi /etc/network/interfaces</code></pre>
+
+<p>Example:</p>
+<pre><code>auto eth0
+iface eth0 inet static
+    address 192.168.1.10
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+
+# secondary IP
+up ip addr add 192.168.1.20/24 dev eth0
+down ip addr del 192.168.1.20/24 dev eth0</code></pre>
+
+<p>This means:</p>
+<ul>
+  <li>When interface starts → IP added</li>
+  <li>When interface stops → IP removed</li>
+</ul>
+
+<hr>
+
+<h1>No Restart Needed</h1>
+<p>Because you already added the IP using <code>ip addr add</code>, <strong>no restart is required</strong>.</p>
+<p>After reboot, Debian will automatically add it.</p>
+
+<hr>
+
+<h1>Verify Configuration</h1>
+<p>Check running IPs:</p>
+<pre><code>ip a</code></pre>
+
+<p>Check configuration:</p>
+<pre><code>cat /etc/network/interfaces</code></pre>
+
+<hr>
+
+<h1>Why This Method is Preferred</h1>
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Method</th>
+    <th>Downtime</th>
+    <th>Persistent</th>
+  </tr>
+  <tr>
+    <td>ip addr add</td>
+    <td>❌ No</td>
+    <td>❌ No</td>
+  </tr>
+  <tr>
+    <td>interfaces file only</td>
+    <td>⚠ restart needed</td>
+    <td>✅ Yes</td>
+  </tr>
+  <tr>
+    <td><strong>ip + interfaces method</strong></td>
+    <td>✅ No downtime</td>
+    <td>✅ Yes</td>
+  </tr>
+</table>
+
+<p>This is the <strong>standard production method used by many Linux admins</strong>.</p>
+
+<hr>
+
+<h1> Example Final Output</h1>
+<pre><code>eth0
+ ├── 192.168.1.10  (primary)
+ └── 192.168.1.20  (secondary)</code></pre>
+
+<hr>
+
+<p>💡 <strong>Senior Linux Admin Tip</strong></p>
+<p>To quickly see <strong>all secondary IPs on a server</strong>:</p>
+<pre><code>ip -brief addr</code></pre>
+
+<p>Example output:</p>
+<pre><code>eth0  UP  192.168.1.10/24 192.168.1.20/24</code></pre>
+
+
+
+<h1>Adding Secondary IP on SUSE (No Downtime)</h1>
+<p>This applies to systems running <strong>SUSE Linux Enterprise Server</strong>.</p>
+
+<hr>
+
+<h1> Add Secondary IP Online (No Downtime)</h1>
+<p>Run:</p>
+<pre><code>ip addr add 192.168.1.20/24 dev eth0</code></pre>
+
+<p>Example:</p>
+<pre><code>ip addr add 10.203.193.79/24 dev eth0</code></pre>
+
+<p>Verify:</p>
+<pre><code>ip a show eth0</code></pre>
+
+<p>You will see:</p>
+<pre><code>192.168.1.10   → primary
+192.168.1.20   → secondary</code></pre>
+
+<ul>
+  <li>✅ Immediate</li>
+  <li>✅ No network restart</li>
+  <li>❌ Not persistent yet</li>
+</ul>
+
+<hr>
+
+<h1> Make It Permanent (SUSE Method)</h1>
+<p>Edit the interface configuration file:</p>
+<pre><code>/etc/sysconfig/network/ifcfg-eth0</code></pre>
+
+<p>Add the secondary IP using <strong>IPADDR_1 format</strong>.</p>
+
+<p>Example:</p>
+<pre><code>IPADDR='192.168.1.10/24'
+IPADDR_1='192.168.1.20/24'</code></pre>
+
+<p>If you already have multiple IPs it may look like:</p>
+<pre><code>IPADDR='192.168.1.10/24'
+IPADDR_1='192.168.1.20/24'
+IPADDR_2='192.168.1.30/24'</code></pre>
+
+<hr>
+
+<h1> Apply Without Restarting Network</h1>
+<p>Instead of restarting networking, run:</p>
+<pre><code>wicked ifreload eth0</code></pre>
+
+<p>SUSE uses <strong>wicked</strong> as the network manager.</p>
+<p>This reloads the configuration <strong>without dropping the interface</strong>.</p>
+
+<hr>
+
+<h1> Verify</h1>
+<pre><code>ip a show eth0</code></pre>
+<p>or</p>
+<pre><code>wicked show all</code></pre>
+
+<hr>
+
+<h1> Summary (Production Safe Method)</h1>
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Step</th>
+    <th>Command</th>
+  </tr>
+  <tr>
+    <td>Add IP online</td>
+    <td><code>ip addr add IP/24 dev eth0</code></td>
+  </tr>
+  <tr>
+    <td>Make permanent</td>
+    <td>edit <code>/etc/sysconfig/network/ifcfg-eth0</code></td>
+  </tr>
+  <tr>
+    <td>Apply safely</td>
+    <td><code>wicked ifreload eth0</code></td>
+  </tr>
+</table>
+
+<hr>
+
+<h2> Result</h2>
+<ul>
+  <li>Secondary IP added <strong>online</strong></li>
+  <li><strong>No downtime</strong></li>
+  <li>IP remains after reboot</li>
+</ul>
+
+
+
+</body>
+</html>
