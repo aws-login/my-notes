@@ -16,7 +16,7 @@
 <p>These are bundles in Kubernetes are KUBE-COTROLLER-MANAGER.</p>
 
 <p><strong>NODE CONTROLLER:</strong></p>
-<p>Like Node controller is responsible for  monitoring the status of nodes , and take necessary action keep the application running.</p>
+<p>Like Node controller is responsible for monitoring the status of nodes, and take necessary action keep the application running.</p>
 <p>Node controller checks the status for nodes availibilty in every 5 secs.</p>
 <p>if it stop receiving heartbeat from the nodes, the nodes marked as unreachable but before marking it unreachable it waits from 40sec.</p>
 <p>Once the controller marked the node as unreachable , controller will wait fr 5 mins to come up the node online. If node doesn't come up in 5 mins controller removed the pods on faulty node and provision them in  working nodes if they are part of repicasets.</p>
