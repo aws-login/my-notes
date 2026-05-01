@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="../../style.css"> <!-- Linking external CSS -->
+</head>
+<body>
+
+<h1>Helper Containers — Sidecar, Adapter, Ambassador Patterns</h1>
+
+
+
+<p>In Kubernetes, normally it is good practice to have only one application container per pod. But there are some valid cases to have helper containers along with main container.</p>
+
+<p>There are three multi container patterns:</p>
+
+<ul>
+  <li>Sidecar Pattern</li>
+  <li>Ambassador Pattern</li>
+  <li>Adapter Pattern</li>
+</ul>
+
+
+<p>Sidecar pattern is about attaching helper container to main application container. Two containers co exist in a pod. One container is main application container that has core application/service logic. Second container is to help/enhance functionality of main container. Sometimes sidecar container is used to fix some environmental issues/limitations of existing legacy application. Both containers share common resources like file system and network.</p>
+
+
+<p>Some common use cases of this pattern are:</p>
+
+<p>not have HTTPS support and it may be required now by security team. Sidecar container can accept HTTPS traffic and terminate it at that level and forward request to application container on HTTP.</p>
+<p>File syncing/Watching — Sidecar container can monitor some repository and pull down code or config changes. It’ll put those in shared volume that can be accessed by main application.</p>
+<p>Standardizing logging formats.</p>
+
+<img src="pic1.JPG" alt="pic1">
+<img src="pic2.JPG" alt="pic2">
+
+
+<p>Sidecar container for syncing configuration or code from repository</p>
+
+Sidecar container to proxy traffic
+Adapter Pattern
+
+<p>The Adapter pattern inherits from the generic sidecar with specific purpose of presenting standard interface. Services in distributed systems maybe written in different languages or using different frameworks by different teams. This pattern is helpful when we need standard interface for some specific purpose like logs/metrics. We may need to expose logs/metrics in standard format to some aggregator for alerting/monitoring. But different applications may be exposing this information in different formats. Helper container can present unified interface.</p>
+
+<img src="pic3.JPG" alt="pic3">
+
+<p>Adapter Pattern — Providing Standard Logs/Metrics Interface</p>
+<p>In above example, adapter container knows how to read application specific logs/metrics and format them to required format (expected by common tool like Prometheus)</p>
+
+<p>Ambassador Pattern</p>
+
+<p>The Ambassador pattern inherits from the generic sidecar pattern with specific purpose of presenting standard interface to outside services to be consumed by main application container.</p>
+<p>Examples can be accessing cache, accessing some legacy database or service that requires some non-standard protocol or data format. This patterns relieves main application container from having intimate knowledge of consumed service by providing interface in standard or well known format. It can also be useful when some target service must be selected based on load etc.</p>
+
+<img src="pic4.JPG" alt="pic4">
+<img src="pic5.JPG" alt="pic5">
+
+
+<p>Ambassador container providing standard access to cache (could be etcd, memcachd)</p>
+<p>Considerations</p>
+<p>One important consideration for most of these patterns is performance. Most of these are going to add some overhead to calls as a cost for obtaining standardization. Because of proximity of helper containers to main container, it should be acceptable to most applications but should be taken into account based on business needs.</p>
+</body>
+</html>
