@@ -7,10 +7,24 @@
   <link rel="stylesheet" href="internal.css"> <!-- Linking external CSS -->
 </head>
 
+
 <body>
 
-<header id="top">
-  <h1>DevOps Day 1 Complete Notes</h1>
+<div class="hover-hint">
+  ⬇ Hover here for menu
+</div>
+
+<div class="hover-zone"></div>
+
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 1 Complete Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
 
   <nav>
     <a href="#intro">Introduction</a>
@@ -26,7 +40,11 @@
     <a href="#tools">Tools</a>
     <a href="#interview">Interview Questions</a>
   </nav>
+
 </header>
+
+<div id="top"></div>
+
 
 <div class="container">
 
@@ -43,7 +61,7 @@
     <strong>DevOps = Development + Operations + Automation + Monitoring</strong>
   </div>
 
-  <div class="diagram">
+  <pre class="diagram">
 +-------------------+
 |   DEVELOPMENT     |
 +-------------------+
@@ -55,7 +73,7 @@
 +-------------------+
 |      DEVOPS       |
 +-------------------+
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -73,7 +91,7 @@
     <li>Reliable deployments</li>
   </ul>
 
-  <div class="diagram">
+  <pre class="diagram">
 +-----------------------------+
 |     DEVOPS OBJECTIVES       |
 +-----------------------------+
@@ -83,7 +101,7 @@
 | Continuous Monitoring       |
 | Stable Infrastructure       |
 +-----------------------------+
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -93,13 +111,13 @@
 
   <h3>Traditional Model</h3>
 
-  <div class="diagram">
+  <pre class="diagram">
 Developer Team
       ↓
 Operations Team
       ↓
 Production Server
-  </div>
+  </pre>
 
   <ul>
     <li>Communication gap</li>
@@ -110,7 +128,7 @@ Production Server
 
   <h3>DevOps Model</h3>
 
-  <div class="diagram">
+  <pre class="diagram">
 Development + Operations
           ↓
       Automation
@@ -120,7 +138,7 @@ Development + Operations
  Continuous Deployment
           ↓
       Monitoring
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -128,7 +146,7 @@ Development + Operations
 <section id="lifecycle">
   <h2>DevOps Lifecycle</h2>
 
-  <div class="diagram">
+  <pre class="diagram">
 +---------+
 | PLAN    |
 +---------+
@@ -156,7 +174,7 @@ Development + Operations
 +---------+
 | MONITOR |
 +---------+
-  </div>
+  </pre>
 
   <h3>Lifecycle Explanation</h3>
 
@@ -198,7 +216,7 @@ Development + Operations
     <li>No manual approval required</li>
   </ul>
 
-  <div class="diagram">
+  <pre class="diagram">
 Developer Code
        ↓
       Git
@@ -212,7 +230,7 @@ Developer Code
  Kubernetes
        ↓
    Production
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -237,7 +255,7 @@ Developer Code
     <li>System monitoring</li>
   </ul>
 
-  <div class="diagram">
+  <pre class="diagram">
 +-------------------+
 |   LINUX SERVER    |
 +-------------------+
@@ -247,7 +265,7 @@ Developer Code
 | Jenkins           |
 | Monitoring Tools  |
 +-------------------+
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -259,7 +277,7 @@ Developer Code
     Git helps developers manage source code changes and collaborate effectively.
   </p>
 
-  <div class="diagram">
+  <pre class="diagram">
 Developer
     ↓
 Git Add
@@ -269,11 +287,11 @@ Git Commit
 Git Push
     ↓
 Remote Repository
-  </div>
+  </pre>
 
   <h3>Important Git Commands</h3>
 
-  <div class="diagram">
+  <pre class="diagram">
 git clone
 git add
 git commit
@@ -281,7 +299,7 @@ git push
 git pull
 git reset
 git revert
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -302,7 +320,7 @@ git revert
     <li>Scalable</li>
   </ul>
 
-  <div class="diagram">
+  <pre class="diagram">
 +-----------------------+
 |      CONTAINER        |
 +-----------------------+
@@ -311,7 +329,7 @@ git revert
 | Dependencies          |
 | Runtime Environment   |
 +-----------------------+
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -342,7 +360,7 @@ git revert
     </tr>
   </table>
 
-  <div class="diagram">
+  <pre class="diagram">
 +------------------+
 |     CLOUD        |
 +------------------+
@@ -352,7 +370,7 @@ git revert
 | Storage          |
 | Networking       |
 +------------------+
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -367,13 +385,13 @@ git revert
     <li>Monitoring automation</li>
   </ul>
 
-  <div class="diagram">
+  <pre class="diagram">
 Manual Work
      ↓
  Automation Tools
      ↓
  Faster & Reliable Delivery
-  </div>
+  </pre>
 
   <h3>Popular Automation Tools</h3>
 
@@ -433,13 +451,13 @@ Manual Work
     </tr>
   </table>
 
-  <div class="diagram">
+  <pre class="diagram">
 +------------------------------------------------+
 |                 DEVOPS TOOLS                   |
 +------------------------------------------------+
 | Git | Jenkins | Docker | Kubernetes | Ansible |
 +------------------------------------------------+
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -481,7 +499,7 @@ Manual Work
     A container packages application code and dependencies together for consistent execution.
   </p>
 
-  <div class="diagram">
+  <pre class="diagram">
 +--------------------------------+
 |      QUICK REVISION            |
 +--------------------------------+
@@ -491,7 +509,7 @@ Manual Work
 | Docker = Containers            |
 | Kubernetes = Orchestration     |
 +--------------------------------+
-  </div>
+  </pre>
 
   <a href="#top" class="top-btn">Back to Top</a>
 </section>
@@ -502,6 +520,9 @@ Manual Work
   <h3>DevOps Day 1 Interactive HTML Notes</h3>
   <p>Prepared for Learning & Revision</p>
 </footer>
+
+<script src="script-internal.js"></script>
+
 
 </body>
 </html>

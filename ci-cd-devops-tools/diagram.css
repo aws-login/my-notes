@@ -1,0 +1,16 @@
+.diagram {
+  background: #0d1117;
+  color: #00ff99;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+
+  font-family: Consolas, monospace;
+  font-size: 15px;
+  line-height: 1.5;
+
+  overflow-x: auto;
+  white-space: pre;
+
+  max-width: 100%;
+}
