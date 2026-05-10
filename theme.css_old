@@ -43,22 +43,3 @@ body.dark h3{
 color:#ffffff;
 }
 
-/* Sidebar base styles */
-.sidebar {
-  background: #1a1a1a;   /* dark background */
-  padding: 10px;
-}
-
-.sidebar li {
-  list-style: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  color: #ccc;           /* default text color */
-}
-
-/* Active state */
-.sidebar li.active {
-  color: red;            /* highlight clicked item */
-  font-weight: bold;
-}
-

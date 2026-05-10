@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terms</title>
+  <link rel="stylesheet" href="internal.css"> <!-- Linking external CSS -->
+</head>
+
+<body>
+<div id="top"></div>
+<header>
+  <h1>DevOps Day 1 Complete Notes</h1>
+
+  <nav>
+    <a href="#intro">Introduction</a>
+    <a href="#goals">Goals</a>
+    <a href="#traditional">Traditional vs DevOps</a>
+    <a href="#lifecycle">Lifecycle</a>
+    <a href="#cicd">CI/CD</a>
+    <a href="#linux">Linux</a>
+    <a href="#git">Git</a>
+    <a href="#containers">Containers</a>
+    <a href="#cloud">Cloud</a>
+    <a href="#automation">Automation</a>
+    <a href="#tools">Tools</a>
+    <a href="#interview">Interview Questions</a>
+  </nav>
+</header>
+
+<div class="container">
+
+<section id="intro">
+  <h2>What is DevOps?</h2>
+
+  <p>
+    DevOps is a combination of Development and Operations.
+    It is a culture and methodology that improves collaboration,
+    automation, and software delivery.
+  </p>
+
+  <div class="highlight">
+    <strong>DevOps = Development + Operations + Automation + Monitoring</strong>
+  </div>
+
+  <div class="diagram">
++-------------------+
+|   DEVELOPMENT     |
++-------------------+
+          +
++-------------------+
+|    OPERATIONS     |
++-------------------+
+          ↓
++-------------------+
+|      DEVOPS       |
++-------------------+
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="goals">
+  <h2>Goals of DevOps</h2>
+
+  <ul>
+    <li>Faster software delivery</li>
+    <li>Automation of manual tasks</li>
+    <li>Reduced downtime</li>
+    <li>Better collaboration</li>
+    <li>Continuous monitoring</li>
+    <li>Scalable infrastructure</li>
+    <li>Reliable deployments</li>
+  </ul>
+
+  <div class="diagram">
++-----------------------------+
+|     DEVOPS OBJECTIVES       |
++-----------------------------+
+| Faster Delivery             |
+| Better Collaboration        |
+| Automation                  |
+| Continuous Monitoring       |
+| Stable Infrastructure       |
++-----------------------------+
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="traditional">
+  <h2>Traditional IT Model vs DevOps</h2>
+
+  <h3>Traditional Model</h3>
+
+  <div class="diagram">
+Developer Team
+      ↓
+Operations Team
+      ↓
+Production Server
+  </div>
+
+  <ul>
+    <li>Communication gap</li>
+    <li>Slow deployment</li>
+    <li>Manual process</li>
+    <li>Frequent failures</li>
+  </ul>
+
+  <h3>DevOps Model</h3>
+
+  <div class="diagram">
+Development + Operations
+          ↓
+      Automation
+          ↓
+ Continuous Integration
+          ↓
+ Continuous Deployment
+          ↓
+      Monitoring
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="lifecycle">
+  <h2>DevOps Lifecycle</h2>
+
+  <div class="diagram">
++---------+
+| PLAN    |
++---------+
+      ↓
++---------+
+| CODE    |
++---------+
+      ↓
++---------+
+| BUILD   |
++---------+
+      ↓
++---------+
+| TEST    |
++---------+
+      ↓
++---------+
+| DEPLOY  |
++---------+
+      ↓
++---------+
+| OPERATE |
++---------+
+      ↓
++---------+
+| MONITOR |
++---------+
+  </div>
+
+  <h3>Lifecycle Explanation</h3>
+
+  <ul>
+    <li><strong>Plan:</strong> Requirement gathering and planning</li>
+    <li><strong>Code:</strong> Developers write source code</li>
+    <li><strong>Build:</strong> Compile/package application</li>
+    <li><strong>Test:</strong> Automated testing</li>
+    <li><strong>Deploy:</strong> Release application</li>
+    <li><strong>Operate:</strong> Manage infrastructure</li>
+    <li><strong>Monitor:</strong> Track application health</li>
+  </ul>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="cicd">
+  <h2>CI/CD Concepts</h2>
+
+  <h3>Continuous Integration (CI)</h3>
+
+  <ul>
+    <li>Code integration</li>
+    <li>Automated testing</li>
+    <li>Early bug detection</li>
+  </ul>
+
+  <h3>Continuous Delivery (CD)</h3>
+
+  <ul>
+    <li>Automated release preparation</li>
+    <li>Deployment with approval</li>
+  </ul>
+
+  <h3>Continuous Deployment</h3>
+
+  <ul>
+    <li>Automatic production deployment</li>
+    <li>No manual approval required</li>
+  </ul>
+
+  <div class="diagram">
+Developer Code
+       ↓
+      Git
+       ↓
+   Jenkins CI
+       ↓
+ Build & Test
+       ↓
+ Docker Image
+       ↓
+ Kubernetes
+       ↓
+   Production
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="linux">
+  <h2>Linux Importance in DevOps</h2>
+
+  <ul>
+    <li>Most servers run Linux</li>
+    <li>Cloud uses Linux heavily</li>
+    <li>Containers work efficiently</li>
+    <li>Automation tools support Linux</li>
+  </ul>
+
+  <h3>Important Linux Skills</h3>
+
+  <ul>
+    <li>SSH</li>
+    <li>Permissions</li>
+    <li>Networking</li>
+    <li>Shell scripting</li>
+    <li>System monitoring</li>
+  </ul>
+
+  <div class="diagram">
++-------------------+
+|   LINUX SERVER    |
++-------------------+
+| Applications      |
+| Docker            |
+| Kubernetes        |
+| Jenkins           |
+| Monitoring Tools  |
++-------------------+
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="git">
+  <h2>Git and Version Control</h2>
+
+  <p>
+    Git helps developers manage source code changes and collaborate effectively.
+  </p>
+
+  <div class="diagram">
+Developer
+    ↓
+Git Add
+    ↓
+Git Commit
+    ↓
+Git Push
+    ↓
+Remote Repository
+  </div>
+
+  <h3>Important Git Commands</h3>
+
+  <div class="diagram">
+git clone
+git add
+git commit
+git push
+git pull
+git reset
+git revert
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="containers">
+  <h2>Containers and Docker</h2>
+
+  <p>
+    Containers package applications along with dependencies to ensure consistency.
+  </p>
+
+  <h3>Benefits</h3>
+
+  <ul>
+    <li>Portable</li>
+    <li>Lightweight</li>
+    <li>Fast deployment</li>
+    <li>Scalable</li>
+  </ul>
+
+  <div class="diagram">
++-----------------------+
+|      CONTAINER        |
++-----------------------+
+| Application           |
+| Libraries             |
+| Dependencies          |
+| Runtime Environment   |
++-----------------------+
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="cloud">
+  <h2>Cloud in DevOps</h2>
+
+  <p>
+    Cloud computing provides scalable infrastructure and managed services.
+  </p>
+
+  <table>
+    <tr>
+      <th>Cloud Provider</th>
+      <th>Usage</th>
+    </tr>
+    <tr>
+      <td>AWS</td>
+      <td>Compute, Storage, DevOps Tools</td>
+    </tr>
+    <tr>
+      <td>Azure</td>
+      <td>Enterprise Cloud Platform</td>
+    </tr>
+    <tr>
+      <td>GCP</td>
+      <td>Kubernetes and AI Services</td>
+    </tr>
+  </table>
+
+  <div class="diagram">
++------------------+
+|     CLOUD        |
++------------------+
+| Virtual Machines |
+| Containers       |
+| Databases        |
+| Storage          |
+| Networking       |
++------------------+
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="automation">
+  <h2>Automation in DevOps</h2>
+
+  <ul>
+    <li>Server provisioning</li>
+    <li>Application deployment</li>
+    <li>Infrastructure management</li>
+    <li>Monitoring automation</li>
+  </ul>
+
+  <div class="diagram">
+Manual Work
+     ↓
+ Automation Tools
+     ↓
+ Faster & Reliable Delivery
+  </div>
+
+  <h3>Popular Automation Tools</h3>
+
+  <table>
+    <tr>
+      <th>Tool</th>
+      <th>Purpose</th>
+    </tr>
+    <tr>
+      <td>Ansible</td>
+      <td>Configuration Management</td>
+    </tr>
+    <tr>
+      <td>Terraform</td>
+      <td>Infrastructure Provisioning</td>
+    </tr>
+    <tr>
+      <td>Jenkins</td>
+      <td>CI/CD Automation</td>
+    </tr>
+  </table>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="tools">
+  <h2>Important DevOps Tools</h2>
+
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Tools</th>
+    </tr>
+    <tr>
+      <td>Version Control</td>
+      <td>Git</td>
+    </tr>
+    <tr>
+      <td>CI/CD</td>
+      <td>Jenkins, GitLab CI</td>
+    </tr>
+    <tr>
+      <td>Containers</td>
+      <td>Docker</td>
+    </tr>
+    <tr>
+      <td>Orchestration</td>
+      <td>Kubernetes</td>
+    </tr>
+    <tr>
+      <td>Monitoring</td>
+      <td>Prometheus, Grafana</td>
+    </tr>
+    <tr>
+      <td>Cloud</td>
+      <td>AWS, Azure, GCP</td>
+    </tr>
+  </table>
+
+  <div class="diagram">
++------------------------------------------------+
+|                 DEVOPS TOOLS                   |
++------------------------------------------------+
+| Git | Jenkins | Docker | Kubernetes | Ansible |
++------------------------------------------------+
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+<section id="interview">
+  <h2>Important Interview Questions</h2>
+
+  <h3>1. What is DevOps?</h3>
+  <p>
+    DevOps is a culture and methodology that combines development and operations teams to improve software delivery through automation and collaboration.
+  </p>
+
+  <h3>2. Difference Between CI and CD?</h3>
+
+  <table>
+    <tr>
+      <th>CI</th>
+      <th>CD</th>
+    </tr>
+    <tr>
+      <td>Continuous Integration</td>
+      <td>Continuous Delivery/Deployment</td>
+    </tr>
+    <tr>
+      <td>Focus on code integration</td>
+      <td>Focus on deployment</td>
+    </tr>
+  </table>
+
+  <h3>3. Why Linux is Important?</h3>
+
+  <p>
+    Most cloud servers and DevOps tools operate on Linux systems.
+  </p>
+
+  <h3>4. What is a Container?</h3>
+
+  <p>
+    A container packages application code and dependencies together for consistent execution.
+  </p>
+
+  <div class="diagram">
++--------------------------------+
+|      QUICK REVISION            |
++--------------------------------+
+| DevOps = Culture + Automation  |
+| CI/CD = Fast Delivery          |
+| Linux = Core Skill             |
+| Docker = Containers            |
+| Kubernetes = Orchestration     |
++--------------------------------+
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+</section>
+
+</div>
+
+<footer>
+  <h3>DevOps Day 1 Interactive HTML Notes</h3>
+  <p>Prepared for Learning & Revision</p>
+</footer>
+
+</body>
+</html>
