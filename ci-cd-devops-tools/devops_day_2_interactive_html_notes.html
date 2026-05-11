@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 2 - Git Notes</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 2 - Git Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#vcs">VCS</a>
+    <a href="#types">Types</a>
+    <a href="#cvcs">CVCS</a>
+    <a href="#dvcs">DVCS</a>
+    <a href="#git">Git</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#repo">Repository</a>
+    <a href="#installation">Installation</a>
+    <a href="#commands">Commands</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#interview">Interview</a>
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- VCS -->
+<section id="vcs">
+
+  <h2>What is Version Control System (VCS)</h2>
+
+  <p>
+    Version Control System helps developers track source code changes,
+    maintain history, collaborate with teams, and restore previous versions.
+  </p>
+
+  <div class="highlight">
+    VCS = Source Code Tracking + Collaboration + History Management
+  </div>
+
+  <pre class="diagram">
+Developer
+    ↓
+Version Control System
+    ↓
+Source Code History
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- TYPES -->
+<section id="types">
+
+  <h2>Types of Version Control Systems</h2>
+
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Full Form</th>
+    </tr>
+
+    <tr>
+      <td>LVCS</td>
+      <td>Local Version Control System</td>
+    </tr>
+
+    <tr>
+      <td>CVCS</td>
+      <td>Centralized Version Control System</td>
+    </tr>
+
+    <tr>
+      <td>DVCS</td>
+      <td>Distributed Version Control System</td>
+    </tr>
+
+  </table>
+
+  <pre class="diagram">
+             VCS
+              |
+   -----------------------
+   |         |           |
+  LVCS      CVCS       DVCS
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- CVCS -->
+<section id="cvcs">
+
+  <h2>Centralized Version Control System (CVCS)</h2>
+
+  <p>
+    In CVCS, all developers connect to a central server.
+  </p>
+
+  <pre class="diagram">
+        Central Server
+              |
+   ---------------------
+   |         |         |
+Developer  Developer  Developer
+  </pre>
+
+  <h3>Advantages</h3>
+
+  <ul>
+    <li>Central management</li>
+    <li>Easy administration</li>
+  </ul>
+
+  <h3>Disadvantages</h3>
+
+  <ul>
+    <li>Single point failure</li>
+    <li>Internet dependency</li>
+  </ul>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- DVCS -->
+<section id="dvcs">
+
+  <h2>Distributed Version Control System (DVCS)</h2>
+
+  <p>
+    Every developer has a complete local copy of repository and history.
+  </p>
+
+  <pre class="diagram">
+Developer Repo  ↔  Central Repo  ↔  Developer Repo
+  </pre>
+
+  <h3>Advantages</h3>
+
+  <ul>
+    <li>Offline work possible</li>
+    <li>Fast operations</li>
+    <li>No single point failure</li>
+    <li>Better collaboration</li>
+  </ul>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- GIT -->
+<section id="git">
+
+  <h2>What is Git?</h2>
+
+  <p>
+    Git is a Distributed Version Control System used to track source code changes.
+  </p>
+
+  <div class="highlight">
+    Git = Fast + Lightweight + Distributed
+  </div>
+
+  <pre class="diagram">
++----------------------+
+|        GIT           |
++----------------------+
+| Version Control      |
+| Distributed          |
+| Open Source          |
+| Fast & Secure        |
++----------------------+
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+
+  <h2>Git Architecture</h2>
+
+  <p>
+    Git mainly contains:
+  </p>
+
+  <ul>
+    <li>Working Directory</li>
+    <li>Staging Area</li>
+    <li>Local Repository</li>
+  </ul>
+
+  <pre class="diagram">
+Working Directory
+        ↓
+     git add
+        ↓
+   Staging Area
+        ↓
+    git commit
+        ↓
+ Local Repository
+  </pre>
+ <img src="git_arch.JPG" width="600" height="400">
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- REPOSITORY -->
+<section id="repo">
+
+  <h2>Repository</h2>
+
+  <p>
+    Repository is a storage location that contains:
+  </p>
+
+  <ul>
+    <li>Files</li>
+    <li>Commits</li>
+    <li>Branches</li>
+    <li>History</li>
+  </ul>
+
+  <pre class="diagram">
++----------------------+
+|      REPOSITORY      |
++----------------------+
+| Files                |
+| Commits              |
+| Branches             |
+| History              |
++----------------------+
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- INSTALLATION -->
+<section id="installation">
+
+  <h2>Git Installation</h2>
+
+  <h3>Ubuntu/Linux</h3>
+
+  <pre class="diagram">
+sudo apt update
+
+sudo apt install git -y
+  </pre>
+
+  <h3>Check Version</h3>
+
+  <pre class="diagram">
+git --version
+  </pre>
+
+  <h3>Configure Git</h3>
+
+  <pre class="diagram">
+git config --global user.name "YourName"
+
+git config --global user.email "your@email.com"
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- COMMANDS -->
+<section id="commands">
+
+  <h2>Important Git Commands</h2>
+
+  <table>
+
+    <tr>
+      <th>Command</th>
+      <th>Purpose</th>
+    </tr>
+
+    <tr>
+      <td>git init</td>
+      <td>Initialize Repository</td>
+    </tr>
+
+    <tr>
+      <td>git status</td>
+      <td>Check Status</td>
+    </tr>
+
+    <tr>
+      <td>git add .</td>
+      <td>Add Files</td>
+    </tr>
+
+    <tr>
+      <td>git commit</td>
+      <td>Save Changes</td>
+    </tr>
+
+    <tr>
+      <td>git log</td>
+      <td>View History</td>
+    </tr>
+
+    <tr>
+      <td>git push</td>
+      <td>Upload Changes</td>
+    </tr>
+
+    <tr>
+      <td>git pull</td>
+      <td>Download Changes</td>
+    </tr>
+
+  </table>
+
+  <pre class="diagram">
+git init
+git status
+git add .
+git commit -m "message"
+git push
+git pull
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow">
+
+  <h2>Git Workflow</h2>
+
+  <pre class="diagram">
+Developer
+    ↓
+Working Directory
+    ↓
+git add
+    ↓
+Staging Area
+    ↓
+git commit
+    ↓
+Local Repository
+    ↓
+git push
+    ↓
+Remote Repository
+  </pre>
+
+  <div class="highlight">
+    Real-world developer workflow used in DevOps and CI/CD pipelines.
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- INTERVIEW -->
+<section id="interview">
+
+  <h2>Important Interview Questions</h2>
+
+  <h3>What is Git?</h3>
+
+  <p>
+    Git is a Distributed Version Control System used to track source code changes.
+  </p>
+
+  <h3>Difference Between CVCS and DVCS</h3>
+
+  <table>
+
+    <tr>
+      <th>CVCS</th>
+      <th>DVCS</th>
+    </tr>
+
+    <tr>
+      <td>Central server required</td>
+      <td>Local repository available</td>
+    </tr>
+
+    <tr>
+      <td>Internet dependent</td>
+      <td>Offline work possible</td>
+    </tr>
+
+    <tr>
+      <td>Single point failure</td>
+      <td>Safer architecture</td>
+    </tr>
+
+  </table>
+
+  <h3>Difference Between git add and git commit</h3>
+
+  <table>
+
+    <tr>
+      <th>git add</th>
+      <th>git commit</th>
+    </tr>
+
+    <tr>
+      <td>Moves files to staging area</td>
+      <td>Saves changes permanently</td>
+    </tr>
+
+  </table>
+
+  <pre class="diagram">
++--------------------------------+
+|      QUICK REVISION            |
++--------------------------------+
+| Git = DVCS                     |
+| git add = staging              |
+| git commit = save              |
+| Repository = code history      |
++--------------------------------+
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 2 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>
