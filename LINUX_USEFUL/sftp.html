@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SFTP Setup Guide</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Consolas, monospace;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #00bcd4;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid #444;
+      margin: 20px 0;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      color: #c3e88d;
+    }
+    ul {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>SFTP SETUP</h1>
+<h3>Note : We are automating a monthly file transfer from SUSE-LINUX to ALMA-LINUX using cron and password less rsync over SSH.</h3>
+<h2>Source where report.txt generating - SUSE-LINUX ; IP - 192.168.1.10</h2>
+<h2>Destination where report.txt pushed for application use - ALMA-LINUX ; IP - 192.168.1.9</h2>
+<hr>
+
+<h2>Phase 1: Configure Key-Based Authentication (No-Password Login) on ALMA-LINUX ; IP - 192.168.1.9</h2>
+<p>To allow the automated cron job to connect securely without a human typing a password, you must share SSH keys between the machines.</p>
+<ul>
+  <li>Log into destination as your standard user.</li>
+  <li>Generate a secure deployment key pair:</li>
+</ul>
+<pre><code>ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519</code></pre>
+<ul>
+  <li>Append the public key directly into the SFTP server's authorized file:</li>
+</ul>
+<pre><code>cat ~/.ssh/id_ed25519.pub | ssh user@192.168.1.10 \
+'mkdir -p /app/sftp/data/.ssh && \
+cat >> /app/sftp/data/.ssh/authorized_keys && \
+chmod 700 /app/sftp/data/.ssh && \
+chmod 600 /app/sftp/data/.ssh/authorized_keys && \
+chown -R user:users /app/sftp/data/.ssh'</code></pre>
+
+<hr>
+
+<h2>Phase 2: Create the Automated Script on linux-6yta</h2>
+<ul>
+  <li>Create a dedicated directory:</li>
+</ul>
+<pre><code>mkdir -p /home/user/scripts</code></pre>
+<ul>
+  <li>Create and open the production script file:</li>
+</ul>
+<pre><code>vi /home/user/scripts/sftp_pull.sh</code></pre>
+<ul>
+  <li>Paste the following code:</li>
+</ul>
+<pre><code>#!/bin/bash
+# Production SFTP Download Automation
+
+REMOTE_SERVER="192.168.1.10"
+REMOTE_USER="user"
+REMOTE_FILE="/uploads/report.txt"
+
+######################################################################################################
+# The remote path must be "/uploads/report.txt" because the SFTP server is using a Chroot Jail.      #
+# A Chroot Jail renames /app/sftp/data/ to / for that session.                                       #
+######################################################################################################
+
+LOCAL_DEST="/home/user/"
+
+# Execute secure batch download
+sftp -b &lt;(echo "get ${REMOTE_FILE} ${LOCAL_DEST}") ${REMOTE_USER}@${REMOTE_SERVER}
+</code></pre>
+<ul>
+  <li>Apply strict permissions:</li>
+</ul>
+<pre><code>chmod 700 /home/user/scripts/sftp_pull.sh</code></pre>
+
+<hr>
+
+<h2>Phase 3: Test the Configuration Manually on ALMA-LINUX ; IP - 192.168.1.9</h2>
+<ul>
+  <li>Trigger the script manually:</li>
+</ul>
+<pre><code>/home/user/scripts/sftp_pull.sh</code></pre>
+<ul>
+  <li>Verify the file:</li>
+</ul>
+<pre><code>ls -l /app/sftp/data/report.txt</code></pre>
+
+<hr>
+
+<h2>Phase 4: Configure the Production Cron Schedule</h2>
+<ul>
+  <li>Open cron configuration:</li>
+</ul>
+<pre><code>crontab -e</code></pre>
+<ul>
+  <li>Add execution string:</li>
+</ul>
+<pre><code>0 * * * * /home/user/scripts/sftp_pull.sh > /dev/null 2>&1</code></pre>
+
+<hr>
+
+<h2>Test Script to run on SUSE-LINUX ; IP - 192.168.1.10</h2>
+<p>This script creates <code>report.txt</code>, rotates old files, and asks for new content.</p>
+<pre><code>#!/bin/bash
+
+BASE="report.txt"
+
+# Find highest index among report.txt-N files
+max=0
+for f in ${BASE}-*; do
+    if [[ -f "$f" ]]; then
+        idx=${f##*-}
+        if [[ "$idx" =~ ^[0-9]+$ ]]; then
+            (( idx > max )) && max=$idx
+        fi
+    fi
+done
+
+# Rotate in reverse order
+for ((i=max; i>=1; i--)); do
+    old="${BASE}-${i}"
+    new="${BASE}-$((i+1))"
+    if [[ -f "$old" ]]; then
+        mv "$old" "$new"
+    fi
+done
+
+# Rotate base file
+if [[ -f "$BASE" ]]; then
+    mv "$BASE" "${BASE}-1"
+fi
+
+# Ask user for content
+echo -n "Enter content for the new report: "
+read content
+
+# Create new report.txt
+echo "$content" > "$BASE"
+
+# Set ownership to user:users
+chown user:users "$BASE"
+
+echo "Rotation complete. New report.txt created with ownership user:users."
+</code></pre>
+
+</body>
+</html>
