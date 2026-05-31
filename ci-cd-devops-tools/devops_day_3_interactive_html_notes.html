@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 3 - GitHub, Remote Repository & Clone Operations</title>
+
+  <link rel="stylesheet" href="internal.css">
+
+</head>
+
+<body>
+
+<div id="top"></div>
+
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<div class="hover-zone"></div>
+
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 3 - GitHub Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+
+    <a href="#git-github">Git vs GitHub</a>
+    <a href="#github">GitHub</a>
+    <a href="#localrepo">Local Repo</a>
+    <a href="#remoterepo">Remote Repo</a>
+    <a href="#clone">Clone</a>
+    <a href="#pushpull">Push/Pull</a>
+    <a href="#pat">PAT</a>
+    <a href="#commands">Commands</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#interview">Interview</a>
+
+  </nav>
+
+</header>
+
+<div class="container">
+
+<section id="git-github">
+
+<h2>Git vs GitHub</h2>
+
+<table>
+
+<tr>
+<th>Git</th>
+<th>GitHub</th>
+</tr>
+
+<tr>
+<td>Version Control Tool</td>
+<td>Cloud Repository Platform</td>
+</tr>
+
+<tr>
+<td>Local</td>
+<td>Cloud</td>
+</tr>
+
+<tr>
+<td>Tracks Changes</td>
+<td>Stores Repositories</td>
+</tr>
+
+</table>
+
+<pre class="diagram">
+Git     = MS Word
+GitHub  = Google Drive
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="git-github">
+
+<h2>Git Architecture</h2>
+
+<div class="git-architecture">
+
+<div class="git-box">
+    <h3>Working Area</h3>
+    <p>(Working Directory)</p>
+</div>
+
+<div class="arrow">
+    ↓<br>
+    <span>git add</span>
+</div>
+
+<div class="git-box">
+    <h3>Staging Area</h3>
+    <p>(Index)</p>
+</div>
+
+<div class="arrow">
+    ↓<br>
+    <span>git commit</span>
+</div>
+
+<div class="git-box">
+    <h3>Local Repository</h3>
+    <p>(Commit Area)</p>
+</div>
+
+<div class="arrow">
+    ↓<br>
+    <span>git push</span>
+</div>
+<div class="git-box">
+    <h3>Remote Repository</h3>
+</div>
+
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+<section id="github">
+
+<h2>What is GitHub?</h2>
+
+<p>
+GitHub is a cloud-based platform for hosting and managing Git repositories.
+</p>
+
+<pre class="diagram">
+                GitHub Server
+                       │
+      ┌────────────────┼────────────────┐
+      │                │                │
+ Developer A     Developer B     Developer C
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="localrepo">
+
+<h2>Local Repository</h2>
+
+<p>
+Stored on the developer machine.
+</p>
+
+<pre class="diagram">
+project/
+ ├── .git
+ ├── app.py
+ └── README.md
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="remoterepo">
+
+<h2>Remote Repository</h2>
+
+<p>
+Stored on GitHub for collaboration.
+</p>
+
+<pre class="diagram">
+https://github.com/company/project.git
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="clone">
+
+<h2>Git Clone</h2>
+
+<pre class="diagram">
+GitHub Repository
+         ↓
+     git clone
+         ↓
+Local Machine
+</pre>
+
+<pre class="diagram">
+git clone https://github.com/user/project.git
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="pushpull">
+
+<h2>Push and Pull Operations</h2>
+
+<h3>Push Workflow</h3>
+
+<pre class="diagram">
+Developer
+      ↓
+Local Repository
+      ↓
+git push
+      ↓
+GitHub Repository
+</pre>
+
+<h3>Pull Workflow</h3>
+
+<pre class="diagram">
+GitHub Repository
+      ↓
+git pull
+      ↓
+Local Repository
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="pat">
+
+<h2>Personal Access Token (PAT)</h2>
+
+<p>
+PAT replaces password-based GitHub authentication.
+</p>
+
+<pre class="diagram">
+Developer
+      ↓
+Git Push
+      ↓
+PAT Authentication
+      ↓
+GitHub Access Granted
+</pre>
+
+<pre class="diagram">
+GitHub Settings
+      ↓
+Developer Settings
+      ↓
+Personal Access Tokens
+      ↓
+Generate Token
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="commands">
+
+<h2>Important Commands</h2>
+
+<table>
+
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>git clone URL</td>
+<td>Download Repository</td>
+</tr>
+
+<tr>
+<td>git remote -v</td>
+<td>View Remotes</td>
+</tr>
+
+<tr>
+<td>git push origin main</td>
+<td>Upload Changes</td>
+</tr>
+
+<tr>
+<td>git pull origin main</td>
+<td>Download Changes</td>
+</tr>
+
+<tr>
+<td>git status</td>
+<td>Repository Status</td>
+</tr>
+
+</table>
+
+<pre class="diagram">
+git clone URL
+git status
+git add .
+git commit -m "message"
+git push origin main
+git pull origin main
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="workflow">
+
+<h2>Complete GitHub Workflow</h2>
+
+<pre class="diagram">
+Create Repository
+        ↓
+git clone
+        ↓
+Modify Files
+        ↓
+git add .
+        ↓
+git commit
+        ↓
+git push
+        ↓
+GitHub
+</pre>
+
+<h3>Team Collaboration</h3>
+
+<pre class="diagram">
+Developer A
+      ↓
+Push Code
+      ↓
+GitHub Repository
+      ↓
+Developer B
+      ↓
+Pull Code
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<section id="interview">
+
+<h2>Important Interview Questions</h2>
+
+<h3>What is GitHub?</h3>
+
+<p>
+GitHub is a cloud platform used to host Git repositories.
+</p>
+
+<h3>What is git clone?</h3>
+
+<p>
+Downloads a remote repository to local machine.
+</p>
+
+<h3>What is PAT?</h3>
+
+<p>
+Personal Access Token used instead of passwords.
+</p>
+
+<h3>Difference Between Git and GitHub?</h3>
+
+<table>
+
+<tr>
+<th>Git</th>
+<th>GitHub</th>
+</tr>
+
+<tr>
+<td>Tool</td>
+<td>Platform</td>
+</tr>
+
+<tr>
+<td>Local</td>
+<td>Cloud</td>
+</tr>
+
+<tr>
+<td>Tracks Changes</td>
+<td>Stores Repositories</td>
+</tr>
+
+</table>
+
+<pre class="diagram">
++----------------------------------+
+| QUICK REVISION                   |
++----------------------------------+
+| Git = Version Control            |
+| GitHub = Repository Hosting      |
+| Clone = Download                 |
+| Push = Upload                    |
+| Pull = Download Updates          |
+| PAT = Authentication             |
++----------------------------------+
+</pre>
+
+<a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<footer>
+
+<h3>DevOps Day 3 Notes</h3>
+
+<p>GitHub, Remote Repository & Clone Operations</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
