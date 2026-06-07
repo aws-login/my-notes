@@ -1,439 +1,246 @@
-<!DOCTYPE html>
-<html lang="en">
+<section id="remote-repositories">
 
-<head>
+    <h2>Git Remote Repositories, GitHub & Git Reset</h2>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="highlight">
+        GitHub acts as a Remote Repository where developers collaborate,
+        share code, maintain history, and backup projects.
+    </div>
 
-  <title>DevOps Day 3 - GitHub, Remote Repository & Clone Operations</title>
+    <h3>Remote Repository Architecture</h3>
 
-  <link rel="stylesheet" href="internal.css">
+    <div class="git-architecture">
 
-</head>
+        <div class="git-box">
+            <h3>Developer System</h3>
+            <p>Local Repository</p>
+        </div>
 
-<body>
+        <div class="arrow">
+            ↕
+            <span>git push / git pull</span>
+        </div>
 
-<div id="top"></div>
+        <div class="git-box">
+            <h3>GitHub Repository</h3>
+            <p>Remote Repository</p>
+        </div>
 
-<div class="hover-hint">
-  🚀 DevOps Menu
-</div>
+        <div class="arrow">
+            ↓
+            <span>Collaboration</span>
+        </div>
 
-<div class="hover-zone"></div>
+        <div class="git-box">
+            <h3>Development Team</h3>
+            <p>Shared Source Code</p>
+        </div>
 
-<header class="navbar" id="navbar">
+    </div>
 
-  <div class="nav-top">
+    <p class="diagram-caption">
+        Figure: Remote Repository Architecture
+    </p>
 
-    <h1>DevOps Day 3 - GitHub Notes</h1>
+    <h3>Creating a Repository in GitHub</h3>
 
-    <button id="pinBtn" type="button">📌</button>
+    <ol>
+        <li>Login to GitHub</li>
+        <li>Click <strong>New Repository</strong></li>
+        <li>Enter repository name</li>
+        <li>Select Public or Private</li>
+        <li>Click Create Repository</li>
+    </ol>
 
-  </div>
+    <h3>Remote Repository Commands</h3>
 
-  <nav>
+    <table>
+        <tr>
+            <th>Command</th>
+            <th>Purpose</th>
+        </tr>
 
-    <a href="#git-github">Git vs GitHub</a>
-    <a href="#github">GitHub</a>
-    <a href="#localrepo">Local Repo</a>
-    <a href="#remoterepo">Remote Repo</a>
-    <a href="#clone">Clone</a>
-    <a href="#pushpull">Push/Pull</a>
-    <a href="#pat">PAT</a>
-    <a href="#commands">Commands</a>
-    <a href="#workflow">Workflow</a>
-    <a href="#interview">Interview</a>
+        <tr>
+            <td><code>git remote</code></td>
+            <td>Display configured remotes</td>
+        </tr>
 
-  </nav>
+        <tr>
+            <td><code>git remote -v</code></td>
+            <td>Display remote URLs</td>
+        </tr>
 
-</header>
+        <tr>
+            <td><code>git remote add origin URL</code></td>
+            <td>Add remote repository</td>
+        </tr>
 
-<div class="container">
+        <tr>
+            <td><code>git remote remove origin</code></td>
+            <td>Remove remote repository</td>
+        </tr>
 
-<section id="git-github">
+        <tr>
+            <td><code>git remote rename old new</code></td>
+            <td>Rename remote</td>
+        </tr>
+    </table>
 
-<h2>Git vs GitHub</h2>
+    <h3>Clone Repository</h3>
 
-<table>
-
-<tr>
-<th>Git</th>
-<th>GitHub</th>
-</tr>
-
-<tr>
-<td>Version Control Tool</td>
-<td>Cloud Repository Platform</td>
-</tr>
-
-<tr>
-<td>Local</td>
-<td>Cloud</td>
-</tr>
-
-<tr>
-<td>Tracks Changes</td>
-<td>Stores Repositories</td>
-</tr>
-
-</table>
-
-<pre class="diagram">
-Git     = MS Word
-GitHub  = Google Drive
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-<section id="git-github">
-
-<h2>Git Architecture</h2>
-
-<div class="git-architecture">
-
-<div class="git-box">
-    <h3>Working Area</h3>
-    <p>(Working Directory)</p>
-</div>
-
-<div class="arrow">
-    ↓<br>
-    <span>git add</span>
-</div>
-
-<div class="git-box">
-    <h3>Staging Area</h3>
-    <p>(Index)</p>
-</div>
-
-<div class="arrow">
-    ↓<br>
-    <span>git commit</span>
-</div>
-
-<div class="git-box">
-    <h3>Local Repository</h3>
-    <p>(Commit Area)</p>
-</div>
-
-<div class="arrow">
-    ↓<br>
-    <span>git push</span>
-</div>
-<div class="git-box">
-    <h3>Remote Repository</h3>
-</div>
-
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-<section id="github">
-
-<h2>What is GitHub?</h2>
-
-<p>
-GitHub is a cloud-based platform for hosting and managing Git repositories.
-</p>
-
-<pre class="diagram">
-                GitHub Server
-                       │
-      ┌────────────────┼────────────────┐
-      │                │                │
- Developer A     Developer B     Developer C
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-<section id="localrepo">
-
-<h2>Local Repository</h2>
-
-<p>
-Stored on the developer machine.
-</p>
-
-<pre class="diagram">
-project/
- ├── .git
- ├── app.py
- └── README.md
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-<section id="remoterepo">
-
-<h2>Remote Repository</h2>
-
-<p>
-Stored on GitHub for collaboration.
-</p>
-
-<pre class="diagram">
-https://github.com/company/project.git
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-<section id="clone">
-
-<h2>Git Clone</h2>
-
-<pre class="diagram">
-GitHub Repository
-         ↓
-     git clone
-         ↓
-Local Machine
-</pre>
-
-<pre class="diagram">
+    <pre class="diagram">
 git clone https://github.com/user/project.git
-</pre>
+    </pre>
 
-<a href="#top" class="top-btn">Back to Top</a>
+    <p>
+        Downloads the complete repository including source code,
+        commit history, branches, and remote configuration.
+    </p>
 
-</section>
+    <h3>SSH Authentication</h3>
 
-<section id="pushpull">
+    <h4>Generate SSH Key</h4>
 
-<h2>Push and Pull Operations</h2>
+    <pre class="diagram">
+ssh-keygen -t rsa -C "email@example.com"
+    </pre>
 
-<h3>Push Workflow</h3>
+    <h4>Display Public Key</h4>
 
-<pre class="diagram">
-Developer
-      ↓
-Local Repository
-      ↓
+    <pre class="diagram">
+cat ~/.ssh/id_rsa.pub
+    </pre>
+
+    <h4>Test Connection</h4>
+
+    <pre class="diagram">
+ssh -T git@github.com
+    </pre>
+
+    <h3>Git Push</h3>
+
+    <h4>First Push</h4>
+
+    <pre class="diagram">
+git push -u origin main
+    </pre>
+
+    <p>
+        Uploads code and creates upstream tracking.
+    </p>
+
+    <h4>Normal Push</h4>
+
+    <pre class="diagram">
 git push
-      ↓
-GitHub Repository
-</pre>
+    </pre>
 
-<h3>Pull Workflow</h3>
+    <h3>Git Pull</h3>
 
-<pre class="diagram">
-GitHub Repository
-      ↓
+    <pre class="diagram">
 git pull
-      ↓
-Local Repository
-</pre>
+    </pre>
 
-<a href="#top" class="top-btn">Back to Top</a>
+    <p>
+        Downloads and merges latest changes from GitHub.
+    </p>
 
+    <h3>Git Reset</h3>
+
+    <table>
+
+        <tr>
+            <th>Reset Type</th>
+            <th>Command</th>
+            <th>Result</th>
+        </tr>
+
+        <tr>
+            <td>Soft Reset</td>
+            <td><code>git reset --soft &lt;commit-id&gt;</code></td>
+            <td>Commit removed, changes remain staged</td>
+        </tr>
+
+        <tr>
+            <td>Mixed Reset</td>
+            <td><code>git reset &lt;commit-id&gt;</code></td>
+            <td>Commit removed, changes moved to working area</td>
+        </tr>
+
+        <tr>
+            <td>Hard Reset</td>
+            <td><code>git reset --hard &lt;commit-id&gt;</code></td>
+            <td>Commit removed, changes permanently deleted</td>
+        </tr>
+
+    </table>
+
+    <h3>Complete Git Workflow</h3>
+
+    <div class="git-architecture">
+
+        <div class="git-box">
+            <h3>Working Area</h3>
+            <p>Files being edited</p>
+        </div>
+
+        <div class="arrow">
+            ↓
+            <span>git add</span>
+        </div>
+
+        <div class="git-box">
+            <h3>Staging Area</h3>
+            <p>Ready for Commit</p>
+        </div>
+
+        <div class="arrow">
+            ↓
+            <span>git commit</span>
+        </div>
+
+        <div class="git-box">
+            <h3>Local Repository</h3>
+            <p>Commit History</p>
+        </div>
+
+        <div class="arrow">
+            ↓
+            <span>git push</span>
+        </div>
+
+        <div class="git-box">
+            <h3>GitHub Repository</h3>
+            <p>Remote Repository</p>
+        </div>
+
+    </div>
+
+    <p class="diagram-caption">
+        Figure: Complete Git Workflow
+    </p>
+
+    <h3>Important Interview Questions</h3>
+
+    <ul>
+        <li>What is a Remote Repository?</li>
+        <li>Difference between Clone and Pull?</li>
+        <li>What is Origin?</li>
+        <li>Why use SSH Authentication?</li>
+        <li>Difference between Soft and Hard Reset?</li>
+    </ul>
+
+    <h3>Key Takeaways</h3>
+
+    <ul>
+        <li>GitHub hosts remote repositories.</li>
+        <li>SSH provides secure authentication.</li>
+        <li>git clone downloads repositories.</li>
+        <li>git push uploads commits.</li>
+        <li>git pull retrieves updates.</li>
+        <li>git reset helps undo commits.</li>
+        <li>Understanding remote repositories is essential for DevOps workflows.</li>
+    </ul>
+
+    <a href="#top" class="top-btn">Back to Top</a>
 </section>
-
-<section id="pat">
-
-<h2>Personal Access Token (PAT)</h2>
-
-<p>
-PAT replaces password-based GitHub authentication.
-</p>
-
-<pre class="diagram">
-Developer
-      ↓
-Git Push
-      ↓
-PAT Authentication
-      ↓
-GitHub Access Granted
-</pre>
-
-<pre class="diagram">
-GitHub Settings
-      ↓
-Developer Settings
-      ↓
-Personal Access Tokens
-      ↓
-Generate Token
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-<section id="commands">
-
-<h2>Important Commands</h2>
-
-<table>
-
-<tr>
-<th>Command</th>
-<th>Purpose</th>
-</tr>
-
-<tr>
-<td>git clone URL</td>
-<td>Download Repository</td>
-</tr>
-
-<tr>
-<td>git remote -v</td>
-<td>View Remotes</td>
-</tr>
-
-<tr>
-<td>git push origin main</td>
-<td>Upload Changes</td>
-</tr>
-
-<tr>
-<td>git pull origin main</td>
-<td>Download Changes</td>
-</tr>
-
-<tr>
-<td>git status</td>
-<td>Repository Status</td>
-</tr>
-
-</table>
-
-<pre class="diagram">
-git clone URL
-git status
-git add .
-git commit -m "message"
-git push origin main
-git pull origin main
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-<section id="workflow">
-
-<h2>Complete GitHub Workflow</h2>
-
-<pre class="diagram">
-Create Repository
-        ↓
-git clone
-        ↓
-Modify Files
-        ↓
-git add .
-        ↓
-git commit
-        ↓
-git push
-        ↓
-GitHub
-</pre>
-
-<h3>Team Collaboration</h3>
-
-<pre class="diagram">
-Developer A
-      ↓
-Push Code
-      ↓
-GitHub Repository
-      ↓
-Developer B
-      ↓
-Pull Code
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-<section id="interview">
-
-<h2>Important Interview Questions</h2>
-
-<h3>What is GitHub?</h3>
-
-<p>
-GitHub is a cloud platform used to host Git repositories.
-</p>
-
-<h3>What is git clone?</h3>
-
-<p>
-Downloads a remote repository to local machine.
-</p>
-
-<h3>What is PAT?</h3>
-
-<p>
-Personal Access Token used instead of passwords.
-</p>
-
-<h3>Difference Between Git and GitHub?</h3>
-
-<table>
-
-<tr>
-<th>Git</th>
-<th>GitHub</th>
-</tr>
-
-<tr>
-<td>Tool</td>
-<td>Platform</td>
-</tr>
-
-<tr>
-<td>Local</td>
-<td>Cloud</td>
-</tr>
-
-<tr>
-<td>Tracks Changes</td>
-<td>Stores Repositories</td>
-</tr>
-
-</table>
-
-<pre class="diagram">
-+----------------------------------+
-| QUICK REVISION                   |
-+----------------------------------+
-| Git = Version Control            |
-| GitHub = Repository Hosting      |
-| Clone = Download                 |
-| Push = Upload                    |
-| Pull = Download Updates          |
-| PAT = Authentication             |
-+----------------------------------+
-</pre>
-
-<a href="#top" class="top-btn">Back to Top</a>
-
-</section>
-
-</div>
-
-<footer>
-
-<h3>DevOps Day 3 Notes</h3>
-
-<p>GitHub, Remote Repository & Clone Operations</p>
-
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-</html>
