@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 2 - Git Notes</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 2 - Git Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#GRPMRO">Git Remote Repository Management & Reset Operations</a>
+    <a href="#LRRW">Local to Remote Repository Workflow</a>
+    <a href="#IPR">Initialize & Push Repository</a>
+    <a href="#URR">Understanding Remote Repositories</a>
+    <a href="#RMC">Remote Management Commands</a>
+    <a href="#CER">Clone Existing Repository</a>
+    <a href="#CTER">Contributing to Existing Repository</a>
+    <a href="#CR">Git Reset</a>
+    <a href="#CR">Types of Reset</a>
+    <a href="#QRC">Quick Reference Commands</a>
+    <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a>
+
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Git Remote Repository Management & Reset Operations -->
+<section id="AGO">
+
+  <h2>Git Remote Repository Management & Reset Operations</h2>
+
+  <div class="highlight">
+    This module covers connecting local repositories to GitHub,
+    managing remote configurations, cloning repositories,
+    pushing code, and undoing changes using Git Reset.
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Local to Remote Repository Workflow -->
+<section id="GS">
+
+  <h3>Local to Remote Repository Workflow</h3>
+
+  <p>
+    Git allows developers to push locally committed code to GitHub.
+    A remote repository acts as a centralized storage location for
+    collaboration and backup.
+  </p>
+
+  <pre class="diagram">
+               LOCAL MACHINE
+
++-------------------+
+| Working Area      |
++-------------------+
+         |
+         | git add
+         v
++-------------------+
+| Staging Area      |
++-------------------+
+         |
+         | git commit
+         v
++-------------------+
+| Local Repository  |
++-------------------+
+         |
+         | git push
+         v
++-------------------+
+| GitHub Repository |
++-------------------+
+  </pre>
+
+ 
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Initialize & Push Repository -->
+<section id="SW">
+
+  <h3> Initialize & Push Repository</h3>
+
+  <ol>
+    <li>Create project directory.</li>
+    <li>Initialize Git repository.</li>
+    <li>Configure username and email.</li>
+    <li>Stage files.</li>
+    <li>Create commit.</li>
+    <li>Add remote repository.</li>
+    <li>Rename branch to main.</li>
+    <li>Push code to GitHub.</li>
+  </ol>
+
+  <pre class="diagram">
+git init
+
+git config --global user.name "Your Name"
+
+git config --global user.email "your@email.com"
+
+git add .
+
+git commit -m "Initial Commit"
+
+git remote add origin URL
+
+git branch -M main
+
+git push -u origin main
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Understanding Remote Repositories< -->
+<section id="GT">
+
+  <h3>Understanding Remote Repositories</h3>
+
+  <p>
+    A remote repository is a version-controlled repository hosted
+    on a server such as GitHub, GitLab, or Bitbucket.
+  </p>
+
+  <pre class="diagram">
+Developer Machine
+        |
+        |
+   origin
+        |
+        |
+        v
+GitHub Repository
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Remote Management Commands -->
+<section id="GB">
+
+  <h3>Remote Management Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>git remote</td>
+  <td>List remote aliases</td>
+</tr>
+
+<tr>
+  <td>git remote -v</td>
+  <td>Show remote URLs</td>
+</tr>
+
+<tr>
+  <td>git remote add origin URL</td>
+  <td>Add remote repository</td>
+</tr>
+
+<tr>
+  <td>git remote set-url origin URL</td>
+  <td>Update remote URL</td>
+</tr>
+
+<tr>
+  <td>git remote rename origin newname</td>
+  <td>Rename remote alias</td>
+</tr>
+
+<tr>
+  <td>git remote remove origin</td>
+  <td>Delete remote configuration</td>
+</tr>
+```
+
+  </table>
+
+  <pre class="diagram">
+git remote
+
+git remote -v
+
+git remote set-url origin NEW_URL
+
+git remote rename origin mouse
+
+git remote remove origin
+  </pre>
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Clone Existing Repository -->
+<section id="QRC">
+
+  <h3>Clone Existing Repository</h3>
+
+  <p>
+    Cloning downloads the complete repository,
+    including commit history, branches and files.
+  </p>
+
+  <pre class="diagram">
+GitHub Repository
+        |
+        |
+    git clone
+        |
+        v
+Local Machine
+  </pre>
+
+  <pre class="diagram">
+git clone https://github.com/user/project.git
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Contributing to Existing Repository -->
+<section id="CRS">
+
+  <h3>Contributing to Existing Repository</h3>
+
+  <ol>
+    <li>Clone repository.</li>
+    <li>Modify files.</li>
+    <li>Stage changes.</li>
+    <li>Create commit.</li>
+    <li>Push updates.</li>
+  </ol>
+
+  <pre class="diagram">
+git add .
+
+git commit -m "Feature Added"
+
+git push origin main
+  </pre>
+
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+<!-- Git Reset -->
+<section id="GCR">
+
+
+  <h3>Git Reset</h3>
+
+  <p>
+    Git Reset allows developers to move changes backward
+    through Git's three areas:
+  </p>
+
+  <ul>
+    <li>Commit Area</li>
+    <li>Staging Area</li>
+    <li>Working Area</li>
+  </ul>
+
+  <pre class="diagram">
+Commit Area
+     |
+     |
+git reset
+     |
+     v
+Staging Area
+     |
+     |
+git reset
+     |
+     v
+Working Area
+  </pre>
+
+  <h3>Types of Reset</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Reset Type</th>
+  <th>Behavior</th>
+</tr>
+
+<tr>
+  <td>Soft Reset</td>
+  <td>Moves commit back but keeps files staged</td>
+</tr>
+
+<tr>
+  <td>Mixed Reset</td>
+  <td>Moves files back to working area (default)</td>
+</tr>
+
+<tr>
+  <td>Hard Reset</td>
+  <td>Permanently deletes changes</td>
+</tr>
+```
+
+  </table>
+
+  <h4>Soft Reset</h4>
+
+  <pre class="diagram">
+git reset --soft COMMIT_ID
+  </pre>
+
+  <div class="highlight">
+    Changes remain in the Staging Area.
+  </div>
+
+  <h4>Mixed Reset</h4>
+
+  <pre class="diagram">
+git reset --mixed COMMIT_ID
+  </pre>
+
+  <div class="highlight">
+    Changes move back to the Working Area.
+  </div>
+
+  <h4>Hard Reset</h4>
+
+  <pre class="diagram">
+git reset --hard COMMIT_ID
+  </pre>
+
+  <div class="highlight">
+    Warning: Permanently deletes changes from local system.
+  </div>
+
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Quick Reference Commands -->
+<section id="KT">
+
+  <h3>Quick Reference Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Category</th>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Repository</td>
+  <td>git init</td>
+  <td>Initialize repository</td>
+</tr>
+
+<tr>
+  <td>Repository</td>
+  <td>git branch -M main</td>
+  <td>Rename branch</td>
+</tr>
+
+<tr>
+  <td>Remote</td>
+  <td>git remote -v</td>
+  <td>View URLs</td>
+</tr>
+
+<tr>
+  <td>Remote</td>
+  <td>git remote add origin URL</td>
+  <td>Add remote</td>
+</tr>
+
+<tr>
+  <td>Remote</td>
+  <td>git push -u origin main</td>
+  <td>Push repository</td>
+</tr>
+
+<tr>
+  <td>Clone</td>
+  <td>git clone URL</td>
+  <td>Download repository</td>
+</tr>
+
+<tr>
+  <td>Reset</td>
+  <td>git reset --soft</td>
+  <td>Move commit to staging</td>
+</tr>
+
+<tr>
+  <td>Reset</td>
+  <td>git reset --mixed</td>
+  <td>Move commit to working area</td>
+</tr>
+
+<tr>
+  <td>Reset</td>
+  <td>git reset --hard</td>
+  <td>Delete changes</td>
+</tr>
+```
+
+  </table>
+
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Key Takeaways -->
+<section id="interview">
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Practice -->
+<section id="practice">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Origin is the default alias for a remote repository.</li>
+    <li>git remote -v displays fetch and push URLs.</li>
+    <li>Cloning automatically configures remote connections.</li>
+    <li>git push uploads local commits to GitHub.</li>
+    <li>Soft Reset preserves staged files.</li>
+    <li>Mixed Reset moves files back to the working area.</li>
+    <li>Hard Reset permanently removes changes.</li>
+    <li>you can set the git URL using command "git remote add origin URL" , let say you ran "git remote -v" and its showing "https://" git url but you want to use SSH way , you can update the SSH URL using "git remote add origin URL" command.</li>
+  </ul>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 5 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>

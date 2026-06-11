@@ -1,246 +1,544 @@
-<section id="remote-repositories">
+<!DOCTYPE html>
+<html lang="en">
 
-    <h2>Git Remote Repositories, GitHub & Git Reset</h2>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="highlight">
-        GitHub acts as a Remote Repository where developers collaborate,
-        share code, maintain history, and backup projects.
-    </div>
+  <title>DevOps Day 2 - Git Notes</title>
 
-    <h3>Remote Repository Architecture</h3>
+  <link rel="stylesheet" href="internal.css">
+</head>
 
-    <div class="git-architecture">
+<body>
 
-        <div class="git-box">
-            <h3>Developer System</h3>
-            <p>Local Repository</p>
-        </div>
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
 
-        <div class="arrow">
-            ↕
-            <span>git push / git pull</span>
-        </div>
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
 
-        <div class="git-box">
-            <h3>GitHub Repository</h3>
-            <p>Remote Repository</p>
-        </div>
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
 
-        <div class="arrow">
-            ↓
-            <span>Collaboration</span>
-        </div>
+  <div class="nav-top">
 
-        <div class="git-box">
-            <h3>Development Team</h3>
-            <p>Shared Source Code</p>
-        </div>
+    <h1>DevOps Day 2 - Git Notes</h1>
 
-    </div>
+    <button id="pinBtn" type="button">📌</button>
 
-    <p class="diagram-caption">
-        Figure: Remote Repository Architecture
-    </p>
+  </div>
 
-    <h3>Creating a Repository in GitHub</h3>
+  <nav>
+    <a href="#GRM">Git & Repository Management</a>
+    <a href="#GRL">Git Repository Lifecycle</a>
+    <a href="#RT">Repository Types</a>
+    <a href="#IF">Important Files</a>
+    <a href="#AM">Authentication Methods</a>
+    <a href="#SW">SSH Workflow</a>
+    <a href="#IC">Important Commands</a>
+    <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a>
+  </nav>
 
-    <ol>
-        <li>Login to GitHub</li>
-        <li>Click <strong>New Repository</strong></li>
-        <li>Enter repository name</li>
-        <li>Select Public or Private</li>
-        <li>Click Create Repository</li>
-    </ol>
+</header>
 
-    <h3>Remote Repository Commands</h3>
+<div id="top"></div>
 
-    <table>
-        <tr>
-            <th>Command</th>
-            <th>Purpose</th>
-        </tr>
+<!-- MAIN CONTENT -->
+<div class="container">
 
-        <tr>
-            <td><code>git remote</code></td>
-            <td>Display configured remotes</td>
-        </tr>
+<!-- Git & Repository Management -->
+<section id="GRM">
 
-        <tr>
-            <td><code>git remote -v</code></td>
-            <td>Display remote URLs</td>
-        </tr>
+  <h2>Git & Repository Management</h2>
 
-        <tr>
-            <td><code>git remote add origin URL</code></td>
-            <td>Add remote repository</td>
-        </tr>
+  <div class="highlight">
+    Repository Management covers creating Git repositories,
+    tracking code changes, managing commits, connecting to GitHub,
+    and configuring secure authentication using PAT or SSH Keys.
+  </div>
 
-        <tr>
-            <td><code>git remote remove origin</code></td>
-            <td>Remove remote repository</td>
-        </tr>
+  <a href="#top" class="top-btn">Back to Top</a>
 
-        <tr>
-            <td><code>git remote rename old new</code></td>
-            <td>Rename remote</td>
-        </tr>
-    </table>
+</section>
 
-    <h3>Clone Repository</h3>
 
-    <pre class="diagram">
-git clone https://github.com/user/project.git
-    </pre>
 
-    <p>
-        Downloads the complete repository including source code,
-        commit history, branches, and remote configuration.
-    </p>
+<!-- Git Repository Lifecycle -->
+<section id="GRL">
 
-    <h3>SSH Authentication</h3>
+  <h3>Git Repository Lifecycle</h3>
 
-    <h4>Generate SSH Key</h4>
+  <p>
+    Git follows a structured workflow from code creation to version control.
+    Developers work in the Working Area, move changes to the Staging Area,
+    commit them to the Local Repository, and finally synchronize with GitHub.
+  </p>
 
-    <pre class="diagram">
-ssh-keygen -t rsa -C "email@example.com"
-    </pre>
+  <pre class="diagram">
+                 GIT WORKFLOW
 
-    <h4>Display Public Key</h4>
++-------------------+
+| Working Area      |
++-------------------+
+         |
+         | git add
+         v
++-------------------+
+| Staging Area      |
++-------------------+
+         |
+         | git commit
+         v
++-------------------+
+| Local Repository  |
++-------------------+
+         |
+         | git push
+         v
++-------------------+
+| GitHub Repository |
++-------------------+
+  </pre>
 
-    <pre class="diagram">
-cat ~/.ssh/id_rsa.pub
-    </pre>
+  <h3>Phase 1: Local Repository Initialization</h3>
 
-    <h4>Test Connection</h4>
+  <ol>
+    <li>Create a project directory.</li>
+    <li>Initialize Git repository.</li>
+    <li>Configure developer identity.</li>
+  </ol>
 
-    <pre class="diagram">
-ssh -T git@github.com
-    </pre>
+  <pre class="diagram">
+mkdir project-name
 
-    <h3>Git Push</h3>
+cd project-name
 
-    <h4>First Push</h4>
+git init
 
-    <pre class="diagram">
-git push -u origin main
-    </pre>
+git config --global user.name "Your Name"
 
-    <p>
-        Uploads code and creates upstream tracking.
-    </p>
+git config --global user.email "your@email.com"
+  </pre>
 
-    <h4>Normal Push</h4>
+  <h3>Phase 2: Local Workflow</h3>
 
-    <pre class="diagram">
+  <p>
+    Changes are first created in the Working Area,
+    then moved to the Staging Area before being committed.
+  </p>
+
+  <pre class="diagram">
+git status
+
+git add app.py
+
+git add .
+
+git commit -m "Initial Commit"
+
+git log
+  </pre>
+
+  <h4>Workflow Explanation</h4>
+
+  <table>
+
+```
+<tr>
+  <th>Area</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Working Area</td>
+  <td>Where code is created or modified</td>
+</tr>
+
+<tr>
+  <td>Staging Area</td>
+  <td>Temporary area before commit</td>
+</tr>
+
+<tr>
+  <td>Commit Area</td>
+  <td>Stores version history locally</td>
+</tr>
+```
+
+  </table>
+
+  <h3>Phase 3: Remote Repository (GitHub)</h3>
+
+  <p>
+    GitHub provides a centralized location to store and share repositories.
+  </p>
+
+  <pre class="diagram">
+Developer
+    |
+    |
 git push
-    </pre>
+    |
+    v
+GitHub Repository
+    |
+    |
+git clone
+    |
+    v
+Other Developers
+  </pre>
+ 
+  <a href="#top" class="top-btn">Back to Top</a>
 
-    <h3>Git Pull</h3>
+</section>
 
-    <pre class="diagram">
-git pull
-    </pre>
 
-    <p>
-        Downloads and merges latest changes from GitHub.
-    </p>
 
-    <h3>Git Reset</h3>
+<!-- Repository Types -->
+<section id="RT">
 
-    <table>
+  <h4>Repository Types</h4>
 
-        <tr>
-            <th>Reset Type</th>
-            <th>Command</th>
-            <th>Result</th>
-        </tr>
+  <table>
 
-        <tr>
-            <td>Soft Reset</td>
-            <td><code>git reset --soft &lt;commit-id&gt;</code></td>
-            <td>Commit removed, changes remain staged</td>
-        </tr>
+```
+<tr>
+  <th>Repository Type</th>
+  <th>Description</th>
+</tr>
 
-        <tr>
-            <td>Mixed Reset</td>
-            <td><code>git reset &lt;commit-id&gt;</code></td>
-            <td>Commit removed, changes moved to working area</td>
-        </tr>
+<tr>
+  <td>Public</td>
+  <td>Anyone can view and clone</td>
+</tr>
 
-        <tr>
-            <td>Hard Reset</td>
-            <td><code>git reset --hard &lt;commit-id&gt;</code></td>
-            <td>Commit removed, changes permanently deleted</td>
-        </tr>
+<tr>
+  <td>Private</td>
+  <td>Only authorized users can access</td>
+</tr>
+```
 
-    </table>
+  </table>
+ 
+  <a href="#top" class="top-btn">Back to Top</a>
 
-    <h3>Complete Git Workflow</h3>
+</section>
 
-    <div class="git-architecture">
 
-        <div class="git-box">
-            <h3>Working Area</h3>
-            <p>Files being edited</p>
-        </div>
+<!-- Important Files -->
+<section id="IF">
 
-        <div class="arrow">
-            ↓
-            <span>git add</span>
-        </div>
+  <h4>Important Files</h4>
 
-        <div class="git-box">
-            <h3>Staging Area</h3>
-            <p>Ready for Commit</p>
-        </div>
+  <table>
 
-        <div class="arrow">
-            ↓
-            <span>git commit</span>
-        </div>
+```
+<tr>
+  <th>File</th>
+  <th>Purpose</th>
+</tr>
 
-        <div class="git-box">
-            <h3>Local Repository</h3>
-            <p>Commit History</p>
-        </div>
+<tr>
+  <td>README.md</td>
+  <td>Project documentation</td>
+</tr>
 
-        <div class="arrow">
-            ↓
-            <span>git push</span>
-        </div>
+<tr>
+  <td>.gitignore</td>
+  <td>Exclude files from tracking</td>
+</tr>
+```
 
-        <div class="git-box">
-            <h3>GitHub Repository</h3>
-            <p>Remote Repository</p>
-        </div>
+  </table>
 
-    </div>
+  <pre class="diagram">
+git clone https://github.com/user/project.git
+  </pre>
 
-    <p class="diagram-caption">
-        Figure: Complete Git Workflow
-    </p>
+  <a href="#top" class="top-btn">Back to Top</a>
 
-    <h3>Important Interview Questions</h3>
+</section>
 
-    <ul>
-        <li>What is a Remote Repository?</li>
-        <li>Difference between Clone and Pull?</li>
-        <li>What is Origin?</li>
-        <li>Why use SSH Authentication?</li>
-        <li>Difference between Soft and Hard Reset?</li>
-    </ul>
 
-    <h3>Key Takeaways</h3>
 
-    <ul>
-        <li>GitHub hosts remote repositories.</li>
-        <li>SSH provides secure authentication.</li>
-        <li>git clone downloads repositories.</li>
-        <li>git push uploads commits.</li>
-        <li>git pull retrieves updates.</li>
-        <li>git reset helps undo commits.</li>
-        <li>Understanding remote repositories is essential for DevOps workflows.</li>
-    </ul>
+
+
+
+<!-- Authentication Methods -->
+<section id="AM">
+
+  <h3>Authentication Methods</h3>
+
+  <p>
+    GitHub no longer supports password-based authentication.
+    Developers use Personal Access Tokens (PAT) or SSH Keys.
+  </p>
+
+  <h4>Method 1: Personal Access Token (PAT)</h4>
+
+  <pre class="diagram">
+GitHub
+   |
+Settings
+   |
+Developer Settings
+   |
+Personal Access Token
+   |
+Generate Token
+  </pre>
+
+  <ul>
+    <li>Create token from GitHub settings.</li>
+    <li>Select required permissions.</li>
+    <li>Copy and store securely.</li>
+    <li>Use token instead of password.</li>
+  </ul>
+
+  <h4>Method 2: SSH Authentication</h4>
+
+  <pre class="diagram">
+Local Machine
+      |
+ssh-keygen
+      |
+      v
+Public Key
+      |
+      v
+GitHub SSH Keys
+      |
+      v
+Passwordless Access
+  </pre>
+
+  <pre class="diagram">
+ssh-keygen -t rsa -C "your_email@example.com"
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- SSH Workflow -->
+<section id="SW">
+
+  <h4>SSH Workflow</h4>
+
+  <ol>
+    <li>Generate SSH Key Pair.</li>
+    <li>Copy Public Key.</li>
+    <li>Add Key to GitHub.</li>
+    <li>Use SSH URL for cloning.</li>
+  </ol>
+
+  <pre class="diagram">
+git@github.com:user/project.git
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Important Commands -->
+<section id="IC">
+
+  <h3>Important Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>mkdir project-name</td>
+  <td>Create directory</td>
+</tr>
+
+<tr>
+  <td>git init</td>
+  <td>Initialize repository</td>
+</tr>
+
+<tr>
+  <td>git config --global</td>
+  <td>Configure Git identity</td>
+</tr>
+
+<tr>
+  <td>git status</td>
+  <td>Check repository state</td>
+</tr>
+
+<tr>
+  <td>git add .</td>
+  <td>Stage files</td>
+</tr>
+
+<tr>
+  <td>git commit -m</td>
+  <td>Create commit</td>
+</tr>
+
+<tr>
+  <td>git log</td>
+  <td>View history</td>
+</tr>
+
+<tr>
+  <td>git clone URL</td>
+  <td>Clone repository</td>
+</tr>
+
+<tr>
+  <td>ssh-keygen</td>
+  <td>Create SSH keys</td>
+</tr>
+
+<tr>
+  <td>rm -rf .git</td>
+  <td>Remove Git tracking</td>
+</tr>
+```
+
+  </table>  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Key Takeaways -->
+<section id="KT">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Git tracks code history through commits.</li>
+    <li>Working Area → Staging Area → Commit Area is the core workflow.</li>
+    <li>GitHub stores repositories remotely.</li>
+    <li>README.md documents projects.</li>
+    <li>.gitignore prevents unnecessary files from being tracked.</li>
+    <li>PAT and SSH are secure authentication methods.</li>
+    <li>SSH provides passwordless Git operations.</li>
+  </ul>
 
     <a href="#top" class="top-btn">Back to Top</a>
+
 </section>
+
+
+
+<!-- Practice -->
+<section id="practice">
+
+
+  <h2>Practice: Step-by-Step Action Plan</h2>
+
+  <h3>Phase 1: Local Repository Initialization</h3>
+  <ol>
+    <li><strong>Create a Project Directory:</strong> <code>mkdir project-name</code></li>
+    <li><strong>Initialize the Repository:</strong> <code>git init</code></li>
+    <li><strong>Configure Developer Information:</strong>
+      <ul>
+        <li><code>git config --global user.name "Your Name"</code></li>
+        <li><code>git config --global user.email "yourname@example.com"</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Phase 2: Local Workflow (Working Area to Commit Area)</h3>
+  <ol>
+    <li><strong>Create and Modify Files:</strong> Work in the <em>Working Area</em>.</li>
+    <li><strong>Check Repository Status:</strong> <code>git status</code></li>
+    <li><strong>Move Files to Staging:</strong>
+      <ul>
+        <li>Single file: <code>git add &lt;filename&gt;</code></li>
+        <li>All files: <code>git add .</code></li>
+      </ul>
+    </li>
+    <li><strong>Commit Changes:</strong> <code>git commit -m "Your descriptive message"</code></li>
+    <li><strong>Review History:</strong> <code>git log</code></li>
+  </ol>
+
+  <h3>Phase 3: Working with Remote Repositories (GitHub)</h3>
+  <ol>
+    <li><strong>Create a GitHub Repository:</strong> Public vs Private, with optional <code>README.md</code> and <code>.gitignore</code>.</li>
+    <li><strong>Clone a Repository:</strong> <code>git clone &lt;repository-url&gt;</code></li>
+  </ol>
+
+  <h3>Phase 4: Security and Authentication Setup</h3>
+  <p>Git requires secure authentication methods for private repositories:</p>
+  <ul>
+    <li><strong>Method A: Personal Access Token (PAT)</strong>
+      <ol>
+        <li>Generate token in GitHub Settings.</li>
+        <li>Set expiration and permissions.</li>
+        <li>Copy and use token in place of password.</li>
+      </ol>
+    </li>
+    <li><strong>Method B: SSH Key</strong>
+      <ol>
+        <li>Generate keys: <code>ssh-keygen -t rsa -C "your_email@example.com"</code></li>
+        <li>Copy public key (<code>id_rsa.pub</code>).</li>
+        <li>Add to GitHub Settings → SSH keys.</li>
+        <li>Clone via SSH URL (<code>git@github.com...</code>).</li>
+      </ol>
+    </li>
+  </ul>
+
+  <h2>Quick Reference Command List</h2>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Usage/Description</th>
+    </tr>
+    <tr><td><code>mkdir &lt;dir_name&gt;</code></td><td>Creates a new directory.</td></tr>
+    <tr><td><code>git init</code></td><td>Initializes a new Git repository.</td></tr>
+    <tr><td><code>git config --global user.name/email</code></td><td>Sets developer identity.</td></tr>
+    <tr><td><code>git status</code></td><td>Shows working directory and staging area state.</td></tr>
+    <tr><td><code>git add &lt;file&gt;</code></td><td>Adds a specific file to staging.</td></tr>
+    <tr><td><code>git add .</code></td><td>Adds all files to staging.</td></tr>
+    <tr><td><code>git commit -m "&lt;msg&gt;"</code></td><td>Records changes with a message.</td></tr>
+    <tr><td><code>git log</code></td><td>Displays commit history.</td></tr>
+    <tr><td><code>git clone &lt;URL&gt;</code></td><td>Clones a remote repository.</td></tr>
+    <tr><td><code>rm -rf .git</code></td><td>Removes Git tracking (use with caution).</td></tr>
+    <tr><td><code>ssh-keygen</code></td><td>Generates SSH keys for secure access.</td></tr>
+  </table>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 2 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>

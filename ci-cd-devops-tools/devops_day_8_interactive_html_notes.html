@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 2 - Git Notes</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 2 - Git Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#summary">Summary</a>
+    <a href="#FFM">Fast Forward Merge</a>
+    <a href="#TWM">Three-Way Merge</a>
+    <a href="#MC">Merge Conflict</a>
+    <a href="#CM">Conflict Markers</a>
+    <a href="#CRS">Conflict Resolution Steps</a>
+    <a href="#GRS">GitHub Conflict Resolution</a>
+    <a href="#IRC">Important Merge Commands</a>
+    <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a>
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Summary -->
+<section id="summary">
+
+  <h3><strong>Summary</strong></h3>
+
+  <p>
+    Git branches allow developers to work independently. Changes are combined
+    using merge operations. Depending on commit history, Git performs either
+    Fast Forward Merge or Three-Way Merge. If the same code is modified in
+    multiple branches, merge conflicts occur and require manual resolution.
+  </p>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+<!-- Fast Forward Merge -->
+<section id="FFM">
+
+<h3>Fast Forward Merge</h3>
+
+  <p>
+    Occurs when the parent branch has no new commits after the feature branch
+    was created.
+  </p>
+
+  <pre class="diagram">
+Main Branch
+
+C1 ---- C2 ---- C3
+                  \
+                   \
+Feature Branch      C4 ---- C5
+
+
+git merge feature
+
+
+C1 ---- C2 ---- C3 ---- C4 ---- C5
+  </pre>
+
+  <pre class="diagram">
+git checkout -b feature
+
+git add .
+
+git commit -m "feature changes"
+
+git switch master
+
+git merge feature
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Three-Way Merge -->
+<section id="TWM">
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+  <h3>Three-Way Merge</h3>
+
+  <p>
+    Occurs when both branches contain independent commits.
+    Git creates a merge commit.
+  </p>
+
+  <pre class="diagram">
+          C4 ---- C5
+         /          \
+C1 ---- C2 ---- C3   M1
+         \
+          C6 ---- C7
+
+
+M1 = Merge Commit
+  </pre>
+
+  <pre class="diagram">
+git switch master
+
+git merge feature
+  </pre>
+
+
+<!-- Merge Conflict -->
+<section id="MC">
+
+  <h3>Merge Conflict</h3>
+
+  <p>
+    Conflicts occur when the same line is modified differently
+    in multiple branches.
+  </p>
+
+  <pre class="diagram">
+Main Branch
+
+Database = MySQL
+
+
+Feature Branch
+
+Database = PostgreSQL
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Conflict Markers< -->
+<section id="CM">
+
+  <h3>Conflict Markers</h3>
+
+  <pre class="diagram">
+<<<<<<< HEAD
+
+Database = MySQL
+
+=======
+
+Database = PostgreSQL
+
+>>>>>>> feature
+  </pre>
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Conflict Resolution Steps< -->
+<section id="CRS">
+
+  <h3>Conflict Resolution Steps</h3>
+
+  <ol>
+    <li>Open conflicted file.</li>
+    <li>Review both versions.</li>
+    <li>Choose required code.</li>
+    <li>Remove conflict markers.</li>
+    <li>Save file.</li>
+    <li>Run git add .</li>
+    <li>Create merge commit.</li>
+  </ol>
+
+  <pre class="diagram">
+git add .
+
+git commit -m "resolved conflict"
+  </pre> 
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+<!-- GitHub Conflict Resolution< -->
+<section id="GCR">
+
+  <h3>GitHub Conflict Resolution</h3>
+
+  <ol>
+    <li>Push feature branch.</li>
+    <li>Create Pull Request.</li>
+    <li>GitHub detects conflict.</li>
+    <li>Click Resolve Conflicts.</li>
+    <li>Edit conflicting code.</li>
+    <li>Mark as Resolved.</li>
+    <li>Commit Merge.</li>
+    <li>Merge Pull Request.</li>
+  </ol>
+
+  <pre class="diagram">
+git push origin feature
+
+git push origin main
+  </pre>
+  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+<!-- Important Merge Commands -->
+<section id="IMC">
+
+  <h3>Important Merge Commands</h3>
+
+  <table>
+
+    <tr>
+      <th>Command</th>
+      <th>Purpose</th>
+    </tr>
+
+    <tr>
+      <td>git branch</td>
+      <td>List branches</td>
+    </tr>
+
+    <tr>
+      <td>git checkout -b feature</td>
+      <td>Create branch</td>
+    </tr>
+
+    <tr>
+      <td>git switch master</td>
+      <td>Switch branch</td>
+    </tr>
+
+    <tr>
+      <td>git merge feature</td>
+      <td>Merge branch</td>
+    </tr>
+
+    <tr>
+      <td>git diff ID1 ID2</td>
+      <td>Compare commits</td>
+    </tr>
+
+    <tr>
+      <td>git log --graph</td>
+      <td>Visualize merge history</td>
+    </tr>
+
+  </table>
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Key Takeaways -->
+<section id="KT">
+
+  <h1>Key Takeaways</h1>
+
+  <ul>
+    <li>Fast Forward Merge moves the branch pointer forward.</li>
+    <li>Three-Way Merge creates a merge commit.</li>
+    <li>Conflicts require manual resolution.</li>
+    <li>GitHub provides browser-based conflict resolution.</li>
+    <li>Branching enables parallel development.</li>
+    <li>Merge strategies are essential Git concepts.</li>
+  </ul>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Practice -->
+<section id="practice">
+
+  <h2><strong>Practice:</strong></h2>
+  <h2>Phase 1: Executing a Fast Forward Merge</h2>
+  <p>A fast-forward merge occurs when the parent branch has no new commits since the child branch was created, allowing Git to simply move the pointer forward.</p>
+  <ol>
+    <li><strong>Initialize Repository:</strong> <code>git init</code></li>
+    <li><strong>Create Initial Commits:</strong> Add a file, then <code>git add</code> and <code>git commit -m "message"</code>.</li>
+    <li><strong>Create a Feature Branch:</strong> <code>git checkout -b feature</code></li>
+    <li><strong>Develop in Feature Branch:</strong> Modify code and commit changes.</li>
+    <li><strong>Merge into Parent:</strong> <code>git switch master</code> then <code>git merge feature</code>.</li>
+  </ol>
+
+  <h2>Phase 2: Resolving Local Merge Conflicts (Three-Way Merge)</h2>
+  <ol>
+    <li><strong>Prepare Conflict Scenario:</strong> Modify the same line in both <em>master</em> and <em>feature</em> branches.</li>
+    <li><strong>Attempt the Merge:</strong> <code>git merge feature</code> → conflict occurs.</li>
+    <li><strong>Identify Conflict Markers:</strong>
+      <pre>
+<<<<<<< HEAD
+(master branch content)
+=======
+(feature branch content)
+>>>>>>> feature
+      </pre>
+    </li>
+    <li><strong>Manual Resolution:</strong> Edit file, remove markers, keep desired code.</li>
+    <li><strong>Finalize Resolution:</strong> <code>git add .</code> → <code>git commit -m "resolved conflict"</code>.</li>
+  </ol>
+
+  <h2>Phase 3: Resolving Conflicts on GitHub</h2>
+  <ol>
+    <li><strong>Push Branches:</strong> <code>git push origin main</code>, <code>git push origin feature</code>.</li>
+    <li><strong>Open Pull Request:</strong> Attempt merge on GitHub.</li>
+    <li><strong>Identify Conflict:</strong> GitHub shows “has conflicts that must be resolved.”</li>
+    <li><strong>Web-Based Resolution:</strong> Use <em>Resolve conflicts</em> editor, fix code.</li>
+    <li><strong>Commit and Merge:</strong> Mark resolved → Commit merge → Merge PR.</li>
+  </ol>
+
+  <h2>Quick Reference Command List</h2>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Usage & Syntax</th>
+      <th>Context</th>
+    </tr>
+    <tr><td><code>git init</code></td><td>Initializes a new local Git repository.</td><td>Setup</td></tr>
+    <tr><td><code>git status</code></td><td>Checks current state of working directory.</td><td>Monitoring</td></tr>
+    <tr><td><code>git add &lt;file&gt;</code></td><td>Stages file changes.</td><td>Staging</td></tr>
+    <tr><td><code>git commit -m "msg"</code></td><td>Records changes with a message.</td><td>Committing</td></tr>
+    <tr><td><code>git log --oneline</code></td><td>Shows simplified commit history.</td><td>History</td></tr>
+    <tr><td><code>git branch</code></td><td>Lists local branches.</td><td>Branching</td></tr>
+    <tr><td><code>git checkout -b &lt;name&gt;</code></td><td>Creates and switches to new branch.</td><td>Branching</td></tr>
+    <tr><td><code>git switch &lt;branch&gt;</code></td><td>Switches to specified branch.</td><td>Navigation</td></tr>
+    <tr><td><code>git merge &lt;branch&gt;</code></td><td>Merges branch into current branch.</td><td>Merging</td></tr>
+    <tr><td><code>git diff ID1 ID2</code></td><td>Compares differences between commits.</td><td>Comparison</td></tr>
+    <tr><td><code>git clone &lt;URL&gt;</code></td><td>Creates local copy of remote repo.</td><td>Remote</td></tr>
+    <tr><td><code>git push origin &lt;branch&gt;</code></td><td>Sends commits to remote.</td><td>Remote</td></tr>
+    <tr><td><code>git log --graph</code></td><td>Visualizes branch/merge history.</td><td>Visualization</td></tr>
+  </table>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 8 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>
+
