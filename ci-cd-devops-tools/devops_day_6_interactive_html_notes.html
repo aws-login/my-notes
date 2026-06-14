@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 6 - Git Notes</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 2 - Git Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#GSFPR">Git Squash, Fetch, Pull & Revert</a>
+    <a href="#GSM">Git Squash Merge</a>
+    <a href="#SW">Squash Workflow</a>
+    <a href="#FP">Fetch vs Pull</a>
+    <a href="#SPM">Safe Production Method (Fetch)</a>
+    <a href="#AM">Automatic Method (Pull)</a>
+    <a href="#GR">Git Revert</a>
+    <a href="#RLC">Revert Latest Commit</a>
+    <a href="#RSC">Revert Specific Commit</a>
+    <a href="#VCD">View Commit Details</a>
+    <a href="#RCR">Revert Conflict Resolution</a>
+    <a href="#RS">Resolution Steps</a>
+    <a href="#AR">Abort Revert</a>
+    <a href="#CRR">Comparison: Reset vs Revert</a>
+    <a href="#QRC">Quick Reference Commands</a>
+    <a href="#KT">Key Takeaways</a>
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Git Squash, Fetch, Pull & Revert -->
+<section id="GSFPR">
+
+  <h2>Git Squash, Fetch, Pull & Revert</h2>
+
+  <div class="highlight">
+    These advanced Git operations help maintain clean commit history,
+    synchronize remote changes safely, and undo mistakes without
+    deleting project history.
+  </div>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Git Squash Merge -->
+<section id="GSM">
+
+  <h3>Git Squash Merge</h3>
+
+  <p>
+    Squash Merge combines multiple commits from a feature branch into
+    a single commit before merging into the main branch.
+  </p>
+
+<pre class="diagram">
+Feature Branch
+
+C1 → C2 → C3 → C4
+
+
+git merge --squash feature
+
+
+Main Branch
+
+C1 → C5
+
+(C5 contains all changes)
+  </pre>
+
+
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Squash Workflow -->
+<section id="SW">
+
+  <h3>Squash Workflow</h3>
+
+  <ol>
+    <li>Switch to main branch.</li>
+    <li>Execute squash merge.</li>
+    <li>Review staged files.</li>
+    <li>Create final commit.</li>
+  </ol>
+
+  <pre class="diagram">
+git switch main
+
+git merge --squash feature
+
+git status
+
+git commit -m "Feature Completed"
+  </pre>
+   
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Fetch vs Pull -->
+<section id="FP">
+
+  <h3>Fetch vs Pull</h3>
+
+  <p>
+    Both commands download updates from remote repositories,
+    but they behave differently.
+  </p>
+
+  <table>
+
+
+<tr>
+  <th>Command</th>
+  <th>Behavior</th>
+</tr>
+
+<tr>
+  <td>git fetch</td>
+  <td>Downloads updates only</td>
+</tr>
+
+<tr>
+  <td>git pull</td>
+  <td>Downloads and merges automatically</td>
+</tr>
+```
+
+  </table>
+
+  <pre class="diagram">
+Remote Repository
+        |
+        |
+    git fetch
+        |
+        v
+Local Metadata
+
+(No code merged)
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+
+<!-- Safe Production Method (Fetch) -->
+<section id="SPM">
+
+  <h3>Safe Production Method (Fetch)</h3>
+
+  <p>
+    Recommended in production environments because changes are reviewed
+    before being merged.
+  </p>
+
+  <pre class="diagram">
+git fetch origin
+
+git merge origin/main
+  </pre>
+
+  <pre class="diagram">
+Remote Repository
+        |
+        |
+    git fetch
+        |
+        v
+Review Changes
+        |
+        |
+git merge origin/main
+        |
+        v
+Local Branch Updated
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Automatic Method (Pull) -->
+<section id="AM">
+
+  <h3>Automatic Method (Pull)</h3>
+
+  <pre class="diagram">
+git pull origin main
+  </pre>
+
+  <pre class="diagram">
+Remote Repository
+        |
+        |
+    git pull
+        |
+        v
+Download + Merge
+        |
+        v
+Local Branch Updated
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Git Revert -->
+<section id="GR">
+
+  <h3>Git Revert</h3>
+
+  <p>
+    Git Revert safely undoes changes by creating a new commit
+    that reverses a previous commit.
+  </p>
+
+  <div class="highlight">
+    Revert preserves history.
+    Reset rewrites history.
+  </div>
+
+  <pre class="diagram">
+Original History
+
+C1 → C2 → C3
+
+
+git revert C3
+
+
+New History
+
+C1 → C2 → C3 → R1
+
+R1 = Revert Commit
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Revert Latest Commit -->
+<section id="RLC">
+
+ <h3>Revert Latest Commit</h3>
+
+  <pre class="diagram">
+git revert HEAD
+  </pre>
+
+  <h3>Revert Specific Commit</h3>
+
+  <pre class="diagram">
+git revert COMMIT_ID
+  </pre>
+ 
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Revert Specific Commit -->
+<section id="RSC">
+
+  <h3>Revert Specific Commit</h3>
+
+  <pre class="diagram">
+git revert COMMIT_ID
+  </pre>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- View Commit Details -->
+<section id="VCD">
+
+  <h3>View Commit Details</h3>
+
+  <pre class="diagram">
+git show COMMIT_ID
+  </pre>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Revert Conflict Resolution -->
+<section id="RCR">
+
+  <h3>Revert Conflict Resolution</h3>
+
+  <p>
+    Sometimes Git cannot automatically revert changes and
+    conflict markers appear inside files.
+  </p>
+
+  <pre class="diagram">
+<<<<<<< HEAD
+
+Current Version
+
+=======
+
+Reverted Version
+
+>>>>>>> COMMIT_ID
+  </pre>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Resolution Steps -->
+<section id="RS">
+
+  <h3>Resolution Steps</h3>
+
+  <ol>
+    <li>Open conflicted file.</li>
+    <li>Review both versions.</li>
+    <li>Remove conflict markers.</li>
+    <li>Save file.</li>
+    <li>Stage resolved file.</li>
+    <li>Continue revert process.</li>
+  </ol>
+
+  <pre class="diagram">
+git add .
+
+git revert --continue
+  </pre>
+
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Abort Revert -->
+<section id="AR">
+
+  <h3>Abort Revert</h3>
+
+  <pre class="diagram">
+git revert --abort
+  </pre>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Comparison: Reset vs Revert -->
+<section id="CRR">
+
+  <h3>Comparison: Reset vs Revert</h3>
+
+  <table>
+
+<tr>
+  <th>Feature</th>
+  <th>Reset</th>
+  <th>Revert</th>
+</tr>
+
+<tr>
+  <td>History Preserved</td>
+  <td>No</td>
+  <td>Yes</td>
+</tr>
+
+<tr>
+  <td>Creates New Commit</td>
+  <td>No</td>
+  <td>Yes</td>
+</tr>
+
+<tr>
+  <td>Safe for Shared Branches</td>
+  <td>No</td>
+  <td>Yes</td>
+</tr>
+
+<tr>
+  <td>Used in Production</td>
+  <td>Rarely</td>
+  <td>Recommended</td>
+</tr>
+
+  </table>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Quick Reference Commands -->
+<section id="RSC">
+
+  <h3>Quick Reference Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Feature</th>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Squash</td>
+  <td>git merge --squash feature</td>
+  <td>Combine commits into one</td>
+</tr>
+
+<tr>
+  <td>Fetch</td>
+  <td>git fetch origin</td>
+  <td>Download updates only</td>
+</tr>
+
+<tr>
+  <td>Merge</td>
+  <td>git merge origin/main</td>
+  <td>Apply fetched changes</td>
+</tr>
+
+<tr>
+  <td>Pull</td>
+  <td>git pull origin main</td>
+  <td>Download and merge</td>
+</tr>
+
+<tr>
+  <td>Revert</td>
+  <td>git revert HEAD</td>
+  <td>Undo latest commit</td>
+</tr>
+
+<tr>
+  <td>Revert</td>
+  <td>git revert COMMIT_ID</td>
+  <td>Undo specific commit</td>
+</tr>
+
+<tr>
+  <td>Continue</td>
+  <td>git revert --continue</td>
+  <td>Finish revert after conflict resolution</td>
+</tr>
+
+<tr>
+  <td>Abort</td>
+  <td>git revert --abort</td>
+  <td>Cancel revert process</td>
+</tr>
+
+<tr>
+  <td>Show</td>
+  <td>git show COMMIT_ID</td>
+  <td>View commit details</td>
+</tr>
+```
+
+  </table>
+
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Key Takeaways -->
+<section id="KT">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Squash merges create cleaner commit history.</li>
+    <li>Fetch is safer because it does not automatically merge.</li>
+    <li>Pull = Fetch + Merge.</li>
+    <li>Revert preserves project history.</li>
+    <li>Revert is preferred over Reset on shared branches.</li>
+    <li>Conflict markers must be manually resolved.</li>
+    <li>git show helps inspect commit details before reverting.</li>
+  </ul>
+
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 6 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>

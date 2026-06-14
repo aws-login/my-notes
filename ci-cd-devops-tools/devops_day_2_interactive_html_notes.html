@@ -210,30 +210,56 @@ Developer Repo  ↔  Central Repo  ↔  Developer Repo
 <!-- ARCHITECTURE -->
 <section id="architecture">
 
-  <h2>Git Architecture</h2>
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#working-directory">Working Directory</a></li>
+      <li><a href="#staging-area">Staging Area</a></li>
+      <li><a href="#local-repository">Local Repository</a></li>
+      <li><a href="#remote-repository">Remote Repository</a></li>
+      <li><a href="#diagram">Diagram</a></li>
+    </ul>
+  </div>
 
-  <p>
-    Git mainly contains:
-  </p>
-
+  <!-- Working Directory -->
+  <h2 id="working-directory">Working Directory (Working Tree)</h2>
   <ul>
-    <li>Working Directory</li>
-    <li>Staging Area</li>
-    <li>Local Repository</li>
+    <li>This is the actual folder on your computer where you edit files.</li>
+    <li>It reflects the current state of your project.</li>
+    <li>Changes here are not yet tracked until you stage them.</li>
   </ul>
 
-  <pre class="diagram">
-Working Directory
-        ↓
-     git add
-        ↓
-   Staging Area
-        ↓
-    git commit
-        ↓
- Local Repository
-  </pre>
- <img src="git_arch.JPG" width="600" height="400">
+  <!-- Staging Area -->
+  <h2 id="staging-area">Staging Area (Index)</h2>
+  <ul>
+    <li>Think of this as a “waiting room.”</li>
+    <li>You select which changes you want to include in the next commit.</li>
+    <li>It allows you to prepare a clean snapshot before saving history.</li>
+  </ul>
+
+  <!-- Local Repository -->
+  <h2 id="local-repository">Local Repository</h2>
+  <ul>
+    <li>This is the hidden <code>.git</code> folder inside your project.</li>
+    <li>It stores all commits, branches, and history.</li>
+    <li>Once you commit, your changes move from the staging area into this repository.</li>
+  </ul>
+
+  <!-- Remote Repository -->
+  <h2 id="remote-repository">Remote Repository</h2>
+  <ul>
+    <li>A copy of your repository stored on a server (e.g., GitHub, GitLab, Bitbucket).</li>
+    <li>Used for collaboration and backup.</li>
+    <li>You push changes from your local repo to the remote, and pull updates back.</li>
+  </ul>
+
+  <!-- Diagram -->
+  <h2 id="diagram">Diagram</h2>
+  <div >
+    <img src="git_zones_diagram.png" alt="Git Zones Diagram" width="600" height="400">
+  </div>
+  <p><em>Figure: Flow between Working Directory → Staging Area → Local Repository → Remote Repository</em></p>
   
   <a href="#top" class="top-btn">Back to Top</a>
 

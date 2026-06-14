@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 2 - Git Notes</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 2 - Git Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#GBRCR">Git Branching, Remote Collaboration & Rebase</a>
+    <a href="#GBO">Git Branching Overview</a>
+    <a href="#LBW">Phase 1: Local Branching Workflow</a>
+    <a href="#BNC">Branch Navigation Commands</a>
+    <a href="#BMW">Branch Merge Workflow</a>
+    <a href="#RCW">Remote Collaboration Workflow</a>
+    <a href="#RCS">Remote Collaboration Steps</a>
+    <a href="#GR">Git Rebase</a>
+    <a href="#WR">Why Rebase?</a>
+    <a href="#RW">Rebase Workflow</a>
+    <a href="#FFMAR">Fast Forward Merge After Rebase</a>
+    <a href="#IC">Important Commands</a>
+    <a href="#KT">Key Takeaways</a>
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Git Branching, Remote Collaboration & Rebase -->
+<section id="GSFPR">
+
+  <h2>Git Branching, Remote Collaboration & Rebase</h2>
+
+  <div class="highlight">
+    Branching allows developers to work independently on features,
+    bug fixes, and enhancements without affecting production code.
+    Rebase helps maintain a clean commit history by replaying commits
+    on top of the latest branch changes.
+  </div>
+ 
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Git Branching Overview -->
+<section id="GBO">
+
+<h3>Git Branching Overview</h3>
+
+  <p>
+    A branch is an independent line of development.
+    Developers create branches to isolate work and avoid impacting
+    the stable production branch (main/master).
+  </p>
+
+  <pre class="diagram">
+              MAIN BRANCH
+
+C1 ----- C2 ----- C3
+                  |
+                  |
+                  v
+
+           FEATURE BRANCH
+
+           C4 ----- C5
+
+Development Happens Here
+
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Phase 1: Local Branching Workflow -->
+<section id="LBW">
+
+  <h3>Phase 1: Local Branching Workflow</h3>
+
+  <ol>
+    <li>Initialize repository.</li>
+    <li>Create baseline commits on main/master.</li>
+    <li>Create feature branch.</li>
+    <li>Switch to feature branch.</li>
+    <li>Develop and commit changes.</li>
+    <li>Test feature.</li>
+    <li>Merge back into main branch.</li>
+  </ol>
+
+<pre class="diagram">
+git branch feature-login
+
+git switch feature-login
+
+git add .
+
+git commit -m "Login Feature"
+
+git switch main
+
+git merge feature-login
+  </pre>
+
+   
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Branch Navigation Commands -->
+<section id="BNC">
+
+  <h3>Branch Navigation Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>git branch</td>
+  <td>List all branches</td>
+</tr>
+
+<tr>
+  <td>git branch feature</td>
+  <td>Create branch</td>
+</tr>
+
+<tr>
+  <td>git checkout feature</td>
+  <td>Switch branch</td>
+</tr>
+
+<tr>
+  <td>git switch feature</td>
+  <td>Modern switch command</td>
+</tr>
+
+<tr>
+  <td>git checkout -b feature</td>
+  <td>Create and switch</td>
+</tr>
+
+<tr>
+  <td>git switch -c feature</td>
+  <td>Create and switch (modern)</td>
+</tr>
+
+<tr>
+  <td>git branch -d feature</td>
+  <td>Delete branch</td>
+</tr>
+```
+
+  </table>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Branch Merge Workflow -->
+<section id="BMW">
+
+  <h3>Branch Merge Workflow</h3>
+
+  <pre class="diagram">
+Main Branch
+
+C1 ----- C2 ----- C3
+                    \
+                     \
+                      C4 ----- C5
+                     Feature Branch
+
+
+git merge feature
+
+
+C1 ----- C2 ----- C3 ----- C4 ----- C5
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+
+<!-- Remote Collaboration Workflow -->
+<section id="RCW">
+
+  <h3>Remote Collaboration Workflow</h3>
+
+  <p>
+    Teams collaborate through GitHub using feature branches
+    and Pull Requests.
+  </p>
+
+  <pre class="diagram">
+Developer
+     |
+     |
+Create Feature Branch
+     |
+     |
+git push origin feature
+     |
+     v
+
+GitHub Repository
+     |
+     |
+Pull Request
+     |
+     |
+Code Review
+     |
+     v
+
+Merge Into Main
+  </pre>
+
+   
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Remote Collaboration Steps -->
+<section id="RCS">
+
+  <h4>Remote Collaboration Steps</h4>
+
+  <ol>
+    <li>Clone repository.</li>
+    <li>Create feature branch.</li>
+    <li>Develop feature.</li>
+    <li>Commit changes.</li>
+    <li>Push feature branch.</li>
+    <li>Create Pull Request.</li>
+    <li>Review and approve.</li>
+    <li>Merge into main branch.</li>
+  </ol>
+
+  <pre class="diagram">
+git clone REPOSITORY_URL
+
+git checkout -b feature-payment
+
+git add .
+
+git commit -m "Payment Module"
+
+git push origin feature-payment
+  </pre>
+ 
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Git Rebase -->
+<section id="GR">
+
+  <h3>Git Rebase</h3>
+
+  <p>
+    Rebase replays commits from one branch on top of another branch.
+    It creates a cleaner, linear commit history.
+  </p>
+
+  <pre class="diagram">
+Before Rebase
+
+Main
+
+C1 ----- C2 ----- C3 ----- C4
+
+           \
+            \
+             C5 ----- C6
+               Feature
+
+
+git rebase main
+
+
+After Rebase
+
+C1 ----- C2 ----- C3 ----- C4 ----- C5 ----- C6
+  </pre>
+
+ 
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Why Rebase? -->
+<section id="WR">
+
+  <h4>Why Rebase?</h4>
+
+  <ul>
+    <li>Maintains clean project history.</li>
+    <li>Reduces unnecessary merge commits.</li>
+    <li>Makes Git logs easier to understand.</li>
+    <li>Supports fast-forward merges.</li>
+  </ul>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Rebase Workflow -->
+<section id="RW">
+
+  <h4>Rebase Workflow</h4>
+
+  <ol>
+    <li>Update local main branch.</li>
+    <li>Switch to feature branch.</li>
+    <li>Execute rebase.</li>
+    <li>Resolve conflicts if any.</li>
+    <li>Merge feature branch.</li>
+  </ol>
+
+  <pre class="diagram">
+git switch main
+
+git pull origin main
+
+git switch feature
+
+git rebase main
+  </pre>
+
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Fast Forward Merge After Rebase -->
+<section id="FFMAR">
+
+  <h3>Fast Forward Merge After Rebase</h3>
+
+  <pre class="diagram">
+Feature Branch
+
+C1 → C2 → C3 → C4 → C5
+
+
+git merge feature
+
+
+Main Branch
+
+C1 → C2 → C3 → C4 → C5
+  </pre>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Important Commands -->
+<section id="IC">
+
+  <h3>Important Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Category</th>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Branch</td>
+  <td>git branch feature</td>
+  <td>Create branch</td>
+</tr>
+
+<tr>
+  <td>Switch</td>
+  <td>git switch feature</td>
+  <td>Switch branch</td>
+</tr>
+
+<tr>
+  <td>Create+Switch</td>
+  <td>git switch -c feature</td>
+  <td>Create and switch</td>
+</tr>
+
+<tr>
+  <td>Merge</td>
+  <td>git merge feature</td>
+  <td>Merge branch</td>
+</tr>
+
+<tr>
+  <td>Push</td>
+  <td>git push origin feature</td>
+  <td>Push feature branch</td>
+</tr>
+
+<tr>
+  <td>Rebase</td>
+  <td>git rebase main</td>
+  <td>Replay commits on main</td>
+</tr>
+
+<tr>
+  <td>Delete</td>
+  <td>git branch -d feature</td>
+  <td>Delete branch</td>
+</tr>
+
+<tr>
+  <td>Inspect</td>
+  <td>git log</td>
+  <td>View history</td>
+</tr>
+```
+
+  </table>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Key Takeaways -->
+<section id="KT">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Never develop directly on the production branch.</li>
+    <li>Use feature branches for enhancements and bug fixes.</li>
+    <li>Pull Requests enable code review and approvals.</li>
+    <li>Rebase creates a cleaner history than repeated merges.</li>
+    <li>Rebase helps enable fast-forward merges.</li>
+    <li>Feature branches support parallel development.</li>
+    <li>GitHub collaboration relies heavily on branching workflows.</li>
+  </ul>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 5 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>
