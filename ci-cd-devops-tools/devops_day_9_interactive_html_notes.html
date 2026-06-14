@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 10 - Git Notes</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 2 - Git Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#GSTB">Git Stash, Tag & Blame</a>
+    <a href="#GS">Git Stash</a>
+    <a href="#SW">Stash Workflow</a>
+    <a href="#GT">Git Tag</a>
+    <a href="#TT">Types of Tags</a>
+    <a href="#TW">Tag Workflow</a>
+    <a href="#GB">Git Blame</a>
+    <a href="#GBW">Git Blame Workflow</a>
+    <a href="#GBV">GitHub Blame View</a>
+    <a href="#QRC">Quick Reference Commands</a>
+    <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a>
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Git Stash, Tag & Blame -->
+<section id="GSTB">
+
+  <h2>Git Stash, Tag & Blame</h2>
+
+  <div class="highlight">
+    Git Stash temporarily saves unfinished work, Git Tags are used
+    for versioning and release management, and Git Blame helps identify
+    who modified specific lines of code.
+  </div>
+
+  <h3>Git Stash</h3>
+
+  <p>
+    Git Stash allows developers to temporarily save uncommitted changes
+    without creating a commit. This is useful when an urgent task or
+    production issue requires immediate attention.
+  </p>
+
+  <pre class="diagram">
+Developer Working Area
+          |
+          |
+      git stash
+          |
+          v
++------------------+
+|  Stash Storage   |
++------------------+
+          |
+          |
+ git stash apply
+ git stash pop
+          |
+          v
+Developer Working Area
+  </pre>
+ 
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Git Stash -->
+<section id="GS">
+
+ 
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Stash Workflow -->
+<section id="SW">
+
+  <h4>Stash Workflow</h4>
+
+  <ol>
+    <li>Check modified files.</li>
+    <li>Save work using git stash.</li>
+    <li>Perform urgent task.</li>
+    <li>Restore saved work.</li>
+    <li>Delete stash if no longer required.</li>
+  </ol>
+
+  <pre class="diagram">
+git status
+
+git stash
+
+git stash list
+
+git stash apply stash@{0}
+
+git stash pop stash@{0}
+
+git stash drop stash@{0}
+
+git stash clear
+  </pre>
+
+ 
+   <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Git Tag -->
+<section id="GT">
+
+  <h3>Git Tag</h3>
+
+  <p>
+    Tags are labels attached to specific commits.
+    They are commonly used to mark software releases
+    such as v1.0, v2.0, and v3.0.
+  </p>
+
+  <pre class="diagram">
+Commit History
+
+C1 ---- C2 ---- C3 ---- C4
+
+              |
+              |
+             v1.0
+
+Release Version
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Types of Tags -->
+<section id="TT">
+
+  <h4>Types of Tags</h4>
+
+  <table>
+
+<tr>
+  <th>Tag Type</th>
+  <th>Description</th>
+</tr>
+
+<tr>
+  <td>Lightweight Tag</td>
+  <td>Simple pointer to a commit</td>
+</tr>
+
+<tr>
+  <td>Annotated Tag</td>
+  <td>Stores author, date and message</td>
+</tr>
+
+  </table>
+ 
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Tag Workflow -->
+<section id="TW">
+
+  <h4>Tag Workflow</h4>
+
+  <ol>
+    <li>Identify target commit.</li>
+    <li>Create tag.</li>
+    <li>Verify tag creation.</li>
+    <li>Push tag to GitHub.</li>
+    <li>Delete tag if required.</li>
+  </ol>
+
+  <pre class="diagram">
+git tag
+
+git tag v1.0 COMMIT_ID
+
+git tag -a v1.0 -m "Production Release"
+
+git push origin v1.0
+
+git push origin --tags
+
+git tag -d v1.0
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Git Blame -->
+<section id="GB">
+
+  <h3>Git Blame</h3>
+
+  <p>
+    Git Blame is used for debugging and auditing.
+    It displays which developer modified each line
+    of a file along with commit information.
+  </p>
+
+  <pre class="diagram">
+app.py
+
+Line 1  ← Developer A
+Line 2  ← Developer B
+Line 3  ← Developer C
+Line 4  ← Developer A
+
+git blame app.py
+  </pre>  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Git Blame Workflow -->
+<section id="GBW">
+
+  <h4>Git Blame Workflow</h4>
+
+  <ol>
+    <li>Select target file.</li>
+    <li>Run git blame.</li>
+    <li>Review author information.</li>
+    <li>Identify commit ID.</li>
+    <li>Trace source of issue.</li>
+  </ol>
+
+  <pre class="diagram">
+git blame app.py
+
+git blame -L 1,5 app.py
+
+git blame -M app.py
+
+git blame --date=short app.py
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- GitHub Blame View -->
+<section id="GBV">
+
+  <h3>GitHub Blame View</h3>
+
+  <p>
+    GitHub provides a visual blame interface that displays
+    line ownership and modification history directly in the browser.
+  </p>
+
+  <pre class="diagram">
+GitHub Repository
+        |
+        |
+      File
+        |
+        |
+      Blame
+        |
+        v
+Author + Commit History
+  </pre>
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Quick Reference Commands -->
+<section id="QRC">
+
+  <h3>Quick Reference Commands</h3>
+
+  <table>
+
+<tr>
+  <th>Category</th>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Stash</td>
+  <td>git stash</td>
+  <td>Save temporary work</td>
+</tr>
+
+<tr>
+  <td>Stash</td>
+  <td>git stash list</td>
+  <td>View stash history</td>
+</tr>
+
+<tr>
+  <td>Stash</td>
+  <td>git stash apply</td>
+  <td>Restore and keep stash</td>
+</tr>
+
+<tr>
+  <td>Stash</td>
+  <td>git stash pop</td>
+  <td>Restore and remove stash</td>
+</tr>
+
+<tr>
+  <td>Tag</td>
+  <td>git tag</td>
+  <td>List tags</td>
+</tr>
+
+<tr>
+  <td>Tag</td>
+  <td>git tag -a</td>
+  <td>Create annotated tag</td>
+</tr>
+
+<tr>
+  <td>Tag</td>
+  <td>git push origin --tags</td>
+  <td>Push all tags</td>
+</tr>
+
+<tr>
+  <td>Tag</td>
+  <td>git tag -d</td>
+  <td>Delete tag</td>
+</tr>
+
+<tr>
+  <td>Blame</td>
+  <td>git blame file</td>
+  <td>Show line ownership</td>
+</tr>
+
+<tr>
+  <td>Blame</td>
+  <td>git blame -L</td>
+  <td>Inspect specific lines</td>
+</tr>
+
+  </table>  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Key Takeaways -->
+<section id="KT">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Git Stash temporarily saves unfinished work.</li>
+    <li>Stash Apply restores work while keeping stash history.</li>
+    <li>Stash Pop restores work and removes the stash.</li>
+    <li>Tags are commonly used for release management.</li>
+    <li>Annotated tags contain additional metadata.</li>
+    <li>Tags are not pushed automatically with normal git push.</li>
+    <li>Git Blame helps identify code ownership.</li>
+    <li>GitHub provides a browser-based blame interface.</li>
+  </ul>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!--Practice -->
+<section id="practice">
+
+  <h1>Step-by-Step Action Plan</h1>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#module1">Module 1: Managing Temporary Work with Git Stash</a></li>
+      <li><a href="#module2">Module 2: Versioning and Labeling with Git Tag</a></li>
+      <li><a href="#module3">Module 3: Auditing Changes with Git Blame</a></li>
+      <li><a href="#quick-reference">Quick Reference Command List</a></li>
+    </ul>
+  </div>
+
+  <!-- Module 1 -->
+  <h2 id="module1">Module 1: Managing Temporary Work with Git Stash</h2>
+  <p>When you are in the middle of a task and must switch to an emergency bug fix without committing incomplete code, use <strong>Git Stash</strong> to save your working area changes temporarily.</p>
+  <ol>
+    <li><strong>Identify Uncommitted Changes:</strong> Check your current status to see modified files in the working directory.</li>
+    <li><strong>Save to Temporary Storage:</strong> Move your working area changes into the stash.<br>
+      <em>Command:</em> <code>git stash</code></li>
+    <li><strong>Verify Stash History:</strong> View the list of all stashed changes and their unique indices.<br>
+      <em>Command:</em> <code>git stash list</code></li>
+    <li><strong>Restore Stashed Work:</strong> Once the emergency task is finished, bring your code back.
+      <ul>
+        <li><strong>Option A (Keep in Stash):</strong> Use <code>apply</code> to bring changes back while keeping the record in the stash.<br>
+          <em>Command:</em> <code>git stash apply &lt;stash_id&gt;</code></li>
+        <li><strong>Option B (Remove from Stash):</strong> Use <code>pop</code> to bring changes back and immediately delete them from the stash.<br>
+          <em>Command:</em> <code>git stash pop &lt;stash_id&gt;</code></li>
+      </ul>
+    </li>
+    <li><strong>Clean Up:</strong> Manually delete specific stashes or clear the entire storage.<br>
+      <em>Command (Single):</em> <code>git stash drop &lt;stash_id&gt;</code><br>
+      <em>Command (All):</em> <code>git stash clear</code></li>
+  </ol>
+
+  <!-- Module 2 -->
+  <h2 id="module2">Module 2: Versioning and Labeling with Git Tag</h2>
+  <p>Tags act as labels for specific commits, primarily used to mark release versions (e.g., v1.0, v2.0).</p>
+  <ol>
+    <li><strong>Determine Tag Type:</strong>
+      <ul>
+        <li><strong>Light-weight Tag:</strong> A simple pointer to a commit.</li>
+        <li><strong>Annotated Tag:</strong> A detailed tag containing a message, author, and timestamp.</li>
+      </ul>
+    </li>
+    <li><strong>Apply Tag to a Commit:</strong>
+      <ul>
+        <li><em>Light-weight Syntax:</em> <code>git tag &lt;version_name&gt; &lt;commit_id&gt;</code></li>
+        <li><em>Annotated Syntax:</em> <code>git tag -a &lt;version_name&gt; -m "&lt;message&gt;" &lt;commit_id&gt;</code></li>
+      </ul>
+    </li>
+    <li><strong>Verify Tags:</strong> List all existing tags or check a specific tag's details.<br>
+      <em>Command:</em> <code>git tag</code></li>
+    <li><strong>Sync with Remote Repository:</strong> By default, tags are <strong>not</strong> pushed with standard push commands.
+      <ul>
+        <li><strong>Push Specific Tag:</strong> <code>git push origin &lt;tag_id&gt;</code></li>
+        <li><strong>Push All Tags:</strong> <code>git push origin --tags</code></li>
+      </ul>
+    </li>
+    <li><strong>Remove Tags:</strong> Delete labels if they are no longer needed.<br>
+      <em>Command:</em> <code>git tag -d &lt;tag_id&gt;</code></li>
+  </ol>
+
+  <!-- Module 3 -->
+  <h2 id="module3">Module 3: Auditing Changes with Git Blame</h2>
+  <p>Use this tool for <strong>debugging, tracking, and auditing</strong> to see which developer modified specific lines of a file.</p>
+  <ol>
+    <li><strong>Investigate File History:</strong> Display the author, commit ID, and timestamp for every line in a file.<br>
+      <em>Command:</em> <code>git blame &lt;file_name&gt;</code></li>
+    <li><strong>Narrow Down the Search:</strong> If a file is large, inspect only specific line ranges.<br>
+      <em>Command:</em> <code>git blame -L &lt;start_line&gt;,&lt;end_line&gt; &lt;file_name&gt;</code></li>
+    <li><strong>Analyze on Web Interface:</strong> For a visual "color-coded" view from oldest to newest changes, use the <strong>Blame</strong> button on the GitHub file UI.</li>
+  </ol>
+
+  <!-- Quick Reference Table -->
+  <h2 id="quick-reference">Quick Reference Command List</h2>
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Command Syntax</th>
+      <th>Usage Description</th>
+    </tr>
+    <tr><td><strong>Stash</strong></td><td><code>git stash</code></td><td>Saves working area changes to temporary storage.</td></tr>
+    <tr><td><strong>Stash</strong></td><td><code>git stash list</code></td><td>Displays all stashes with their Index IDs.</td></tr>
+    <tr><td><strong>Stash</strong></td><td><code>git stash apply &lt;id&gt;</code></td><td>Restores code to file but keeps it in stash.</td></tr>
+    <tr><td><strong>Stash</strong></td><td><code>git stash pop &lt;id&gt;</code></td><td>Restores code to file and deletes it from stash.</td></tr>
+    <tr><td><strong>Stash</strong></td><td><code>git stash drop &lt;id&gt;</code></td><td>Deletes a specific stashed item.</td></tr>
+    <tr><td><strong>Stash</strong></td><td><code>git stash clear</code></td><td>Deletes all stashed items.</td></tr>
+    <tr><td><strong>Tag</strong></td><td><code>git tag</code></td><td>Lists all tags in the repository.</td></tr>
+    <tr><td><strong>Tag</strong></td><td><code>git tag &lt;ver&gt; &lt;cid&gt;</code></td><td>Creates a Light-weight tag on a specific commit.</td>
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 10 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>

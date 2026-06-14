@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Day 10 - Git Notes</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>DevOps Day 2 - Git Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#OSCGO">Open Source Contribution & GitHub Organizations</a>
+    <a href="#OSCW">Open Source Contribution Workflow</a>
+    <a href="#OSCS">Open Source Contribution Steps</a>
+    <a href="#FC">Fork vs Clone</a>
+    <a href="#GO">GitHub Organization</a>
+    <a href="#OSW">Organization Setup Workflow</a>
+    <a href="#RP">Repository Permissions</a>
+    <a href="#OCW">Organization Collaboration Workflow</a>
+    <a href="#PAT">Personal Access Token (PAT)</a>
+    <a href="#IC">Important Commands</a>
+    <a href="#FBCF">Fork-Based Contribution Flow</a>
+    <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a>
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Open Source Contribution & GitHub Organizations -->
+<section id="GSTB">
+
+  <h2>Open Source Contribution & GitHub Organizations</h2>
+
+  <div class="highlight">
+    Open Source Contribution allows developers to contribute to projects
+    they do not own using Forks and Pull Requests. GitHub Organizations
+    help manage repositories, teams, permissions, and collaboration
+    at an enterprise scale.
+  </div>
+ 
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Open Source Contribution Workflow -->
+<section id="GS">
+
+  <h3>Open Source Contribution Workflow</h3>
+
+  <p>
+    Forking is the standard approach for contributing to public
+    open-source projects. A fork creates a copy of the repository
+    under your own GitHub account.
+  </p>
+
+  <pre class="diagram">
+Original Repository
+        |
+        |
+      Fork
+        |
+        v
+Your GitHub Account
+        |
+        |
+    git clone
+        |
+        v
+ Local Machine
+        |
+        |
+ Modify Code
+        |
+        |
+   git push
+        |
+        v
+     Your Fork
+        |
+        |
+ Pull Request
+        |
+        v
+Original Repository
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Open Source Contribution Steps -->
+<section id="SW">
+
+  <h3>Open Source Contribution Steps</h3>
+
+  <ol>
+    <li>Identify a public repository.</li>
+    <li>Fork the repository.</li>
+    <li>Clone your fork locally.</li>
+    <li>Modify code.</li>
+    <li>Commit changes.</li>
+    <li>Push changes to your fork.</li>
+    <li>Create Pull Request.</li>
+    <li>Wait for review and approval.</li>
+  </ol>
+
+  <pre class="diagram">
+git clone https://github.com/YourUser/project.git
+
+git add .
+
+git commit -m "Bug Fix"
+
+git push origin main
+  </pre>
+ 
+   <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Fork vs Clone -->
+<section id="GT">
+
+  <h3>Fork vs Clone</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Operation</th>
+  <th>Description</th>
+</tr>
+
+<tr>
+  <td>Fork</td>
+  <td>Creates server-side copy on GitHub</td>
+</tr>
+
+<tr>
+  <td>Clone</td>
+  <td>Downloads repository to local machine</td>
+</tr>
+```
+
+  </table>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- GitHub Organization -->
+<section id="TT">
+
+  <h3>GitHub Organization</h3>
+
+  <p>
+    Organizations provide a centralized environment for managing
+    repositories, developers, teams, and permissions.
+  </p>
+
+  <pre class="diagram">
+GitHub Organization
+          |
+   -----------------
+   |       |       |
+ Team A  Team B  Team C
+   |       |       |
+ Repo1   Repo2   Repo3
+  </pre>  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Organization Setup Workflow -->
+<section id="TW">
+
+  <h3>Organization Setup Workflow</h3>
+
+  <ol>
+    <li>Create Organization.</li>
+    <li>Create Teams.</li>
+    <li>Invite Members.</li>
+    <li>Create Repositories.</li>
+    <li>Assign Permissions.</li>
+  </ol>
+
+  <pre class="diagram">
+GitHub
+   |
+New Organization
+   |
+Create Team
+   |
+Invite Users
+   |
+Assign Repository
+   |
+Grant Permissions
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Repository Permissions -->
+<section id="GB">
+
+  <h3>Repository Permissions</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Permission</th>
+  <th>Capability</th>
+</tr>
+
+<tr>
+  <td>Read</td>
+  <td>View and Clone Repository</td>
+</tr>
+
+<tr>
+  <td>Write</td>
+  <td>Push Code Changes</td>
+</tr>
+
+<tr>
+  <td>Admin</td>
+  <td>Full Repository Control</td>
+</tr>
+```
+
+  </table>  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Organization Collaboration Workflow -->
+<section id="GBV">
+
+  <h3>Organization Collaboration Workflow</h3>
+
+  <pre class="diagram">
+Organization Admin
+          |
+          |
+Invite Developer
+          |
+          v
+Developer Accepts
+Invitation
+          |
+          |
+Generate PAT
+          |
+          |
+Clone Repository
+          |
+          |
+Push Changes
+          |
+          v
+Organization Repository
+  </pre> 
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Personal Access Token (PAT) -->
+<section id="commands">
+
+  <h3>Personal Access Token (PAT)</h3>
+
+  <p>
+    GitHub organizations frequently use private repositories.
+    Developers authenticate using Personal Access Tokens instead
+    of traditional passwords.
+  </p>
+
+  <pre class="diagram">
+GitHub Settings
+       |
+Developer Settings
+       |
+Personal Access Tokens
+       |
+Generate Token
+       |
+Use Token Instead
+of Password
+  </pre>  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Important Commands -->
+<section id="workflow">
+
+  <h3>Important Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>git clone URL</td>
+  <td>Download repository</td>
+</tr>
+
+<tr>
+  <td>git add file</td>
+  <td>Stage file</td>
+</tr>
+
+<tr>
+  <td>git commit -m "msg"</td>
+  <td>Create commit</td>
+</tr>
+
+<tr>
+  <td>git push origin main</td>
+  <td>Upload changes</td>
+</tr>
+```
+
+  </table>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Fork-Based Contribution Flow -->
+<section id="workflow">
+
+  <h3>Fork-Based Contribution Flow</h3>
+
+  <pre class="diagram">
+1. Fork Repository
+
+2. Clone Fork
+
+3. Modify Code
+
+4. git add
+
+5. git commit
+
+6. git push
+
+7. Create Pull Request
+
+8. Review & Merge
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Key Takeaways -->
+<section id="workflow">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Forking is used when contributing to repositories you do not own.</li>
+    <li>Fork creates a GitHub-side copy of a repository.</li>
+    <li>Clone downloads repository to your local machine.</li>
+    <li>Pull Requests enable review before merging changes.</li>
+    <li>Organizations help manage repositories and teams centrally.</li>
+    <li>Teams simplify permission management.</li>
+    <li>Read, Write, and Admin are common repository permissions.</li>
+    <li>PATs are required for authentication in many GitHub workflows.</li>
+  </ul>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Practice -->
+<section id="workflow">
+
+  <h1>Step-by-Step Action Plan</h1>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#phase1">Phase 1: Contributing to Open Source via Git Forking</a></li>
+      <li><a href="#phase2">Phase 2: Setting Up GitHub Organizations and Teams</a></li>
+      <li><a href="#phase3">Phase 3: Collaborative Workflow within an Organization</a></li>
+      <li><a href="#quick-reference">Quick Reference Command List</a></li>
+    </ul>
+  </div>
+
+  <!-- Phase 1 -->
+  <h2 id="phase1">Phase 1: Contributing to Open Source via Git Forking</h2>
+  <p>Forking is the primary method for contributing to projects you do not own. It creates a server-side copy of a repository in your own GitHub account.</p>
+  <ol>
+    <li><strong>Identify the Project:</strong> Locate a public repository you wish to contribute to.</li>
+    <li><strong>Fork the Repository:</strong> On GitHub, click the <strong>"Fork"</strong> button to create a copy under your account.</li>
+    <li><strong>Clone to Local Machine:</strong> Copy the URL of your forked repository and run <code>git clone</code>.</li>
+    <li><strong>Modify and Commit:</strong> Make changes locally, then use <code>git add</code> and <code>git commit</code>.</li>
+    <li><strong>Push to Your Fork:</strong> Upload changes back to your GitHub fork with <code>git push</code>.</li>
+    <li><strong>Submit a Pull Request (PR):</strong> Open a PR from your fork to the original repository for review.</li>
+  </ol>
+
+  <!-- Phase 2 -->
+  <h2 id="phase2">Phase 2: Setting Up GitHub Organizations and Teams</h2>
+  <p>Organizations provide isolated zones to manage multiple projects and developers efficiently.</p>
+  <ol>
+    <li><strong>Create an Organization:</strong> Click "+" on GitHub → <strong>"New Organization"</strong>.</li>
+    <li><strong>Create a Team:</strong> Navigate to the <strong>"Teams"</strong> tab and create a new team.</li>
+    <li><strong>Invite Members:</strong> Add members via usernames or email addresses.</li>
+    <li><strong>Create/Add Repositories:</strong> Create repos within the organization or assign existing ones to teams.</li>
+    <li><strong>Manage Permissions:</strong>
+      <ul>
+        <li><strong>Read:</strong> View and clone only.</li>
+        <li><strong>Write:</strong> Push changes.</li>
+        <li><strong>Admin:</strong> Full control.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <!-- Phase 3 -->
+  <h2 id="phase3">Phase 3: Collaborative Workflow within an Organization</h2>
+  <ol>
+    <li><strong>Accept Invitation:</strong> Members must accept the email invite.</li>
+    <li><strong>Generate Personal Access Token (PAT):</strong> Required for private repos via CLI.</li>
+    <li><strong>Clone and Push:</strong> Clone repos with credentials. Push allowed only if "Write" access is granted.</li>
+  </ol>
+
+  <!-- Quick Reference Table -->
+  <h2 id="quick-reference">Quick Reference Command List</h2>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Usage & Context</th>
+      <th>Exact Syntax Example</th>
+    </tr>
+    <tr><td><code>git clone</code></td><td>Downloads a remote repository to your local machine.</td><td><code>git clone https://github.com/YourUsername/repo-name.git</code></td></tr>
+    <tr><td><code>git add</code></td><td>Stages modified or new files for the next commit.</td><td><code>git add test.sh</code></td></tr>
+    <tr><td><code>git commit</code></td><td>Saves staged changes to the local repository history.</td><td><code>git commit -m "Added contribution file"</code></td></tr>
+    <tr><td><code>git push</code></td><td>Uploads local commits to the remote repository on GitHub.</td><td><code>git push origin master</code></td></tr>
+  </table>
+
+  <p><strong>Important Note on Authentication:</strong> For private or organization repositories, use your <strong>Personal Access Token (PAT)</strong> as the password when prompted during <code>git clone</code> or <code>git push</code>.</p>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>DevOps Day 10 - Git Notes</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>
