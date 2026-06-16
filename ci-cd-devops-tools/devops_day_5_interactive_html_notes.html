@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>DevOps Day 2 - Git Notes</title>
+  <title>DevOps Day 5 - Git Notes</title>
 
   <link rel="stylesheet" href="internal.css">
 </head>
@@ -25,7 +25,7 @@
 
   <div class="nav-top">
 
-    <h1>DevOps Day 2 - Git Notes</h1>
+    <h1>DevOps Day 5 - Git Notes</h1>
 
     <button id="pinBtn" type="button">📌</button>
 
@@ -45,6 +45,7 @@
     <a href="#FFMAR">Fast Forward Merge After Rebase</a>
     <a href="#IC">Important Commands</a>
     <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a>
   </nav>
 
 </header>
@@ -214,7 +215,12 @@ git merge feature
 
 
 C1 ----- C2 ----- C3 ----- C4 ----- C5
+
   </pre>
+  <div class="content">
+    <p>Merge Demo</p>
+    <img src="merge-tutorial.gif" alt="merge-tutorial" width="650" height="500">
+  </div>
 
   <a href="#top" class="top-btn">Back to Top</a>
 
@@ -268,7 +274,7 @@ Merge Into Main
 <!-- Remote Collaboration Steps -->
 <section id="RCS">
 
-  <h4>Remote Collaboration Steps</h4>
+  <h3>Remote Collaboration Steps</h3>
 
   <ol>
     <li>Clone repository.</li>
@@ -322,7 +328,6 @@ C1 ----- C2 ----- C3 ----- C4
              C5 ----- C6
                Feature
 
-
 git rebase main
 
 
@@ -330,6 +335,12 @@ After Rebase
 
 C1 ----- C2 ----- C3 ----- C4 ----- C5 ----- C6
   </pre>
+
+
+  <div class="content">
+    <p>Rebase Demo</p>
+    <img src="rebase-tutor.gif" alt="rebase-tutor" width="650" height="500">
+  </div>
 
  
     <a href="#top" class="top-btn">Back to Top</a>
@@ -498,6 +509,85 @@ C1 → C2 → C3 → C4 → C5
     <a href="#top" class="top-btn">Back to Top</a>
 
 </section>
+
+
+<!-- Practice -->
+<section id="practice">
+
+  <h1>Step-by-Step Action Plan</h1>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#phase1">Phase 1: Local Branching and Merging</a></li>
+      <li><a href="#phase2">Phase 2: Remote Branch Management (GitHub)</a></li>
+      <li><a href="#phase3">Phase 3: Advanced Versioning with Git Rebase</a></li>
+      <li><a href="#quick-reference">Quick Reference Command List</a></li>
+    </ul>
+  </div>
+
+  <!-- Phase 1 -->
+  <h2 id="phase1">Phase 1: Local Branching and Merging</h2>
+  <p>Use this workflow to develop a feature locally and integrate it into your main codebase.</p>
+  <ol>
+    <li><strong>Initialize a Repository:</strong> <code>git init</code></li>
+    <li><strong>Establish Baseline Code:</strong> Create files and commit them with <code>git add .</code> and <code>git commit -m "[message]"</code>.</li>
+    <li><strong>Create a Feature Branch:</strong> <code>git branch feature-login</code></li>
+    <li><strong>Switch to the New Branch:</strong> <code>git checkout feature-login</code></li>
+    <li><strong>Develop and Commit:</strong> Modify files and commit regularly.</li>
+    <li><strong>Merge Back to Master:</strong>
+      <ul>
+        <li>Switch back: <code>git checkout master</code></li>
+        <li>Merge: <code>git merge feature-login</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <!-- Phase 2 -->
+  <h2 id="phase2">Phase 2: Remote Branch Management (GitHub)</h2>
+  <p>Use this workflow when collaborating on remote repositories like GitHub.</p>
+  <ol>
+    <li><strong>Clone the Repository:</strong> <code>git clone https://github.com/user/repo.git</code></li>
+    <li><strong>Branch and Work Locally:</strong> Create a branch and make changes.</li>
+    <li><strong>Push the Specific Branch:</strong> <code>git push origin feature-login</code></li>
+    <li><strong>Open a Pull Request (PR):</strong> Use GitHub UI to open a PR.</li>
+    <li><strong>Review and Merge:</strong> Admin reviews and merges changes into <code>main</code>.</li>
+  </ol>
+
+  <!-- Phase 3 -->
+  <h2 id="phase3">Phase 3: Advanced Versioning with Git Rebase</h2>
+  <p>Use Rebase to maintain a clean, linear project history.</p>
+  <ol>
+    <li><strong>Identify Base Divergence:</strong> Another developer updates <code>master</code>.</li>
+    <li><strong>Execute Rebase:</strong> On your branch, run <code>git rebase master</code>.</li>
+    <li><strong>Linearize History:</strong> Rebasing rewrites history for a clean timeline.</li>
+  </ol>
+
+  <!-- Quick Reference Table -->
+  <h2 id="quick-reference">Quick Reference Command List</h2>
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Command</th>
+      <th>Syntax & Usage</th>
+    </tr>
+    <tr><td><strong>Branch Creation</strong></td><td><code>git branch</code></td><td><code>git branch [branch_name]</code> → Creates a new branch.</td></tr>
+    <tr><td><strong>Switching</strong></td><td><code>git checkout</code></td><td><code>git checkout [branch_name]</code> → Switches to branch.</td></tr>
+    <tr><td><strong>Switching (New)</strong></td><td><code>git switch</code></td><td><code>git switch [branch_name]</code> → Modern alternative.</td></tr>
+    <tr><td><strong>Create & Switch</strong></td><td><code>git checkout -b</code></td><td><code>git checkout -b [branch_name]</code> → Creates and switches.</td></tr>
+    <tr><td><strong>Listing</strong></td><td><code>git branch</code></td><td><code>git branch</code> → Lists all local branches.</td></tr>
+    <tr><td><strong>Merging</strong></td><td><code>git merge</code></td><td><code>git merge [branch_name]</code> → Merges into current branch.</td></tr>
+    <tr><td><strong>Rebasing</strong></td><td><code>git rebase</code></td><td><code>git rebase [base_branch]</code> → Re-applies commits.</td></tr>
+    <tr><td><strong>Remote Push</strong></td><td><code>git push</code></td><td><code>git push origin [branch_name]</code> → Pushes branch to remote.</td></tr>
+    <tr><td><strong>Deletion</strong></td><td><code>git branch -d</code></td><td><code>git branch -d [branch_name]</code> → Deletes branch locally.</td></tr>
+    <tr><td><strong>Force Delete</strong></td><td><code>git branch -D</code></td><td><code>git branch -D [branch_name]</code> → Force deletes branch.</td></tr>
+  </table>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
 
 
 </div>
