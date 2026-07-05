@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Day 1 - Maven Overview</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>Maven Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#MSI">Maven Setup, Installation & Java Project Automation</a>
+    <a href="#MO">Maven Overview</a>
+    <a href="#STEP1">Install Java JDK</a>
+<!--    <a href="#RHEL">Install Java on RHEL, CentOS or Rocky Linux</a>
+    <a href="#UBUNTU">Install Java on Ubuntu or Debian</a>
+    <a href="#JI">Verify Java Installation</a> -->
+    <a href="#STEP2">Download Apache Maven</a>
+    <a href="#EMP">Extract Maven Package</a>
+    <a href="#CMEV">Configure Maven Env Variables</a>
+<!--    <a href="#AMEV">Add Maven Environment Variables</a>
+    <a href="#EVP">Environment Variable Purpose</a>
+    <a href="#GMC">Global Maven Configuration</a> -->
+    <a href="#AEC">Apply Env Changes</a>
+    <a href="#VMI">Verify Maven Installation</a>
+    <a href="#POM">Project Object Model - pom.xml</a>
+    <a href="#POMCON">What is Configured in pom.xml?</a>
+<!--    <a href="#MDM">Maven Dependency Management</a>
+    <a href="#MLR">Maven Local Repository</a>
+    <a href="#MCR">Maven Central Repository</a>
+    <a href="#MBC">Maven Build Commands</a>
+    <a href="#MBL">Maven Build Lifecycle</a> -->
+    <a href="#QRC">Quick Reference Commands</a>
+    <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a> 
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Maven Setup, Installation & Java Project Automation -->
+<section id="MSI">
+
+  <h2>Maven Setup, Installation & Java Project Automation</h2>
+
+  <div class="highlight">
+    Apache Maven is a Java-based build automation and project management tool.
+    Maven uses the pom.xml file to manage project configuration, dependencies,
+    plugins, build lifecycle, and artifact creation.
+  </div>
+   
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Maven Overview -->
+<section id="MO">
+
+  <h3>Maven Overview</h3>
+
+  <p>
+    Maven automates the process of compiling Java source code, downloading
+    dependencies, testing applications, packaging projects, and storing
+    generated artifacts.
+  </p>
+
+  <pre class="diagram">
+                MAVEN WORKFLOW
+
++----------------------+
+|   Java Source Code   |
++----------------------+
+           |
+           |
+           v
++----------------------+
+|       pom.xml        |
+| Project Configuration|
++----------------------+
+           |
+           |
+           v
++----------------------+
+|        Maven         |
+|   Build Automation   |
++----------------------+
+           |
+           |
+     ----------------
+     |      |       |
+     v      v       v
+ Compile   Test   Package
+                    |
+                    v
+             JAR / WAR / EAR
+  </pre>
+
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 1: Install Java JDK -->
+<section id="STEP1">
+
+  <h3>Step 1: Install Java JDK</h3>
+
+  <p>
+    Maven is a Java-based application and requires the Java Development Kit
+    (JDK) to run.
+  </p>
+
+  <div class="highlight">
+    Java 21 is recommended for modern Java tooling and compatibility
+    with tools such as SonarQube.
+  </div>
+ 
+   <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Install Java on RHEL, CentOS or Rocky Linux -->
+<section id="RHEL">
+
+  <h3>Install Java on RHEL, CentOS or Rocky Linux</h3>
+
+  <pre class="diagram">
+yum install java-21-openjdk java-21-openjdk-devel -y
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Install Java on Ubuntu or Debian -->
+<section id="UBUNTU">
+
+  <h3>Install Java on Ubuntu or Debian</h3>
+
+  <pre class="diagram">
+apt update
+
+apt install openjdk-21-jdk -y
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Verify Java Installation -->
+<section id="JI">
+
+  <h3>Verify Java Installation</h3>
+
+  <pre class="diagram">
+java -version
+  </pre>
+
+  <pre class="diagram">
+Java Installation Flow
+
+Linux Server
+     |
+     |
+Install JDK
+     |
+     v
+Java Runtime + Compiler
+     |
+     |
+java -version
+     |
+     v
+Java Verified
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 2: Download Apache Maven -->
+<section id="STEP2">
+
+  <h3>Step 2: Download Apache Maven</h3>
+
+  <p>
+    Maven can be installed using operating system package managers.
+    However, downloading the binary archive directly allows administrators
+    to control the exact Maven version installed on the system.
+  </p>
+
+  <div class="highlight">
+    Download the Maven binary archive from the official Apache Maven
+    distribution source and use the required Maven version for your environment.
+  </div>
+
+  <pre class="diagram">
+Apache Maven Website
+         |
+         |
+Copy Binary URL
+         |
+         v
+       wget
+         |
+         v
+Maven TAR.GZ Archive
+  </pre>
+
+<!--  <pre class="diagram">
+wget OFFICIAL_MAVEN_BINARY_URL
+</pre> -->
+
+<p>
+  You can download the latest version of Apache Maven directly from the 
+  <a href="https://maven.apache.org/download.cgi" target="_blank" rel="noopener noreferrer">Apache Maven Download Page</a>.
+</p>
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 3: Extract Maven Package -->
+<section id="EMP">
+
+  <h3>Step 3: Extract Maven Package</h3>
+
+  <p>
+    After downloading the Maven archive, extract the package into
+    the required installation directory.
+  </p>
+
+  <pre class="diagram">
+tar -xvf apache-maven-x.x.x-bin.tar.gz
+  </pre>
+
+  <pre class="diagram">
+Maven Archive
+
+apache-maven-x.x.x-bin.tar.gz
+              |
+              |
+           tar -xvf
+              |
+              v
++--------------------------+
+| apache-maven-x.x.x       |
+|                          |
+| bin                      |
+| boot                     |
+| conf                     |
+| lib                      |
++--------------------------+
+  </pre>
+
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 4: Configure Maven Environment Variables -->
+<section id="CMEV">
+
+  <h3>Step 4: Configure Maven Environment Variables</h3>
+
+
+  <p>
+    Environment variables allow Maven commands to run from any directory.
+    For user-level configuration, Maven variables can be added to the
+    user's .bashrc file.
+  </p>
+
+  <pre class="diagram">
+vi ~/.bashrc
+  </pre>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Add Maven Environment Variables -->
+<section id="AMEV">
+
+  <h3>Add Maven Environment Variables</h3>
+
+  <pre class="diagram">
+export PATH=$PATH:/path/to/maven/bin
+
+export M2_HOME=/path/to/maven
+
+export MAVEN_HOME=/path/to/maven
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Environment Variable Purpose -->
+<section id="EVP">
+
+  <h3>Environment Variable Purpose</h3>
+
+
+  <table>
+
+```
+<tr>
+  <th>Variable</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>PATH</td>
+  <td>Allows mvn command execution from any directory</td>
+</tr>
+
+<tr>
+  <td>M2_HOME</td>
+  <td>Defines the Maven installation directory</td>
+</tr>
+
+<tr>
+  <td>MAVEN_HOME</td>
+  <td>Defines Maven home location for tools and scripts</td>
+</tr>
+```
+
+  </table>
+
+  <pre class="diagram">
+Shell
+  |
+  |
+.bashrc
+  |
+  |
+PATH + M2_HOME + MAVEN_HOME
+  |
+  v
+Maven Available Globally
+for Current User
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Global Maven Configuration -->
+<section id="GMC">
+
+  <h3>Global Maven Configuration</h3>
+
+  <p>
+    If Maven environment variables must be available to all users,
+    configure the variables in the system profile.
+  </p>
+
+  <pre class="diagram">
+vi /etc/profile
+  </pre>
+
+  <div class="highlight">
+    ~/.bashrc = User-level configuration
+    <br>
+    /etc/profile = System-wide configuration
+  </div>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Step 5: Apply Environment Changes -->
+<section id="AEC">
+
+  <h3>Step 5: Apply Environment Changes</h3>
+
+  <p>
+    After modifying the shell configuration, reload the environment
+    or open a new terminal session.
+  </p>
+
+  <pre class="diagram">
+source ~/.bashrc
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Step 6: Verify Maven Installation -->
+<section id="VMI">
+
+  <h3>Step 6: Verify Maven Installation</h3>
+
+  <pre class="diagram">
+mvn --version
+  </pre>
+
+  <p>
+    The command displays the Maven version, Maven home directory,
+    Java version, Java home, and operating system information.
+  </p>
+
+  <pre class="diagram">
+mvn --version
+      |
+      v
++--------------------------+
+| Maven Version            |
+| Maven Home               |
+| Java Version             |
+| Java Home                |
+| Operating System         |
++--------------------------+
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Project Object Model - pom.xml -->
+<section id="POM">
+
+  <h3>Project Object Model - pom.xml</h3>
+
+<p>
+    The Project Object Model file, known as pom.xml, is the central
+    configuration file of a Maven project.
+  </p>
+
+  <div class="highlight">
+    pom.xml is the brain of a Maven project.
+  </div>
+
+  <pre class="diagram">
+                 pom.xml
+
++--------------------------------+
+| Project Name                   |
+| Project Version                |
+| Group ID                       |
+| Artifact ID                    |
+| Dependencies                   |
+| Plugins                        |
+| Build Configuration            |
++--------------------------------+
+               |
+               v
+             Maven
+               |
+               v
+        Automated Build
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- What is Configured in pom.xml? -->
+<section id="POMCON">
+
+  <h3>What is Configured in pom.xml?</h3>
+
+  <ul>
+	  <li><h4>pom.xml</h4> - It serves as the primary configuration hub where all metadata, dependencies, and build instructions for a Java project are defined.</li>
+    <li><h4>Project name and information</h4>  - It contains the basic identification details of the project, including its display name and general description.</li>
+    <li><h4>Project version</h4>  - It specifies the current release version of the application, which is essential for tracking and managing different project iterations.</li>
+    <li><h4>Group ID</h4>  - The Group ID is a unique identifier for the organization or project group, typically following a reverse domain name convention.</li>
+    <li><h4>Artifact ID</h4>  - The Artifact ID is the specific name of the project or module, used to identify the final output file (like a JAR or WAR).</li>
+    <li><h4>Java dependencies</h4>  - It lists all external Java libraries required by the code, which Maven automatically downloads from the Central Repository to resolve project needs.</li>
+    <li><h4>Database connectors such as MySQL Connector</h4>  - It manages specific third-party integration libraries like the MySQL Connector to ensure the application can connect to databases without manual intervention.
+    <li><h4>Maven plugins</h4>  - It configures reusable software components that extend Maven’s capabilities for specialized tasks like compiling, testing, and code analysis.</li>
+    <li><h4>Build configuration</h4>  - It defines the entire automation lifecycle, providing instructions on how to compile source code, run tests, and package the final executable artifact.</li>
+  </ul>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Maven Dependency Management -->
+<section id="MDM">
+
+  <h3>Maven Dependency Management</h3>
+
+<p>
+    Maven automatically manages project dependencies. When a dependency
+    is defined in pom.xml, Maven first checks the local repository.
+  </p>
+
+  <pre class="diagram">
+               pom.xml
+                  |
+                  |
+          Dependency Required
+                  |
+                  v
+        +------------------+
+        | Local Repository |
+        |      ~/.m2       |
+        +------------------+
+                  |
+          Dependency Found?
+             /          \
+           YES           NO
+            |             |
+            v             v
+       Use Local      Maven Central
+       Dependency     Repository
+                          |
+                          |
+                       Download
+                          |
+                          v
+                       ~/.m2
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+<!-- Maven Central Repository -->
+<section id="MCR">
+
+  <h3>Maven Central Repository</h3>
+
+  <p>
+    Maven stores downloaded dependencies and locally installed
+    project artifacts inside the .m2 directory.
+  </p>
+
+  <pre class="diagram">
+~/.m2/repository
+  </pre>
+
+  <pre class="diagram">
+Maven Central Repository
+          |
+          |
+     Download JAR
+          |
+          v
++-----------------------+
+| ~/.m2/repository      |
+|                       |
+| MySQL Connector       |
+| Java Libraries        |
+| Maven Plugins         |
++-----------------------+
+          |
+          v
+     Maven Project
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+  <h3>Maven Central Repository</h3>
+
+  <p>
+    Maven Central is a remote repository containing Java libraries,
+    frameworks, plugins, and other project dependencies.
+  </p>
+
+  <pre class="diagram">
+Maven Project
+      |
+      |
+    pom.xml
+      |
+      v
+Local Repository (~/.m2)
+      |
+      | Dependency Missing
+      v
+Maven Central Repository
+      |
+      | Download
+      v
+Local Repository (~/.m2)
+      |
+      v
+Project Build
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Maven Build Commands -->
+<section id="MBC">
+
+  <h3>Maven Build Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>mvn clean</td>
+  <td>Deletes previous build files and target directory</td>
+</tr>
+
+<tr>
+  <td>mvn compile</td>
+  <td>Compiles Java source code</td>
+</tr>
+
+<tr>
+  <td>mvn package</td>
+  <td>Creates the application package such as JAR or WAR</td>
+</tr>
+
+<tr>
+  <td>mvn install</td>
+  <td>Installs the generated artifact into the local Maven repository</td>
+</tr>
+```
+
+  </table>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!--Maven Build Lifecycle -->
+<section id="MBL">
+
+  <h3>Maven Build Lifecycle</h3>
+
+ <pre class="diagram">
+Source Code
+     |
+     v
+mvn clean
+     |
+     v
+Remove Old Build
+     |
+     v
+mvn compile
+     |
+     v
+Compile Source Code
+     |
+     v
+mvn package
+     |
+     v
+Create JAR / WAR
+     |
+     v
+mvn install
+     |
+     v
+Store Artifact in ~/.m2
+  </pre>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+<!-- Quick Reference Commands -->
+<section id="QRC">
+
+  <h3>Quick Reference Commands</h3>
+
+  <table>
+
+```
+<tr>
+  <th>Task</th>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Java</td>
+  <td>java -version</td>
+  <td>Verify Java installation</td>
+</tr>
+
+<tr>
+  <td>Java</td>
+  <td>yum install java-21-openjdk java-21-openjdk-devel -y</td>
+  <td>Install Java 21 on RHEL-based Linux</td>
+</tr>
+
+<tr>
+  <td>Java</td>
+  <td>apt install openjdk-21-jdk -y</td>
+  <td>Install Java 21 on Ubuntu or Debian</td>
+</tr>
+
+<tr>
+  <td>Download</td>
+  <td>wget MAVEN_URL</td>
+  <td>Download Maven binary archive</td>
+</tr>
+
+<tr>
+  <td>Extract</td>
+  <td>tar -xvf apache-maven-x.x.x-bin.tar.gz</td>
+  <td>Extract Maven package</td>
+</tr>
+
+<tr>
+  <td>Environment</td>
+  <td>vi ~/.bashrc</td>
+  <td>Configure user environment variables</td>
+</tr>
+
+<tr>
+  <td>Verification</td>
+  <td>mvn --version</td>
+  <td>Verify Maven installation</td>
+</tr>
+
+<tr>
+  <td>Build</td>
+  <td>mvn clean</td>
+  <td>Delete old build files</td>
+</tr>
+
+<tr>
+  <td>Build</td>
+  <td>mvn compile</td>
+  <td>Compile Java source code</td>
+</tr>
+
+<tr>
+  <td>Build</td>
+  <td>mvn package</td>
+  <td>Create JAR or WAR artifact</td>
+</tr>
+
+<tr>
+  <td>Build</td>
+  <td>mvn install</td>
+  <td>Install artifact into local repository</td>
+</tr>
+```
+
+  </table>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Key Takeaways -->
+<section id="KT">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Maven is a Java build automation and project management tool.</li>
+    <li>Java JDK must be installed before Maven.</li>
+    <li>Downloading Maven binaries gives better version control over the installation.</li>
+    <li>PATH allows the mvn command to run from any directory.</li>
+    <li>M2_HOME and MAVEN_HOME identify the Maven installation directory.</li>
+    <li>pom.xml is the central configuration file of a Maven project.</li>
+    <li>Maven automatically manages project dependencies.</li>
+    <li>The ~/.m2 directory is Maven's default local repository.</li>
+    <li>Missing dependencies are downloaded from configured remote repositories, commonly Maven Central.</li>
+    <li>mvn clean removes previous build output.</li>
+    <li>mvn compile compiles source code.</li>
+    <li>mvn package creates a distributable artifact.</li>
+    <li>mvn install stores the artifact in the local Maven repository.</li>
+  </ul>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Practice -->
+<section id="practice">
+
+  <h1>Step-by-Step Action Plan</h1>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>Day 1 - Maven Overview</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>
+

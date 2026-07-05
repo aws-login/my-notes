@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Day 2 - Maven Architecture Overview</title>
+
+  <link rel="stylesheet" href="internal.css">
+</head>
+
+<body>
+
+<!-- HOVER HINT -->
+<div class="hover-hint">
+  🚀 DevOps Menu
+</div>
+
+<!-- HOVER AREA -->
+<div class="hover-zone"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+
+  <div class="nav-top">
+
+    <h1>Maven Notes</h1>
+
+    <button id="pinBtn" type="button">📌</button>
+
+  </div>
+
+  <nav>
+    <a href="#MACP">Maven Arch, Conf & Project Lifecycle</a>
+    <a href="#STEP1">Validate Maven Environment</a>
+    <a href="#STEP2">Maven Configuration Files</a>
+    <a href="#STEP3">Maven Local Repository</a>
+    <a href="#STEP4">Create a Maven Project Using Archetype</a>
+    <a href="#STEP5">Maven Project Directory Structure</a>
+    <a href="#STEP6">Modify Application Source Code</a>
+    <a href="#STEP7">Maven Build Lifecycle</a>
+    <a href="#STEP8">Verify Project Structure</a>
+    <a href="#STEP9">Project Object Model - pom.xml</a>
+    <a href="#KT">Key Takeaways</a>
+    <a href="#practice">Practice</a>
+  </nav>
+
+</header>
+
+<div id="top"></div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+<!-- Maven Architecture, Configuration & Project Lifecycle -->
+<section id="MACP">
+
+  <h2>Maven Architecture, Configuration & Project Lifecycle</h2>
+
+  <div class="highlight">
+    Maven uses Global Settings, User Settings, a Local Repository,
+    Remote Repositories, pom.xml, and a standard Build Lifecycle
+    to automate Java project creation, dependency management,
+    compilation, testing, and packaging.
+  </div>
+
+  <h3>Maven Architecture Overview</h3>
+
+  <p>
+    Maven follows a configuration and repository-based architecture.
+    Maven reads project configuration from pom.xml and combines
+    Global and User settings to determine how the project should
+    be built and where dependencies should be downloaded from.
+  </p>
+
+  <pre class="diagram">
+                 MAVEN ARCHITECTURE
+
++-----------------------------+
+|         pom.xml             |
+| Project Configuration       |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|            Maven            |
+|       Build Engine          |
++-----------------------------+
+              |
+       -----------------
+       |               |
+       v               v
++---------------+  +---------------+
+| Global        |  | User          |
+| settings.xml  |  | settings.xml  |
++---------------+  +---------------+
+       |               |
+       -------+---------
+              |
+              v
++-----------------------------+
+|       Effective Settings    |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|       Local Repository      |
+|      ~/.m2/repository       |
++-----------------------------+
+              |
+       Dependency Missing?
+              |
+              v
++-----------------------------+
+|      Remote Repository      |
+|        Maven Central        |
++-----------------------------+
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 1: Validate Maven Environment -->
+<section id="STEP1">
+
+  <h3>Step 1: Validate Maven Environment</h3>
+
+  <p>
+    Before creating or building a Maven project, verify that Maven
+    is correctly installed and available through the system PATH.
+  </p>
+
+  <pre class="diagram">
+mvn --version
+  </pre>
+
+  <p>
+    The output normally displays Maven version, Maven home,
+    Java version, Java home, and operating system details.
+  </p>
+
+  <pre class="diagram">
+Terminal
+   |
+   |
+mvn --version
+   |
+   v
++-------------------------+
+| Maven Version           |
+| Maven Home              |
+| Java Version            |
+| Java Home               |
+| Operating System        |
++-------------------------+
+  </pre>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 2: Maven Configuration Files -->
+<section id="STEP2">
+
+  <h3>Step 2: Maven Configuration Files</h3>
+
+  <p>
+    Maven supports two primary levels of settings configuration:
+    Global Settings and User Settings.
+  </p>
+
+  <table>
+
+
+<tr>
+  <th>Configuration</th>
+  <th>Location</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Global Settings</td>
+  <td>MAVEN_HOME/conf/settings.xml</td>
+  <td>Applies to all Maven users on the machine</td>
+</tr>
+
+<tr>
+  <td>User Settings</td>
+  <td>~/.m2/settings.xml</td>
+  <td>Applies only to the current user</td>
+</tr>
+
+
+  </table>
+
+  <pre class="diagram">
+              MAVEN SETTINGS
+
+          Global Settings
+MAVEN_HOME/conf/settings.xml
+                 |
+                 |
+                 v
+        +----------------+
+        |     Maven      |
+        +----------------+
+                 ^
+                 |
+                 |
+          User Settings
+      ~/.m2/settings.xml
+
+
+Global Settings
+      +
+User Settings
+      |
+      v
+Effective Maven Settings
+  </pre>
+
+  <h4>Global Settings</h4>
+
+  <p>
+    Global settings are stored inside the Maven installation directory.
+    These settings can affect every Maven user on the system.
+  </p>
+
+  <pre class="diagram">
+$MAVEN_HOME/conf/settings.xml
+  </pre>
+
+  <h4>User Settings</h4>
+
+  <p>
+    User settings are stored inside the user's .m2 directory.
+    They are useful for developer-specific configurations such as
+    proxy servers, repository credentials, mirrors, and custom repositories.
+  </p>
+
+  <pre class="diagram">
+~/.m2/settings.xml
+  </pre>
+
+  <h3>Locate Maven Settings</h3>
+
+  <pre class="diagram">
+mvn help:effective-settings | grep -i settings
+  </pre>
+
+  <p>
+    The effective settings command helps display the final Maven
+    configuration after combining Global and User settings.
+  </p>
+
+  <pre class="diagram">
+mvn help:effective-settings
+  </pre>
+
+  <pre class="diagram">
+Global settings.xml
+        |
+        |
+        +----------+
+                   |
+                   v
+           Effective Settings
+                   ^
+                   |
+        +----------+
+        |
+User settings.xml
+  </pre>
+  
+
+   <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 3: Maven Local Repository -->
+<section id="STEP3">
+
+  <h3>Step 3: Maven Local Repository</h3>
+
+  <p>
+    Maven stores downloaded dependencies, plugins, and locally installed
+    artifacts inside the Local Repository.
+  </p>
+
+  <pre class="diagram">
+Default Local Repository
+
+~/.m2/repository
+  </pre>
+
+  <pre class="diagram">
+Maven Project
+      |
+      |
+Dependency Required
+      |
+      v
++----------------------+
+| Local Repository     |
+| ~/.m2/repository     |
++----------------------+
+      |
+      | Dependency Missing
+      v
++----------------------+
+| Maven Central        |
+| Remote Repository    |
++----------------------+
+      |
+      | Download
+      v
++----------------------+
+| Local Repository     |
++----------------------+
+      |
+      v
+Project Build
+  </pre>
+
+  <h3>Change Maven Local Repository Path</h3>
+
+  <p>
+    The default local repository path can be changed using
+    the localRepository configuration inside settings.xml.
+  </p>
+
+  <pre class="diagram">
+vi ~/.m2/settings.xml
+  </pre>
+
+  <h4>Default XML Configuration</h4>
+
+  <pre class="diagram">
+&lt;!--
+&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
+--&gt;
+  </pre>
+
+  <h4>Custom Local Repository</h4>
+
+  <pre class="diagram">
+&lt;localRepository&gt;/opt/repo&lt;/localRepository&gt;
+  </pre>
+
+  <pre class="diagram">
+Before
+
+~/.m2/repository
+       |
+       |
+   Maven Cache
+
+
+After Configuration
+
+/opt/repo
+    |
+    |
+Maven Local Repository
+  </pre>
+
+  <div class="highlight">
+    Remove the XML comment markers &lt;!-- and --&gt;
+    before enabling the localRepository configuration.
+  </div>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 4: Create a Maven Project Using Archetype -->
+<section id="STEP4">
+
+  <h3>Step 4: Create a Maven Project Using Archetype</h3>
+
+  <p>
+    Maven Archetypes are project templates used to automatically
+    generate a standard Maven project structure.
+  </p>
+
+  <pre class="diagram">
+Maven Archetype
+       |
+       |
+Project Template
+       |
+       v
++-----------------------+
+| Standard Directories  |
+| pom.xml               |
+| Java Source Code      |
+| Test Source Code      |
++-----------------------+
+  </pre>
+
+  <h4>Generate Maven Project</h4>
+
+  <pre class="diagram">
+mvn archetype:generate \
+-DgroupId=com.mycompany \
+-DartifactId=myproject \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-Dversion=1.0 \
+-DinteractiveMode=false
+  </pre>
+
+  <h3>Archetype Parameters</h3>
+
+  <table>
+
+
+<tr>
+  <th>Parameter</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>groupId</td>
+  <td>Organization or company identifier</td>
+</tr>
+
+<tr>
+  <td>artifactId</td>
+  <td>Project and artifact name</td>
+</tr>
+
+<tr>
+  <td>archetypeArtifactId</td>
+  <td>Defines the Maven project template</td>
+</tr>
+
+<tr>
+  <td>version</td>
+  <td>Defines the initial project version</td>
+</tr>
+
+<tr>
+  <td>interactiveMode</td>
+  <td>Controls interactive questions during project generation</td>
+</tr>
+
+
+  </table>
+
+  <div class="highlight">
+    groupId Example: com.mycompany
+    <br>
+    artifactId Example: payment-service
+    <br>
+    Version Example: 1.0
+  </div>
+
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 5: Maven Project Directory Structure -->
+<section id="STEP5">
+
+  <h3>Step 5: Maven Project Directory Structure</h3>
+
+  <pre class="diagram">
+myproject
+|
++-- pom.xml
+|
++-- src
+|   |
+|   +-- main
+|   |   |
+|   |   +-- java
+|   |       |
+|   |       +-- com
+|   |           |
+|   |           +-- mycompany
+|   |               |
+|   |               +-- App.java
+|   |
+|   +-- test
+|       |
+|       +-- java
+|
++-- target
+  </pre>
+
+  <h3>Important Maven Directories</h3>
+
+  <table>
+
+
+<tr>
+  <th>Directory</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>src/main/java</td>
+  <td>Stores application Java source code</td>
+</tr>
+
+<tr>
+  <td>src/test/java</td>
+  <td>Stores test source code</td>
+</tr>
+
+<tr>
+  <td>target/classes</td>
+  <td>Stores compiled .class files</td>
+</tr>
+
+<tr>
+  <td>target</td>
+  <td>Stores Maven build output and packaged artifacts</td>
+</tr>
+
+<tr>
+  <td>pom.xml</td>
+  <td>Project Object Model configuration file</td>
+</tr>
+
+
+  </table>
+    
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 6: Modify Application Source Code -->
+<section id="STEP6">
+
+  <h3>Step 6: Modify Application Source Code</h3>
+
+  <p>
+    Application source code is stored under src/main/java.
+    The exact directory structure follows the Java package name.
+  </p>
+
+  <pre class="diagram">
+cd myproject
+
+vi src/main/java/com/mycompany/App.java
+  </pre>
+
+  <h4>Example Java Code</h4>
+
+  <pre class="diagram">
+package com.mycompany;
+
+public class App
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Hello Maven Project");
+    }
+}
+  </pre>
+
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 7: Maven Build Lifecycle -->
+<section id="STEP7">
+
+  <h3>Step 7: Maven Build Lifecycle</h3>
+
+  <p>
+    Maven processes the source code through multiple build phases.
+    Each phase performs a specific task.
+  </p>
+
+  <pre class="diagram">
+Java Source Code
+       |
+       v
+    validate
+       |
+       v
+    compile
+       |
+       v
+      test
+       |
+       v
+    package
+       |
+       v
+     verify
+       |
+       v
+    install
+       |
+       v
+     deploy
+  </pre>
+
+  <h3>Compile Maven Project</h3>
+
+  <pre class="diagram">
+mvn compile
+  </pre>
+
+  <p>
+    The compile phase converts Java .java source files into
+    Java bytecode .class files.
+  </p>
+
+  <pre class="diagram">
+App.java
+   |
+   |
+mvn compile
+   |
+   v
+App.class
+
+Location:
+
+target/classes
+  </pre>
+
+  <h3>Package Maven Project</h3>
+
+  <pre class="diagram">
+mvn package
+  </pre>
+
+  <p>
+    The package phase creates the final application artifact.
+    The default artifact for a standard Java project is normally a JAR file.
+  </p>
+
+  <pre class="diagram">
+Java Source
+     |
+     |
+mvn package
+     |
+     v
+Compile
+     |
+     v
+Test
+     |
+     v
+Package
+     |
+     v
+target/myproject-1.0.jar
+  </pre>
+  
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 8: Verify Project Structure -->
+<section id="STEP8">
+
+  <h3>Step 8: Verify Project Structure</h3>
+
+  <pre class="diagram">
+tree myproject
+  </pre>
+
+  <p>
+    The tree command displays the Maven project directory hierarchy
+    and helps identify generated target files.
+  </p>
+
+  <h3>Run the Maven Application</h3>
+
+  <pre class="diagram">
+java -cp target/myproject-1.0.jar com.mycompany.App
+  </pre>
+
+  <pre class="diagram">
+Maven JAR
+    |
+    |
+java -cp
+    |
+    v
+Main Java Class
+    |
+    v
+Application Output
+
+Hello Maven Project
+  </pre>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+<!-- Step 9: Project Object Model - pom.xml -->
+<section id="STEP9">
+
+  <h3>Step 9: Project Object Model - pom.xml</h3>
+
+  <p>
+    pom.xml is the backbone of every Maven project.
+    It contains project metadata, dependencies, plugins,
+    packaging type, and version information.
+  </p>
+
+  <pre class="diagram">
+                  pom.xml
+
++----------------------------------+
+| groupId                          |
+| artifactId                       |
+| version                          |
+| packaging                        |
+| dependencies                     |
+| plugins                          |
+| build configuration              |
++----------------------------------+
+                  |
+                  v
+                Maven
+                  |
+                  v
+             Project Build
+  </pre>
+
+  <h3>Adding Maven Dependencies</h3>
+
+  <p>
+    External Java libraries are defined inside the dependencies
+    section of pom.xml.
+  </p>
+
+  <pre class="diagram">
+&lt;dependencies&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+        &lt;version&gt;VERSION&lt;/version&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+  </pre>
+
+  <pre class="diagram">
+Maven Central
+      |
+      |
+Find Dependency
+      |
+      v
+Copy XML
+      |
+      v
+pom.xml
+      |
+      v
+mvn compile / package
+      |
+      v
+Dependency Downloaded
+  </pre>
+
+  <h3>Change Maven Packaging Type</h3>
+
+  <p>
+    The packaging element determines the type of artifact
+    Maven generates.
+  </p>
+
+  <pre class="diagram">
+&lt;packaging&gt;jar&lt;/packaging&gt;
+  </pre>
+
+  <p>
+    For a web application, the packaging type may be changed to WAR.
+  </p>
+
+  <pre class="diagram">
+&lt;packaging&gt;war&lt;/packaging&gt;
+  </pre>
+
+  <table>
+
+
+<tr>
+  <th>Packaging Type</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>JAR</td>
+  <td>Java application or Java library</td>
+</tr>
+
+<tr>
+  <td>WAR</td>
+  <td>Java web application deployment</td>
+</tr>
+
+<tr>
+  <td>EAR</td>
+  <td>Enterprise Java application packaging</td>
+</tr>
+
+
+  </table>
+
+  <h3>Update Maven Project Version</h3>
+
+  <p>
+    Project versions are defined inside pom.xml.
+    Update the version before creating a new release artifact.
+  </p>
+
+  <pre class="diagram">
+Version 1
+
+&lt;version&gt;1.0&lt;/version&gt;
+
+        |
+        |
+New Release
+        |
+        v
+
+Version 2
+
+&lt;version&gt;2.0&lt;/version&gt;
+  </pre>
+
+  <pre class="diagram">
+vi pom.xml
+
+mvn package
+  </pre>
+
+  <pre class="diagram">
+Version 1.0
+
+target/myproject-1.0.jar
+
+
+Update pom.xml
+
+
+Version 2.0
+
+target/myproject-2.0.jar
+  </pre>
+
+  <h3>Quick Reference Commands</h3>
+
+  <table>
+
+
+<tr>
+  <th>Task</th>
+  <th>Command</th>
+  <th>Purpose</th>
+</tr>
+
+<tr>
+  <td>Verification</td>
+  <td>mvn --version</td>
+  <td>Verify Maven installation</td>
+</tr>
+
+<tr>
+  <td>Settings</td>
+  <td>mvn help:effective-settings</td>
+  <td>Display merged effective Maven settings</td>
+</tr>
+
+<tr>
+  <td>Settings</td>
+  <td>mvn help:effective-settings | grep -i settings</td>
+  <td>Inspect settings information</td>
+</tr>
+
+<tr>
+  <td>Project</td>
+  <td>mvn archetype:generate</td>
+  <td>Create Maven project from archetype</td>
+</tr>
+
+<tr>
+  <td>Compile</td>
+  <td>mvn compile</td>
+  <td>Compile Java source code</td>
+</tr>
+
+<tr>
+  <td>Package</td>
+  <td>mvn package</td>
+  <td>Create JAR or WAR artifact</td>
+</tr>
+
+<tr>
+  <td>Execute</td>
+  <td>java -cp target/file.jar package.MainClass</td>
+  <td>Run the compiled Java application</td>
+</tr>
+
+<tr>
+  <td>Structure</td>
+  <td>tree project_folder</td>
+  <td>Display project directory hierarchy</td>
+</tr>
+
+
+  </table>
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+
+
+<!-- Key Takeaways -->
+<section id="workflow">
+
+  <h3>Key Takeaways</h3>
+
+  <ul>
+    <li>Maven uses Global and User configuration levels.</li>
+    <li>Global settings apply to every Maven user on the system.</li>
+    <li>User settings apply only to an individual developer.</li>
+    <li>Effective Settings represent the final Maven configuration.</li>
+    <li>The default Maven local repository is ~/.m2/repository.</li>
+    <li>The local repository path can be customized in settings.xml.</li>
+    <li>Maven Archetypes automatically generate standard project structures.</li>
+    <li>groupId normally represents the organization or company namespace.</li>
+    <li>artifactId represents the project or generated artifact name.</li>
+    <li>src/main/java contains application source code.</li>
+    <li>src/test/java contains test source code.</li>
+    <li>mvn compile generates .class files under target/classes.</li>
+    <li>mvn package creates the final project artifact.</li>
+    <li>pom.xml manages project metadata, dependencies, plugins, packaging, and versions.</li>
+    <li>Dependencies can be retrieved automatically from configured remote repositories.</li>
+    <li>JAR is commonly used for Java applications and libraries.</li>
+    <li>WAR is commonly used for Java web applications.</li>
+  </ul>
+  
+
+  <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+
+<!-- Practice -->
+<section id="workflow">
+
+  <h1>Step-by-Step Action Plan</h1>
+
+    <a href="#top" class="top-btn">Back to Top</a>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>Day 2 - Maven Architecture Overview</h3>
+
+  <p>Prepared for Learning & Revision</p>
+
+</footer>
+
+<script src="script-internal.js"></script>
+
+</body>
+</html>
+
